@@ -1,0 +1,3 @@
+INSERT INTO public.customers (customer_id, phone_number, full_name, dob, total_points, member_tier, created_at) VALUES (1, '0901234567', 'Lê Thị Khách VIP', '1990-05-15', 5000, 'Khách hàng VIP', '2026-05-17 08:04:17.124545');
+INSERT INTO public.customers (customer_id, phone_number, full_name, dob, total_points, member_tier, created_at) VALUES (2, '0987654321', 'Trần Văn Mua Mới', '1995-10-20', 100, 'Thành viên', '2026-05-17 08:04:17.124545');
+INSERT INTO public.customers (customer_id, phone_number, full_name, dob, total_points, member_tier, created_at) VALUES (3, '0911222333', 'Phạm Khách Tiềm Năng', '1985-02-28', 1500, 'Thành viên Bạc', '2026-05-17 08:04:17.124545');

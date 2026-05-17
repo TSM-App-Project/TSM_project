@@ -1,0 +1,4 @@
+INSERT INTO public.products (product_id, category_id, product_name, weight, labor_cost, stock_quantity, status, purchase_price) VALUES (1, 1, 'Nhẫn trơn Vàng 24K 9999', 1.000, 200000.00, 15, 'ACTIVE', 8000000.00);
+INSERT INTO public.products (product_id, category_id, product_name, weight, labor_cost, stock_quantity, status, purchase_price) VALUES (2, 2, 'Dây chuyền Bạc 925 đính đá', 0.500, 50000.00, 30, 'ACTIVE', 400000.00);
+INSERT INTO public.products (product_id, category_id, product_name, weight, labor_cost, stock_quantity, status, purchase_price) VALUES (3, 3, 'Kim cương tự nhiên 5ly', 0.100, 0.00, 5, 'ACTIVE', 15000000.00);
+INSERT INTO public.products (product_id, category_id, product_name, weight, labor_cost, stock_quantity, status, purchase_price) VALUES (4, 1, 'Lắc tay Vàng 24K Tứ Linh', 2.000, 500000.00, 0, 'INACTIVE', 16000000.00);

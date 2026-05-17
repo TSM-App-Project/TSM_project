@@ -1,0 +1,2 @@
+INSERT INTO public.debt_payments (payment_id, supplier_id, user_id, amount, document_type, payment_status, created_at) VALUES (1, 1, 1, 20000000.00, 'THANH TOÁN', 'ĐÃ XỬ LÝ', '2026-05-17 08:04:17.100843');
+INSERT INTO public.debt_payments (payment_id, supplier_id, user_id, amount, document_type, payment_status, created_at) VALUES (2, 3, 1, 5000000.00, 'TĂNG NỢ', 'ĐÃ XỬ LÝ', '2026-05-17 08:04:17.100843');

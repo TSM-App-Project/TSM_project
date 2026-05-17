@@ -1,0 +1,3 @@
+INSERT INTO public.suppliers (supplier_id, supplier_name, phone, address, tax_code, total_debt, status) VALUES (1, 'Công ty Vàng bạc đá quý SJC', '0281234567', 'Q1, TP.HCM', '0301234567', 50000000.00, 'ACTIVE');
+INSERT INTO public.suppliers (supplier_id, supplier_name, phone, address, tax_code, total_debt, status) VALUES (2, 'Xưởng chế tác Bạc PNJ', '0289876543', 'Phú Nhuận, TP.HCM', '0309876543', 0.00, 'ACTIVE');
+INSERT INTO public.suppliers (supplier_id, supplier_name, phone, address, tax_code, total_debt, status) VALUES (3, 'Công ty Kim Cương Doji', '0241112223', 'Ba Đình, Hà Nội', '0101112223', 15000000.00, 'ACTIVE');

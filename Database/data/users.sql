@@ -1,0 +1,3 @@
+INSERT INTO public.users (user_id, username, password_hash, full_name, role, status, created_at) VALUES (1, 'admin', '123456', 'Huỳnh Long Bảo Khanh', 'QUAN_LY', 'ACTIVE', '2026-05-17 08:04:16.906999');
+INSERT INTO public.users (user_id, username, password_hash, full_name, role, status, created_at) VALUES (2, 'nhanvien1', '123456', 'Nguyễn Thị Bán Hàng', 'NHAN_VIEN', 'ACTIVE', '2026-05-17 08:04:16.906999');
+INSERT INTO public.users (user_id, username, password_hash, full_name, role, status, created_at) VALUES (3, 'nhanvien2', '123456', 'Trần Văn Kỹ Thuật', 'NHAN_VIEN', 'ACTIVE', '2026-05-17 08:04:16.906999');
