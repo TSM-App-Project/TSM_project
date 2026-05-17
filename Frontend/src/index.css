@@ -12,14 +12,26 @@
 }
 
 /* Custom Sparkline Chart Mockups */
-.sparkline-up {
+.sparkline-up-white {
     background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 25L20 20L40 25L60 10L80 15L100 5" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-down-white { /* Vẽ đi xuống - Màu Trắng */
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5L20 15L40 10L60 25L80 20L100 30" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
 }
 .sparkline-up-green {
     background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 25L20 20L40 25L60 10L80 15L100 5" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-down-green {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5L20 15L40 10L60 25L80 20L100 30" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

@@ -5,10 +5,11 @@ export default function Sidebar() {
     return (
         <nav className="fixed h-full w-[260px] left-0 top-0 bg-surface dark:bg-on-surface flex flex-col p-6 gap-stack-md border-r border-outline-variant/30 hidden md:flex z-20">
             <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
-                    <span className="material-symbols-outlined">local_mall</span>
+                <div
+                    className="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
+                 <span className="material-symbols-outlined">diamond</span>
                 </div>
-                <h1 className="text-headline-md font-headline-md font-bold text-on-surface dark:text-surface-bright">FreshCart</h1>
+                <h1 className="text-headline-md font-headline-md font-bold text-on-surface dark:text-surface-bright">TSM</h1>
             </div>
 
             <span className="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider mb-2">Main</span>

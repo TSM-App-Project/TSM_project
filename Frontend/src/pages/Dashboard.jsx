@@ -1,103 +1,148 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
 
+const StatCard = ({ id, activeCard, onClick, icon, title, value, percent, isUp, iconBgColor }) => {
+    const isActive = activeCard === id;
+
+    const baseClass = "cursor-pointer rounded-xl p-card-padding flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden transition-all duration-300";
+    const activeClass = "bg-primary-container text-on-primary scale-105";
+    const inactiveClass = "bg-surface-container-lowest border border-outline-variant/20 hover:border-primary-container/50";
+
+    // 1. TẠO BIẾN QUYẾT ĐỊNH MÀU SẮC CHO ĐƯỜNG KẺ SVG
+    // Nếu được chọn -> Màu trắng (#ffffff)
+    // Nếu không được chọn -> Xét xem đi lên (Xanh: #10b981) hay đi xuống (Đỏ: #ef4444)
+    const strokeColor = isActive ? "#ffffff" : (isUp ? "#10b981" : "#ef4444");
+
+    // 2. TẠO BIẾN QUYẾT ĐỊNH HÌNH DÁNG ĐƯỜNG KẺ
+    const pathData = isUp
+        ? "M0 25L20 15L40 20L60 5L80 10L100 0"  // Tọa độ vẽ đường đi lên
+        : "M0 5L20 15L40 10L60 25L80 20L100 30"; // Tọa độ vẽ đường đi xuống
+
+    return (
+        <div onClick={() => onClick(id)} className={`${baseClass} ${isActive ? activeClass : inactiveClass}`}>
+            {isActive && <div className="absolute -right-10 -top-10 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>}
+            <div className="flex justify-between items-start z-10">
+                <div className={`flex items-center gap-2 ${isActive ? '' : 'text-on-surface-variant'}`}>
+                    <span className={`material-symbols-outlined p-1.5 rounded-lg text-sm ${isActive ? 'bg-white/20' : iconBgColor}`}>{icon}</span>
+                    <span className="font-title-sm text-title-sm font-medium">{title}</span>
+                </div>
+                <span className={`material-symbols-outlined p-1 rounded-full text-xs ${isActive ? 'bg-white/20' : 'text-outline-variant border border-outline-variant/30'}`}>arrow_outward</span>
+            </div>
+            <div className="flex justify-between items-end mt-2 z-10">
+                <div>
+                    <h3 className={`font-display-lg text-display-lg ${isActive ? '' : 'text-on-surface'}`}>{value}</h3>
+                    <div className={`flex items-center gap-1 text-sm mt-1 ${isActive ? '' : (isUp ? 'text-primary-container' : 'text-error')}`}>
+                        <span className="material-symbols-outlined text-[16px]">{isUp ? 'arrow_upward' : 'arrow_downward'}</span>
+                        <span>{percent}</span>
+                    </div>
+                </div>
+
+                {/* 3. VỨT THẺ <div> CŨ ĐI, THAY BẰNG THẺ <svg> NÀY */}
+                <svg className="w-20 h-10" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d={pathData} stroke={strokeColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+
+            </div>
+        </div>
+    );
+};
+
 export default function Dashboard() {
+    const [activeCard, setActiveCard] = useState('revenue');
+
+    const chartData = {
+        revenue: {
+            title: "Sales By Category",
+            value: "$18,200.82",
+            percent: "8.24%",
+            isUp: true
+        },
+        orders: {
+            title: "Orders Trend",
+            value: "3,842",
+            percent: "12.50%",
+            isUp: true
+        },
+        products: {
+            title: "Product Inventory",
+            value: "1,247",
+            percent: "2.30%",
+            isUp: false
+        },
+        customers: {
+            title: "Customer Growth",
+            value: "8,234",
+            percent: "24.60%",
+            isUp: true
+        }
+    };
+
+    const currentChart = chartData[activeCard];
+
     return (
         <MainLayout title="Dashboard Overview" subtitle="Welcome back! Your grocery store's performance view">
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                <div className="bg-primary-container text-on-primary rounded-xl p-card-padding flex flex-col gap-4 shadow-sm relative overflow-hidden">
-                    <div className="absolute -right-10 -top-10 w-32 h-32 bg-white opacity-10 rounded-full blur-2xl"></div>
-                    <div className="flex justify-between items-start z-10">
-                        <div className="flex items-center gap-2">
-                            <span className="material-symbols-outlined bg-white/20 p-1.5 rounded-lg text-sm">attach_money</span>
-                            <span className="font-title-sm text-title-sm font-medium">Total Revenue</span>
-                        </div>
-                        <span className="material-symbols-outlined bg-white/20 p-1 rounded-full text-xs">arrow_outward</span>
-                    </div>
-                    <div className="flex justify-between items-end mt-2 z-10">
-                        <div>
-                            <h3 className="font-display-lg text-display-lg">$24,582</h3>
-                            <div className="flex items-center gap-1 text-sm mt-1">
-                                <span className="material-symbols-outlined text-[16px]">arrow_upward</span>
-                                <span>18.2% this week</span>
-                            </div>
-                        </div>
-                        <div className="w-20 h-10 sparkline-up"></div>
-                    </div>
-                </div>
-
-                <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                    <div className="flex justify-between items-start">
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                            <span className="material-symbols-outlined bg-primary-fixed-dim/20 text-primary p-1.5 rounded-lg text-sm">shopping_cart</span>
-                            <span className="font-title-sm text-title-sm font-medium">Total Orders</span>
-                        </div>
-                        <span className="material-symbols-outlined text-outline-variant p-1 rounded-full text-xs border border-outline-variant/30">arrow_outward</span>
-                    </div>
-                    <div className="flex justify-between items-end mt-2">
-                        <div>
-                            <h3 className="font-display-lg text-display-lg text-on-surface">3,842</h3>
-                            <div className="flex items-center gap-1 text-sm mt-1 text-primary-container">
-                                <span className="material-symbols-outlined text-[16px]">arrow_upward</span>
-                                <span>12.5% this week</span>
-                            </div>
-                        </div>
-                        <div className="w-20 h-10 sparkline-up-green"></div>
-                    </div>
-                </div>
-
-                <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                    <div className="flex justify-between items-start">
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                            <span className="material-symbols-outlined bg-secondary-fixed/50 text-secondary p-1.5 rounded-lg text-sm">inventory_2</span>
-                            <span className="font-title-sm text-title-sm font-medium">Total Product</span>
-                        </div>
-                        <span className="material-symbols-outlined text-outline-variant p-1 rounded-full text-xs border border-outline-variant/30">arrow_outward</span>
-                    </div>
-                    <div className="flex justify-between items-end mt-2">
-                        <div>
-                            <h3 className="font-display-lg text-display-lg text-on-surface">1,247</h3>
-                            <div className="flex items-center gap-1 text-sm mt-1 text-error">
-                                <span className="material-symbols-outlined text-[16px]">arrow_downward</span>
-                                <span>2.3% this week</span>
-                            </div>
-                        </div>
-                        <div className="w-20 h-10 sparkline-down-red"></div>
-                    </div>
-                </div>
-
-                <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding flex flex-col gap-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
-                    <div className="flex justify-between items-start">
-                        <div className="flex items-center gap-2 text-on-surface-variant">
-                            <span className="material-symbols-outlined bg-tertiary-fixed-dim/20 text-tertiary p-1.5 rounded-lg text-sm">group</span>
-                            <span className="font-title-sm text-title-sm font-medium">Active Customers</span>
-                        </div>
-                        <span className="material-symbols-outlined text-outline-variant p-1 rounded-full text-xs border border-outline-variant/30">arrow_outward</span>
-                    </div>
-                    <div className="flex justify-between items-end mt-2">
-                        <div>
-                            <h3 className="font-display-lg text-display-lg text-on-surface">8,234</h3>
-                            <div className="flex items-center gap-1 text-sm mt-1 text-primary-container">
-                                <span className="material-symbols-outlined text-[16px]">arrow_upward</span>
-                                <span>24.6% this week</span>
-                            </div>
-                        </div>
-                        <div className="w-20 h-10 sparkline-up-green"></div>
-                    </div>
-                </div>
+                <StatCard
+                    id="revenue"
+                    activeCard={activeCard}
+                    onClick={setActiveCard}
+                    icon="attach_money"
+                    title="Total Revenue"
+                    value="$24,582"
+                    percent="18.2% this week"
+                    isUp={true}
+                    sparklineClass="sparkline-up-green"
+                    iconBgColor="bg-primary-fixed-dim/20 text-primary"
+                />
+                <StatCard
+                    id="orders"
+                    activeCard={activeCard}
+                    onClick={setActiveCard}
+                    icon="shopping_cart"
+                    title="Total Orders"
+                    value="3,842"
+                    percent="12.5% this week"
+                    isUp={true}
+                    sparklineClass="sparkline-up-green"
+                    iconBgColor="bg-primary-fixed-dim/20 text-primary"
+                />
+                <StatCard
+                    id="products"
+                    activeCard={activeCard}
+                    onClick={setActiveCard}
+                    icon="inventory_2"
+                    title="Total Product"
+                    value="1,247"
+                    percent="2.3% this week"
+                    isUp={false}
+                    sparklineClass="sparkline-down-red"
+                    iconBgColor="bg-secondary-fixed/50 text-secondary"
+                />
+                <StatCard
+                    id="customers"
+                    activeCard={activeCard}
+                    onClick={setActiveCard}
+                    icon="group"
+                    title="Active Customers"
+                    value="8,234"
+                    percent="24.6% this week"
+                    isUp={true}
+                    sparklineClass="sparkline-up-green"
+                    iconBgColor="bg-tertiary-fixed-dim/20 text-tertiary"
+                />
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div className="lg:col-span-2 bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col">
                     <div className="flex justify-between items-center mb-6">
                         <div>
-                            <h3 className="font-headline-md text-headline-md text-on-surface">Sales By Category</h3>
+                            <h3 className="font-headline-md text-headline-md text-on-surface">{currentChart.title}</h3>
                             <div className="flex items-center gap-3 mt-1">
-                                <span className="font-display-lg text-display-lg text-on-surface">$18,200.82</span>
-                                <span className="flex items-center gap-1 bg-primary-fixed-dim/20 text-primary px-2 py-0.5 rounded-md text-sm font-medium">
-                                    <span className="material-symbols-outlined text-[16px]">arrow_upward</span> 8.24%
+                                <span className="font-display-lg text-display-lg text-on-surface">{currentChart.value}</span>
+                                <span className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-sm font-medium ${currentChart.isUp ? 'bg-primary-fixed-dim/20 text-primary' : 'bg-error-container text-error'}`}>
+                                    <span className="material-symbols-outlined text-[16px]">{currentChart.isUp ? 'arrow_upward' : 'arrow_downward'}</span>
+                                    {currentChart.percent}
                                 </span>
                             </div>
                         </div>
@@ -107,7 +152,7 @@ export default function Dashboard() {
                             <option>Yearly</option>
                         </select>
                     </div>
-                    <div className="flex-1 w-full min-h-[250px] relative chart-mockup mt-4 border-l border-b border-outline-variant/20">
+                    <div className="flex-1 w-full min-h-[250px] relative chart-mockup mt-4 border-l border-b border-outline-variant/20 transition-all duration-500">
                         <div className="absolute left-[-40px] top-0 h-full flex flex-col justify-between text-xs text-on-surface-variant pb-8">
                             <span>$4,700</span>
                             <span>$4,600</span>
