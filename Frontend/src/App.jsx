@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
+import Master from "./pages/Master.jsx";
 
 function App() {
     return (
@@ -20,7 +21,7 @@ function App() {
                 <Route path="/support" element={<ComingSoon />} />
 
                 {/* Các route mới cho chức năng phần mềm */}
-                <Route path="/master" element={<ComingSoon />} />
+                <Route path="/master" element={<Master />} />
                 <Route path="/products" element={<ComingSoon />} />
                 <Route path="/trading" element={<ComingSoon />} />
                 <Route path="/services" element={<ComingSoon />} />
