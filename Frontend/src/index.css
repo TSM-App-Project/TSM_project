@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-outlined.fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Custom Sparkline Chart Mockups */
+.sparkline-up-white {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 25L20 20L40 25L60 10L80 15L100 5" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-down-white { /* Vẽ đi xuống - Màu Trắng */
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5L20 15L40 10L60 25L80 20L100 30" stroke="%23ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-up-green {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 25L20 20L40 25L60 10L80 15L100 5" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-down-green {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5L20 15L40 10L60 25L80 20L100 30" stroke="%2310b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.sparkline-down-red {
+    background-image: url('data:image/svg+xml;utf8,<svg width="100" height="30" viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 5L20 15L40 10L60 25L80 20L100 30" stroke="%23ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.chart-mockup {
+    background-image: url('data:image/svg+xml;utf8,<svg width="600" height="200" viewBox="0 0 600 200" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 180 C 50 180, 50 120, 100 120 C 150 120, 150 150, 200 150 C 250 150, 250 80, 300 80 C 350 80, 350 140, 400 140 C 450 140, 450 60, 500 60 C 550 60, 550 160, 600 160" stroke="%2310b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M0 180 C 50 180, 50 120, 100 120 C 150 120, 150 150, 200 150 C 250 150, 250 80, 300 80 C 350 80, 350 140, 400 140 C 450 140, 450 60, 500 60 C 550 60, 550 160, 600 160 L 600 200 L 0 200 Z" fill="%2310b981" fill-opacity="0.1"/></svg>');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}
+.donut-mockup {
+    background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="80" stroke="%2310b981" stroke-width="20" stroke-dasharray="300 200" stroke-dashoffset="0" /><circle cx="100" cy="100" r="80" stroke="%234edea3" stroke-width="20" stroke-dasharray="100 400" stroke-dashoffset="-300" /><circle cx="100" cy="100" r="80" stroke="%23bbcabf" stroke-width="20" stroke-dasharray="50 450" stroke-dashoffset="-400" /></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
