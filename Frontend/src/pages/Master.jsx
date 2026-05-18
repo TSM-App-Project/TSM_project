@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
-import { mockUsers, mockLogs } from '../mocks/master.mock';
+import { mockUsers } from '../mocks/users.mock';
+import { mockLogs } from '../mocks/dialog.mock';
 
 const formatRole = (roleCode) => {
     if (roleCode === 'QUAN_LY') return 'Quản lý';
