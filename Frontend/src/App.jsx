@@ -6,6 +6,9 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import Master from "./pages/Master.jsx";
+import Services from "./pages/Services.jsx";
+import Customers from "./pages/Customers.jsx";
+
 
 function App() {
     return (
@@ -24,9 +27,9 @@ function App() {
                 <Route path="/master" element={<Master />} />
                 <Route path="/products" element={<ComingSoon />} />
                 <Route path="/trading" element={<ComingSoon />} />
-                <Route path="/services" element={<ComingSoon />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="/suppliers" element={<ComingSoon />} />
-                <Route path="/customers" element={<ComingSoon />} />
+                <Route path="/customers" element={<Customers />} />
                 <Route path="/inventory" element={<ComingSoon />} />
 
                 {/* Tự động chuyển hướng về trang login khi nhập sai URL (LUÔN ĐỂ CUỐI CÙNG) */}

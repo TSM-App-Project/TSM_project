@@ -140,8 +140,8 @@ export const CUSTOMERS = [
  * Usage: TIER_CONFIG[customer.tier]
  */
 export const TIER_CONFIG = {
-    standard: { label: 'Standard', color: 'bg-surface-variant text-on-surface-variant',          icon: 'person'         },
-    silver:   { label: 'Silver',   color: 'bg-outline-variant/30 text-on-surface-variant',        icon: 'workspace_premium' },
-    gold:     { label: 'Gold',     color: 'bg-primary-fixed-dim/20 text-primary',                 icon: 'star'           },
-    platinum: { label: 'Platinum', color: 'bg-secondary-fixed/50 text-secondary',                 icon: 'diamond'        },
+    standard: { label: 'Standard', color: 'bg-blue-100 text-blue-700', icon: 'person' },
+    silver:   { label: 'Silver',   color: 'bg-slate-200 text-slate-700', icon: 'workspace_premium' },
+    gold:     { label: 'Gold',     color: 'bg-yellow-100 text-yellow-700', icon: 'star' },
+    platinum: { label: 'Platinum', color: 'bg-secondary-fixed/50 text-secondary', icon: 'diamond' },
 };
