@@ -1,3 +1,4 @@
+
 create table users
 (
     user_id       serial
@@ -381,4 +382,5 @@ FROM products p
 
 alter table view_inventory_search
     owner to postgres;
+
 
