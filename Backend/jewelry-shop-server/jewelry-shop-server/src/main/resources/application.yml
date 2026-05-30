@@ -2,16 +2,9 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/tsm}
-    username: ${DB_USER:postgres}
-    password: ${DB_PASSWORD:29102006}
+  profiles:
+    active: local
   jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        format_sql: true
     open-in-view: false
   jackson:
     serialization:
