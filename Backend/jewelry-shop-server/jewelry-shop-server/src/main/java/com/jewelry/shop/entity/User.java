@@ -1,5 +1,6 @@
 package com.jewelry.shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class User {
     private String username;
 
     @Column(name = "password_hash", nullable = false, length = 255)
+    @JsonIgnore
     private String passwordHash;
 
     @Column(name = "full_name", nullable = false, length = 100)
