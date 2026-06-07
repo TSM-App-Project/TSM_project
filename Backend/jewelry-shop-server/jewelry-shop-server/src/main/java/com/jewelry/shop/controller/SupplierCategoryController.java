@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/supplier-categories")
 @CrossOrigin("*")
-@PreAuthorize("hasAuthority('Quản lý')") // Chỉ Quản lý mới được phép
+@PreAuthorize("hasAuthority('QUAN_LY')") // Chỉ Quản lý mới được phép
 public class SupplierCategoryController {
 
     private final SupplierCategoryService supplierCategoryService;

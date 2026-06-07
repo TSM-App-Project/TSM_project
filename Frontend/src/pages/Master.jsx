@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainLayout from '../layouts/MainLayout';
-import { mockUsers } from '../mocks/users.mock';
-import { mockLogs } from '../mocks/dialog.mock';
+import { api } from '../services/apiClient';
 
 const formatRole = (roleCode) => {
     if (roleCode === 'QUAN_LY') return 'Quản lý';
@@ -12,7 +11,8 @@ const formatRole = (roleCode) => {
 export default function Master() {
     const currentUserRole = 'QUAN_LY';
 
-    const [userList, setUserList] = useState(mockUsers);
+    const [userList, setUserList] = useState([]);
+    const [logList, setLogList] = useState([]);
     const [activeTab, setActiveTab] = useState('accounts');
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -20,11 +20,34 @@ export default function Master() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMode, setModalMode] = useState('add');
     const [formData, setFormData] = useState({
-        id: '', username: '', password: '', fullName: '', role: 'NHAN_VIEN', status: 'Active'
+        userId: '', username: '', password: '', fullName: '', role: 'NHAN_VIEN', status: 'ACTIVE'
     });
 
     // State Modal Xác nhận Xóa
     const [deleteConfirmUser, setDeleteConfirmUser] = useState(null);
+
+    useEffect(() => {
+        loadUsers();
+        loadLogs();
+    }, []);
+
+    const loadUsers = async () => {
+        try {
+            const data = await api.get('/api/users');
+            setUserList(data || []);
+        } catch (error) {
+            console.error('Failed to load users:', error);
+        }
+    };
+
+    const loadLogs = async () => {
+        try {
+            const data = await api.get('/api/logs');
+            setLogList(data || []);
+        } catch (error) {
+            console.error('Failed to load logs:', error);
+        }
+    };
 
     const roleColors = {
         'QUAN_LY': { bg: '#e0f2fe', text: '#0369a1' },
@@ -39,8 +62,7 @@ export default function Master() {
 
     // --- Logic Thêm/Sửa ---
     const handleOpenAddModal = () => {
-        const maxId = userList.length > 0 ? Math.max(...userList.map(u => u.id)) : 0;
-        setFormData({ id: maxId + 1, username: '', password: '', fullName: '', role: 'NHAN_VIEN', status: 'Active' });
+        setFormData({ userId: '', username: '', password: '', fullName: '', role: 'NHAN_VIEN', status: 'ACTIVE' });
         setModalMode('add');
         setIsModalOpen(true);
     };
@@ -58,21 +80,33 @@ export default function Master() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSave = (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        if (modalMode === 'add') {
-            setUserList([...userList, formData]);
-        } else {
-            setUserList(userList.map(u => u.id === formData.id ? { ...u, ...formData } : u));
+        try {
+            if (modalMode === 'add') {
+                await api.post('/api/users', formData);
+            } else {
+                await api.put(`/api/users/${formData.userId}`, formData);
+            }
+            await loadUsers();
+            setIsModalOpen(false);
+        } catch (error) {
+            console.error('Failed to save user:', error);
+            alert('Lỗi: ' + error.message);
         }
-        setIsModalOpen(false);
     };
 
     // --- Logic Xóa ---
-    const confirmDelete = () => {
+    const confirmDelete = async () => {
         if (deleteConfirmUser) {
-            setUserList(userList.filter(u => u.id !== deleteConfirmUser.id));
-            setDeleteConfirmUser(null);
+            try {
+                await api.del(`/api/users/${deleteConfirmUser.userId}`);
+                await loadUsers();
+                setDeleteConfirmUser(null);
+            } catch (error) {
+                console.error('Failed to delete user:', error);
+                alert('Lỗi: ' + error.message);
+            }
         }
     };
 
@@ -106,7 +140,7 @@ export default function Master() {
                     <div>
                         <span className="text-sm text-on-surface-variant block mb-1">Total Log Events</span>
                         <span className="font-headline-md text-headline-md font-bold text-on-surface">
-                            {mockLogs.length}
+                            {logList.length}
                         </span>
                     </div>
                     <div className="w-12 h-12 bg-error-container/30 text-error rounded-xl flex items-center justify-center">
@@ -173,8 +207,8 @@ export default function Master() {
                             </thead>
                             <tbody className="text-sm">
                             {userList.map((user) => (
-                                <tr key={user.id} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
-                                    <td className="py-3 px-4 font-medium text-on-surface">USR-{user.id.toString().padStart(3, '0')}</td>
+                                <tr key={user.userId} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
+                                    <td className="py-3 px-4 font-medium text-on-surface">USR-{user.userId.toString().padStart(3, '0')}</td>
                                     <td className="py-3 px-4 text-on-surface-variant">{user.username}</td>
                                     <td className="py-3 px-4 text-on-surface font-medium">{user.fullName}</td>
                                     <td className="py-3 px-4">
@@ -187,7 +221,7 @@ export default function Master() {
                                     </td>
                                     <td className="py-3 px-4">
                                         <div className="flex items-center gap-2">
-                                            <div className={`w-2 h-2 rounded-full ${user.status === 'Active' ? 'bg-primary' : 'bg-error'}`}></div>
+                                            <div className={`w-2 h-2 rounded-full ${user.status === 'ACTIVE' ? 'bg-primary' : 'bg-error'}`}></div>
                                             <span className="text-on-surface-variant">{user.status}</span>
                                         </div>
                                     </td>
@@ -221,17 +255,17 @@ export default function Master() {
                             </tr>
                             </thead>
                             <tbody className="text-sm">
-                            {mockLogs.map((log) => (
+                            {logList.map((log) => (
                                 <tr key={log.logId} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
-                                    <td className="py-3 px-4 text-on-surface-variant whitespace-nowrap">{log.time}</td>
-                                    <td className="py-3 px-4 font-medium text-on-surface">{log.user}</td>
+                                    <td className="py-3 px-4 text-on-surface-variant whitespace-nowrap">{log.logTime ? new Date(log.logTime).toLocaleString() : ''}</td>
+                                    <td className="py-3 px-4 font-medium text-on-surface">{log.user?.username || ''}</td>
                                     <td className="py-3 px-4">
-                                            <span style={{ backgroundColor: actionColors[log.action]?.bg, color: actionColors[log.action]?.text }} className="inline-block px-2.5 py-1 rounded-md text-xs font-bold border border-black/5">
-                                                {log.action}
+                                            <span style={{ backgroundColor: actionColors[log.actionType]?.bg, color: actionColors[log.actionType]?.text }} className="inline-block px-2.5 py-1 rounded-md text-xs font-bold border border-black/5">
+                                                {log.actionType}
                                             </span>
                                     </td>
-                                    <td className="py-3 px-4 text-on-surface-variant font-mono text-xs">{log.table}</td>
-                                    <td className="py-3 px-4 text-on-surface max-w-md truncate" title={log.desc}>{log.desc}</td>
+                                    <td className="py-3 px-4 text-on-surface-variant font-mono text-xs">{log.affectedTable}</td>
+                                    <td className="py-3 px-4 text-on-surface max-w-md truncate" title={log.description}>{log.description}</td>
                                 </tr>
                             ))}
                             </tbody>
@@ -258,7 +292,7 @@ export default function Master() {
                                 <label className="block text-sm font-medium text-on-surface mb-1">User ID</label>
                                 <input
                                     type="text" disabled
-                                    value={`USR-${formData.id.toString().padStart(3, '0')}`}
+                                    value={modalMode === 'add' ? 'Auto-generated' : `USR-${formData.userId.toString().padStart(3, '0')}`}
                                     className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed"
                                 />
                             </div>
@@ -299,8 +333,8 @@ export default function Master() {
                                 <div>
                                     <label className="block text-sm font-medium text-on-surface mb-1">Status</label>
                                     <select name="status" value={formData.status} onChange={handleInputChange} className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none">
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
+                                        <option value="ACTIVE">ACTIVE</option>
+                                        <option value="INACTIVE">INACTIVE</option>
                                     </select>
                                 </div>
                             </div>
