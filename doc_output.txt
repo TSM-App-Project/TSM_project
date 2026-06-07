@@ -1,0 +1,3169 @@
+gbĐẠI HỌC QUỐC GIA TP. HỒ CHÍ MINH
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN KHOA CÔNG NGHỆ PHẦN MỀM
+ĐỀ TÀI
+: PHẦN MỀM QUẢN LÝ CỬA HÀNG KINH DOANH VÀNG BẠC ĐÁ QUÝ
+SE104.Q25 – NHÓM 7
+GIẢNG VIÊN HƯỚNG DẪN:
+TS. HUỲNH NGỌC TÍN
+NHÓM SINH VIÊN THỰC HIỆN:
+HUỲNH LONG BẢO KHANH – 24520781
+LƯƠNG PHÚC KHANG – 24520747
+HUỲNH GIA KHANG – 24520737
+LÊ TRẦN DUY KHANG – 24520744
+ĐẶNG QUỐC NAM – 24521098
+TP. HỒ CHÍ MINH, THÁNG 05 NĂM 2026
+LỜI CẢM ƠN
+                              Nhóm sinh viên thực hiện
+ Huỳnh Long Bảo Khanh 
+ Lương Phúc Khang 
+Huỳnh Gia Khang 
+ Lê Trần Duy Khang
+Đặng Quốc Nam
+MỤC LỤC
+LỜI CẢM ƠN
+2
+MỤC LỤC
+3
+DANH MỤC HÌNH
+4
+DANH MỤC BẢNG
+5
+PHẦN MỞ ĐẦU
+6
+1. Giới thiệu đề tài
+6
+2. Lý do chọn đề tài
+6
+3. Quy trình phát triển phần mềm
+6
+4. Các công nghệ sử dụng
+6
+Chương 1. XÁC ĐỊNH VÀ MÔ HÌNH HÓA CÁC YÊU CẦU PHẦN MỀM
+7
+1. Danh sách yêu cầu phần mềm.
+7
+2. Phân loại các yêu cầu phần mềm.
+7
+3. Sơ đồ luồng dữ liệu cho từng yêu cầu
+7
+Chương 2. THIẾT KẾ HỆ THỐNG
+8
+1. Kiến trúc hệ thống.
+8
+2. Mô tả các thành phần trong hệ thống
+8
+Chương 3. THIẾT KẾ DỮ LIỆU
+9
+1. Thuật toán thiết kế dữ liệu
+9
+1.1. Bước 1: Xét yêu cầu phần mềm thứ nhất
+9
+1.2. Bước 2: Xét yêu cầu phần mềm thứ hai
+9
+1.3. Tiếp tục với các yêu cầu khác đến khi hết…
+9
+2. Sơ đồ logic hoàn chỉnh.
+9
+3. Danh sách các bảng dữ liệu (table) trong sơ đồ:
+9
+4. Mô tả từng bảng dữ liệu
+9
+4.1. Bảng [Tên bảng]
+9
+Chương 4. THIẾT KẾ GIAO DIỆN
+10
+1. Sơ đồ liên kết các màn hình
+10
+2. Danh sách các màn hình
+10
+3. Mô tả các màn hình
+10
+3.1. Màn hình [Tên màn hình 1]
+10
+3.2. Màn hình [Tên màn hình 2]
+10
+3.3. …
+10
+Chương 5. TRIỂN KHAI, KIỂM THỬ VÀ TỔNG KẾT
+11
+1. Kiểm thử các chức năng
+11
+2. Tổng kết
+11
+BẢNG PHÂN CÔNG CÔNG VIỆC
+12
+TÀI LIỆU THAM KHẢO
+13
+DANH MỤC HÌNH
+DANH MỤC BẢNG
+PHẦN MỞ ĐẦU
+Giới thiệu đề tài
+Trong nền kinh tế hiện đại, ngành kinh doanh vàng bạc đá quý không chỉ đòi hỏi sự tinh tế trong sản phẩm mà còn yêu cầu sự chính xác tuyệt đối trong quản lý giao dịch và vận hành. Đề tài 
+“Phần mềm Quản lý cửa hàng kinh doanh vàng bạc đá quý”
+ tập trung vào việc xây dựng một hệ thống công nghệ thông tin toàn diện, hỗ trợ tối ưu hóa các quy trình nghiệp vụ từ nhập kho, định giá sản phẩm dựa trên biến động thị trường, đến lập hóa đơn bán hàng và báo cáo tài chính. Hệ thống hướng tới việc thay thế các phương thức quản lý thủ công, giúp chủ cửa hàng kiểm soát chặt chẽ tài sản giá trị cao và nâng cao trải nghiệm dịch vụ cho khách hàng. 
+Lý do chọn đề tài
+Việc lựa chọn đề tài này xuất phát từ những nhu cầu thực tế và thách thức đặc thù của ngành kim hoàn:
+Tính đặc thù của hàng hóa:
+ Vàng bạc và đá quý là những mặt hàng có giá trị kinh tế rất lớn, đòi hỏi việc theo dõi tồn kho phải chi tiết đến từng đơn vị trọng lượng nhỏ nhất (lượng, chỉ, phân, ly).
+Biến động giá trị theo thời gian thực:
+ Giá vàng luôn thay đổi liên tục theo thị trường thế giới, yêu cầu phần mềm phải có khả năng cập nhật tỷ giá tự động để đảm bảo tính chính xác cho mọi giao dịch.
+Yêu cầu về minh bạch và bảo mật:
+ Với đặc thù tài chính nhạy cảm, hệ thống cần có cơ chế phân quyền chặt chẽ và ghi lại nhật ký thao tác (Audit Log) để ngăn ngừa gian lận và sai sót.
+Nâng cao hiệu quả quản trị:
+ Cung cấp các báo cáo thống kê trực quan về doanh thu và lợi nhuận, giúp chủ cửa hàng đưa ra các quyết định kinh doanh kịp thời và chính xác.
+Quy trình phát triển phần mềm
+Nhóm lựa chọn mô hình 
+Thác nước (Waterfall Model)
+ để triển khai dự án. Đây là mô hình phát triển tuần tự, trong đó giai đoạn tiếp theo chỉ được bắt đầu khi giai đoạn trước đó đã hoàn thành và được phê duyệt tài liệu rõ ràng.
+Việc áp dụng mô hình Waterfall cho đồ án này là phù hợp vì các yêu cầu nghiệp vụ và biểu mẫu quy định đã được xác định rõ ràng ngay từ đầu bởi giảng viên hướng dẫn. Quy trình thực hiện bao gồm 5 giai đoạn chính:
+Xác định yêu cầu (Requirements definition):
+ Thu thập và đặc tả toàn bộ các chức năng và ràng buộc của hệ thống.
+Thiết kế hệ thống và phần mềm (System and software design):
+ Thiết kế kiến trúc Client-Server và sơ đồ dữ liệu logic.
+Hiện thực và kiểm thử đơn vị (Implementation and unit testing):
+ Tiến hành lập trình các module và kiểm tra lỗi ở mức cơ bản.
+Tích hợp và kiểm thử hệ thống (Integration and system testing):
+ Kết nối các service và kiểm tra toàn bộ luồng nghiệp vụ trên hệ thống hoàn chỉnh.
+Vận hành và bảo trì (Operation and maintenance):
+ Chuyển giao hệ thống và cập nhật các tính năng theo phản hồi thực tế.
+Các công nghệ sử dụng
+Để đảm bảo hệ thống hoạt động ổn định, bảo mật và có hiệu năng cao, nhóm đã lựa chọn stack công nghệ hiện đại sau:
+Frontend
+: React kết hợp với Tailwind CSS và Vite.
+React:
+ 
+Thư viện JavaScript phổ biến giúp xây dựng giao diện người dùng theo dạng component, dễ dàng quản lý và tái sử dụng code.
+Tailwind CSS:
+ 
+Framework CSS giúp tối ưu hóa việc thiết kế giao diện POS chuyên nghiệp và phản hồi nhanh.
+Vite:
+ 
+Công cụ hỗ trợ build code cực nhanh, giúp tăng hiệu suất trong quá trình phát triển ứng dụng.
+Backend: 
+Java.
+Sử dụng ngôn ngữ Java giúp xây dựng các Service xử lý nghiệp vụ mạnh mẽ, an toàn và có khả năng mở rộng tốt trong kiến trúc Client-Server.
+Cơ sở dữ liệu: 
+PostgreSQL.
+Hệ quản trị cơ sở dữ liệu quan hệ mã nguồn mở mạnh mẽ, đảm bảo 
+tính toàn vẹn dữ liệu (ACID)
+ – yếu tố sống còn trong các giao dịch tài chính và quản lý tài sản giá trị cao.
+Chương 1. XÁC ĐỊNH VÀ MÔ HÌNH HÓA CÁC YÊU CẦU PHẦN MỀM
+Sơ đồ use case
+Hình 1.1. Sơ đồ use case
+Danh sách các yêu cầu
+Yêu cầu chức năng
+Bảng 1.2.1. Danh sách các yêu cầu chức năng
+STT
+Tên yêu cầu
+Biểu mẫu
+Quy định
+Ghi chú
+1
+Quản lý tài khoản & Phân quyền
+BM1
+2
+Đăng nhập hệ thống
+3
+Quản lý loại sản phẩm
+BM3
+QĐ3
+4
+Quản lý sản phẩm
+BM4
+QĐ4
+5
+Quản lý loại dịch vụ
+BM5
+QĐ5
+6
+Quản lý danh mục nhà cung cấp
+BM6
+QĐ6
+7
+Quản lý công nợ
+BM7
+QĐ7
+8
+Quản lý khách hàng
+BM8
+QĐ8
+9
+Lập phiếu bán hàng
+BM9
+QĐ9
+10
+Lập phiếu mua hàng
+BM10
+QĐ10
+11
+Lập phiếu dịch vụ
+BM11
+QĐ11
+12
+Lập báo cáo tồn kho
+BM12
+13
+Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+BM13.1, BM13.2, BM13.3
+14
+Tra cứu phiếu dịch vụ
+BM14
+QĐ14
+15
+Tra cứu tồn kho
+BM15
+16
+Kết xuất báo cáo tài chính
+17
+Theo dõi nhật ký hệ thống
+QĐ17
+Yêu cầu phi chức năng
+Bảng 1.2.2. Danh sách các yêu cầu phi chức năng
+Nhóm yêu cầu
+Mô tả chi tiết
+Hiệu năng
+Hệ thống phải xử lý và tính toán xong tổng tiền hóa đơn (bao gồm tỷ giá thời gian thực và tiền công) với thời gian phản hồi dưới 1 giây.
+Thao tác tìm kiếm sản phẩm bằng mã vạch phải trả về kết quả với độ trễ không quá 0.5 giây.
+Bảo mật
+Chỉ tài khoản có quyền Quản lý hoặc Chủ cửa hàng mới được thay đổi bảng tỷ giá vàng.
+Mọi thao tác chỉnh sửa, xóa phiếu thu hoặc hủy hóa đơn phải được ghi log (tên tài khoản, thời gian thực hiện).
+Toàn bộ mật khẩu và dữ liệu giá vốn sản phẩm phải được mã hóa an toàn trong cơ sở dữ liệu.
+Độ tin cậy
+Hệ thống phải đảm bảo tính sẵn sàng cao, hoạt động ổn định với thời gian uptime đạt 99.9%.
+Dữ liệu giao dịch, hóa đơn và tồn kho phải được tự động sao lưu (backup) lên đám mây.
+Khả năng sử dụng
+Giao diện bán hàng (POS) phải tối ưu để người dùng có thể sử dụng thành thạo trong thời gian ngắn.
+Ràng buộc hệ thống
+Chính xác tuyệt đối: Mọi phép tính liên quan đến tiền tệ và trọng lượng vàng (lượng, chỉ, phân, ly) không được có sai số làm tròn.
+Chặn dữ liệu rác: Hệ thống phải ngăn chặn và cảnh báo ngay lập tức khi người dùng nhập số âm hoặc ký tự chữ vào các trường trọng lượng, tiền công, giá bán.
+Hệ thống phải tương thích tốt với các thiết bị ngoại vi tại cửa hàng như máy in tem nhãn, máy in hóa đơn nhiệt và cân điện tử ngành vàng.
+Đặc tả các yêu cầu chức năng
+Đặc tả chức năng Quản lý tài khoản & Phân quyền
+Function (Chức năng)
+Quản lý tài khoản & Phân quyền
+Description (Mô tả)
+Tạo mới, khóa hoặc phân quyền cho nhân viên (VD: Nhân viên A chỉ được bán hàng, không được sửa giá).
+Inputs (Đầu vào)
+Tên đăng nhập, Mật khẩu, Họ tên, Role (Nhóm quyền).
+Source (Nguồn)
+Admin hệ thống.
+Outputs (Đầu ra)
+Tài khoản mới được tạo, thông báo thành công.
+Destination (Đích)
+Cơ sở dữ liệu
+Action (Hành động)
+Tiếp nhận thông tin 
+Validate (Tên đăng nhập không trùng lặp) 
+Mã hóa mật khẩu
+Lưu vào CSDL.
+Requires (Yêu cầu)
+Toàn bộ mật khẩu người dùng phải được mã hóa (Hash) an toàn.
+Precondition (Điều kiện tiên quyết)
+Người dùng thao tác phải có quyền Admin.
+Postcondition (Điều kiện sau)
+ Tài khoản mới có thể lập tức đăng nhập vào hệ thống.
+Side effects (Tác động phụ)
+Ghi một bản ghi vào Audit Log(VD: Admin X đã tạo tài khoản Y).
+Đặc tả chức năng Đăng nhập hệ thống
+Function (Chức năng)
+Đăng nhập hệ thống
+Description (Mô tả)
+Cho phép user đăng nhập hệ thống dùng username, password
+Inputs (Đầu vào)
+Người dùng nhập từ LoginForm
+Source (Nguồn)
+Kết quả xác thực (thành công,hay thất bại)
+Outputs (Đầu ra)
+Destination (Đích)
+Dashboard của người dùng
+Action (Hành động)
+Hệ thống nhận username và password.
+Hệ thống kiểm tra thông tin xác thực trong database.
+If thông tin xác thực đúng → login thành công.
+Ngược lại → thông báo lỗi.
+Requires (Yêu cầu)
+Cơ sở dữ liệu người dùng cần sẵn sàng
+Precondition (Điều kiện tiên quyết)
+User Account tồn tại trong hệ thống
+Postcondition (Điều kiện sau)
+User session được tạo
+Side effects (Tác động phụ)
+Lần đăng nhập này được ghi lại trong nhật ký hệ thống.
+Đặc tả chức năng Quản lý loại sản phẩm
+Function (Chức năng)
+Quản lý loại sản phẩm
+Description (Mô tả)
+Cho phép người quản trị định nghĩa và quản lý các nhóm hàng hóa kinh doanh tại cửa hàng (ví dụ: Nhẫn, Dây chuyền, Bông tai, Đồng hồ...) để phục vụ việc phân loại kho và tối ưu hóa bộ lọc tra cứu.
+Inputs (Đầu vào)
+Tên loại sản phẩm, Mã loại sản phẩm, Đơn vị tính
+Source (Nguồn)
+Bàn phím người dùng.
+Outputs (Đầu ra)
+Danh sách các loại sản phẩm được cập nhật mới, thông báo thực hiện thành công/thất bại.
+Destination (Đích)
+Cơ sở dữ liệu (Bảng Loại sản phẩm) và các màn hình liên quan như Nhập kho, Tra cứu. 
+Action (Hành động)
+Hệ thống hiển thị danh sách các loại sản phẩm hiện đang kinh doanh.
+Người dùng chọn chức năng Thêm mới, Chỉnh sửa hoặc Ẩn loại sản phẩm.
+Hệ thống kiểm tra tính hợp lệ của dữ liệu (Tên không được để trống, không được trùng với loại đã có).
+Lưu các thay đổi vào Cơ sở dữ liệu.
+Requires (Yêu cầu)
+Hệ thống phải ngăn chặn việc xóa các loại sản phẩm đã có dữ liệu giao dịch hoặc đang có sản phẩm tồn kho liên quan (chỉ cho phép chuyển trạng thái sang "Ngừng kinh doanh").
+Precondition (Điều kiện tiên quyết)
+Người dùng đã đăng nhập vào hệ thống với quyền Admin hoặc Quản lý.
+Postcondition (Điều kiện sau)
+Danh mục loại sản phẩm mới lập tức có hiệu lực, cho phép nhân viên kho chọn khi nhập hàng mới và nhân viên bán hàng dùng làm bộ lọc tra cứu.
+Side effects (Tác động phụ)
+Ảnh hưởng trực tiếp đến kết quả của chức năng "Tra cứu theo loại sản phẩm" và các báo cáo thống kê tồn kho theo nhóm hàng. Ghi nhận hành động vào nhật ký hệ thống (Audit Log).
+Đặc tả chức năng quản lý sản phẩm
+Function (Chức năng)
+Quản lý sản phẩm
+Description (Mô tả)
+Cho phép người quản lý thực hiện các thao tác thêm mới, chỉnh sửa và ẩn sản phẩm trong hệ thống nhằm đảm bảo danh mục sản phẩm luôn chính xác và cập nhật. 
+Inputs (Đầu vào)
+Tên sản phẩm, Mã loại sản phẩm, Đơn vị tính, Phần trăm lợi nhuận. 
+Source (Nguồn)
+Quản lý/Admin nhập liệu từ giao diện quản lý sản phẩm. 
+Outputs (Đầu ra)
+Danh sách sản phẩm được cập nhật đầy đủ thông tin sau khi thực hiện thao tác. 
+Destination (Đích)
+Cơ sở dữ liệu hệ thống, Màn hình danh sách sản phẩm. 
+Action (Hành động)
+Nhập thông tin sản phẩm (Tên, Loại sản phẩm, Đơn vị tính, Lợi nhuận).
+Hệ thống kiểm tra tính hợp lệ và trùng lặp dữ liệu.
+Thực hiện thêm mới hoặc cập nhật thông tin sản phẩm.
+Trường hợp xóa, hệ thống chuyển trạng thái sản phẩm sang “Ẩn”.
+Cập nhật danh sách sản phẩm và hiển thị kết quả.
+Requires (Yêu cầu)
+Tên sản phẩm không được để trống.
+Mã loại sản phẩm phải tồn tại trong hệ thống.
+Phần trăm lợi nhuận phải ≥ 0.
+Không cho phép xóa sản phẩm đã phát sinh giao dịch (chỉ được ẩn).
+Precondition (Điều kiện tiên quyết)
+Người dùng đã đăng nhập với quyền Quản lý hoặc Admin.
+Danh mục loại sản phẩm đã được thiết lập trước.
+Postcondition (Điều kiện sau)
+Thông tin sản phẩm được lưu hoặc cập nhật trong hệ thống.
+Danh sách sản phẩm hiển thị dữ liệu mới nhất.
+Side effects (Tác động phụ)
+Ghi nhận nhật ký thao tác (thêm/sửa/ẩn sản phẩm). 
+Đặc tả chức năng Quản lý loại dịch vụ
+Function (Chức năng)
+Quản lý loại dịch vụ
+Description (Mô tả)
+Định nghĩa và quản lý danh mục các loại hình dịch vụ (Gia công, kiểm định, đổi trả)
+Inputs (Đầu vào)
+Tên loại dịch vụ, Đơn giá dịch vụ. 
+Source (Nguồn)
+Bàn phím người dùng (Admin hoặc Quản lý) nhập từ giao diện danh mục. 
+Outputs (Đầu ra)
+Danh mục dịch vụ được cập nhật mới trên toàn hệ thống. 
+Destination (Đích)
+Cơ sở dữ liệu (Bảng Loại dịch vụ). 
+Action (Hành động)
+Hệ thống tiếp nhận yêu cầu Thêm/Sửa/Xóa (Ẩn) loại dịch vụ.
+Kiểm tra tên dịch vụ (không được trùng lặp) và đơn giá (số dương).
+Lưu thay đổi vào Cơ sở dữ liệu.
+Requires (Yêu cầu)
+Dữ liệu tiền tệ phải chính xác.
+Precondition (Điều kiện tiên quyết)
+Tài khoản đang thao tác phải có quyền Admin hoặc Quản lý.
+Postcondition (Điều kiện sau)
+Các loại dịch vụ mới sẽ xuất hiện trong thanh chọn khi nhân viên lập phiếu dịch vụ. 
+Side effects (Tác động phụ)
+Nếu thực hiện thao tác "Xóa", hệ thống chỉ chuyển trạng thái thành "Ẩn" để không làm hỏng dữ liệu của các phiếu dịch vụ cũ.
+Đặc tả chức năng Quản lý danh mục nhà cung cấp
+Function (Chức năng)
+Quản lý danh mục nhà cung cấp
+Description (Mô tả)
+Cho phép người dùng thêm, sửa, ẩn và tìm kiếm thông tin chi tiết của các nhà cung cấp để phục vụ việc lập phiếu mua hàng.
+Inputs (Đầu vào)
+Tên nhà cung cấp, số điện thoại, địa chỉ, mã số thuế (nếu có), từ khóa tìm kiếm.
+Source (Nguồn)
+Người dùng nhập từ giao diện Quản lý nhà cung cấp. 
+Outputs (Đầu ra)
+Danh sách nhà cung cấp thỏa mãn điều kiện tìm kiếm; Thông báo kết quả thực hiện (Thêm/Sửa/Ẩn).
+Destination (Đích)
+Cơ sở dữ liệu danh mục đối tác; Màn hình lập phiếu mua hàng. 
+Action (Hành động)
+Hệ thống hiển thị danh sách nhà cung cấp hiện có.
+Người dùng nhập từ khóa để tìm kiếm hoặc chọn các nút chức năng (Thêm/Sửa/Ẩn).
+Nếu là "Ẩn": Hệ thống chuyển trạng thái nhà cung cấp thành 'Ngừng hoạt động' (không xóa vĩnh viễn để bảo toàn dữ liệu hóa đơn cũ).
+Hệ thống cập nhật dữ liệu và phản hồi kết quả cho người dùng. 
+Requires (Yêu cầu)
+Cơ sở dữ liệu nhà cung cấp sẵn sàng hoạt động.
+Precondition (Điều kiện tiên quyết)
+Tài khoản người dùng có quyền Quản lý hoặc chủ cửa hàng.
+Postcondition (Điều kiện sau)
+Thông tin nhà cung cấp được cập nhật đồng bộ trong toàn hệ thống.
+Side effects (Tác động phụ)
+Các thay đổi thông tin liên lạc có thể ảnh hưởng đến việc hiển thị trên các đơn mua hàng đang chờ xử lý. 
+Đặc tả chức năng Quản lý công nợ
+Function (Chức năng)
+Quản lý Công nợ
+Description (Mô tả)
+Theo dõi tiền nợ nhà cung cấp nguyên liệu,...
+Inputs (Đầu vào)
+ID Nhà cung cấp, Số tiền thanh toán, Loại chứng từ.
+Source (Nguồn)
+Bàn phím người dùng.
+Outputs (Đầu ra)
+Phiếu chi công nợ, Cập nhật số dư nợ hiện tại.
+Destination (Đích)
+Cơ sở dữ liệu
+Action (Hành động)
+ Lập phiếu thanh toán 
+ Trừ đi tổng nợ của nhà cung cấp 
+ Cập nhật trạng thái "Đã thanh toán" hoặc "Thanh toán một phần".
+Requires (Yêu cầu)
+Dữ liệu tiền tệ phải dùng kiểu Decimal chính xác tuyệt đối và chặn không cho nhập số âm hay ký tự chữ.
+Precondition (Điều kiện tiên quyết)
+Tồn tại biên bản nhập hàng (phiếu nhập kho) chưa thanh toán.
+Postcondition (Điều kiện sau)
+Giảm tổng dư nợ của nhà cung cấp.
+Side effects (Tác động phụ)
+Số dư quỹ tiền mặt/ngân hàng giảm.
+Đặc tả chức năng Quản lý khách hàng
+Function (Chức năng)
+Quản lý khách hàng
+Description (Mô tả)
+Lưu thông tin khách hàng, tích điểm hạng thành viên, tra cứu lịch sử mua/bán của khách.
+Inputs (Đầu vào)
+ Số điện thoại, Họ tên, Ngày sinh (tùy chọn).
+Source (Nguồn)
+Bàn phím người dùng.
+Outputs (Đầu ra)
+Hồ sơ khách hàng, hạng thẻ hiện tại, tổng điểm tích lũy.
+Destination (Đích)
+Cơ sở dữ liệu (Bảng Customers), Màn hình hiển thị.
+Action (Hành động)
+Nhập SĐT để tìm kiếm. Nếu chưa có, chọn "Thêm mới".
+Validate SĐT đúng định dạng.
+Lưu bản ghi khách hàng vào DB.
+Requires (Yêu cầu)
+ Chặn các ký tự chữ trong trường Số điện thoại.
+Precondition (Điều kiện tiên quyết)
+ Nhân viên đã đăng nhập.
+Postcondition (Điều kiện sau)
+ Dữ liệu khách hàng được cập nhật sẵn sàng cho việc lập hóa đơn hoặc tích điểm.
+Side effects (Tác động phụ)
+Không có.
+Đặc tả chức năng Lập phiếu bán hàng
+Function (Chức năng)
+Lập hóa đơn bán hàng
+Description (Mô tả)
+Cho phép nhân viên tạo hóa đơn bán lẻ, hệ thống tự động tính tổng tiền dựa trên trọng lượng, loại vàng, tỷ giá hiện tại và tiền công gia công.
+Inputs (Đầu vào)
+Mã vạch sản phẩm, số điện thoại khách hàng (tùy chọn), số tiền khách đưa.
+Source (Nguồn)
+Nhân viên thu ngân (ví dụ mã NV: 0781) quét mã vạch bằng máy quét hoặc chọn sản phẩm trên màn hình POS.
+Outputs (Đầu ra)
+Biên lai bán hàng (chứa chi tiết tỷ giá, trọng lượng, tiền công), thông báo lưu thành công trên màn hình.
+Destination (Đích)
+Cơ sở dữ liệu (Bảng Hóa đơn, Chi tiết hóa đơn) và Máy in hóa đơn nhiệt.
+Action (Hành động)
+Hệ thống nhận mã sản phẩm từ thao tác của nhân viên.
+Truy xuất thông tin: Loại vàng, trọng lượng vàng, tiền công.
+Truy vấn bảng tỷ giá để lấy "Tỷ giá bán ra" tương ứng ngay tại thời điểm hiện tại.
+Tính toán: 
+Thành tiền = (Trọng lượng * Tỷ giá bán ra) + Tiền công
+.
+Hiển thị sản phẩm và giá tiền lên giỏ hàng.
+Nhân viên nhập số tiền khách đưa, hệ thống tính tiền thối lại.
+Lưu hóa đơn và in biên lai.
+Requires (Yêu cầu)
+Bảng tỷ giá vàng của cửa hàng phải đang ở trạng thái kích hoạt và CSDL sản phẩm phải sẵn sàng.
+Precondition (Điều kiện tiên quyết)
+Nhân viên đang trong phiên làm việc hợp lệ và sản phẩm được chọn phải có trạng thái "Còn hàng" trong kho.
+Postcondition (Điều kiện sau)
+Hóa đơn được tạo với trạng thái "Hoàn thành". Số lượng tồn kho của món trang sức đó giảm về 0 (đối với trang sức độc bản).
+Side effects (Tác động phụ)
+Doanh thu ca làm việc của nhân viên được cộng dồn. Điểm tích lũy của khách hàng được cập nhật (nếu có nhập SĐT).
+Đặc tả chức năng Lập phiếu mua hàng
+Function (Chức năng)
+Lập phiếu mua hàng
+Description (Mô tả)
+Cho phép ghi nhận việc nhập hàng từ các nhà cung cấp nhằm tăng số lượng tồn kho trên hệ thống.
+Inputs (Đầu vào)
+Tên nhà cung cấp, Ngày lập phiếu, Danh sách sản phẩm mua (Loại sản phẩm, Số lượng/Trọng lượng, Đơn giá mua). 
+Source (Nguồn)
+Bàn phím người dùng hoặc chọn từ danh sách thả xuống (Combobox) trên giao diện. 
+Outputs (Đầu ra)
+Phiếu mua hàng được tạo, số lượng tồn kho sản phẩm được cập nhật tăng, thông báo lưu thành công. 
+Destination (Đích)
+Cơ sở dữ liệu (Bảng Phiếu mua hàng, Chi tiết phiếu mua hàng, Tồn kho) và Màn hình hiển thị. 
+Action (Hành động)
+Chọn nhà cung cấp từ danh mục.
+Nhập thông tin sản phẩm và chọn loại sản phẩm
+Hệ thống tính Tổng tiền = Σ (Số lượng/Trọng lượng * Đơn giá mua).
+Lưu phiếu và cập nhật tăng số lượng trong kho.
+Requires (Yêu cầu)
+Số lượng/Trọng lượng và đơn giá mua phải là số dương lớn hơn 0. Không được để trống thông tin nhà cung cấp.
+Precondition (Điều kiện tiên quyết)
+Danh mục nhà cung cấp và danh mục sản phẩm phải có sẵn dữ liệu. Người dùng đã đăng nhập với quyền hợp lệ.
+Postcondition (Điều kiện sau)
+Số lượng tồn kho của các sản phẩm tương ứng tăng lên. Phiếu mua hàng được lưu lại. 
+Side effects (Tác động phụ)
+Ghi nhận sự thay đổi dòng tiền (công nợ) với nhà cung cấp. Ghi log thao tác nhập hàng của người dùng. 
+Đặc tả chức năng Lập phiếu dịch vụ
+Function (Chức năng)
+Lập phiếu dịch vụ
+Description (Mô tả)
+Ghi nhận các yêu cầu dịch vụ của khách hàng, tính toán tổng chi phí và quản lý số tiền khách hàng đặt cọc (trả trước).
+Inputs (Đầu vào)
+Thông tin khách hàng (Tên, SĐT), Loại dịch vụ, Ngày giao, Chi phí phát sinh (nếu có), Số tiền trả trước.
+Source (Nguồn)
+Nhân viên bán hàng nhập liệu từ giao diện lập phiếu dịch vụ.
+Outputs (Đầu ra)
+Phiếu dịch vụ với các thông số tiền bạc được tính toán chuẩn xác, trạng thái phiếu được thiết lập.
+Destination (Đích)
+Cơ sở dữ liệu hệ thống, Máy in biên lai.
+Action (Hành động)
+Nhập thông tin khách, chọn Loại dịch vụ.
+Hệ thống tính Thành tiền = Đơn giá dịch vụ + Chi phí phát sinh.
+Nhập số tiền trả trước, hệ thống tính Còn lại = Thành tiền - Số tiền trả trước.
+Chọn Ngày giao hẹn khách và Lưu phiếu.
+Requires (Yêu cầu)
+Ngày giao không được thiết lập trước Ngày lập phiếu. Số tiền trả trước không được âm. 
+Precondition (Điều kiện tiên quyết)
+Danh mục loại dịch vụ đã có dữ liệu. Nhân viên thu ngân đã đăng nhập. 
+Postcondition (Điều kiện sau)
+Phiếu dịch vụ được tạo và đưa vào trạng thái "Chưa giao". 
+Side effects (Tác động phụ)
+Nếu khách hàng có trả trước tiền, số dư quỹ tiền mặt/ngân hàng trong ngày của cửa hàng sẽ tăng lên.
+Đặc tả chức năng Lập báo cáo tồn kho
+Function (Chức năng)
+Lập báo cáo tồn kho
+Description (Mô tả)
+Thống kê và đối soát chi tiết tình hình nhập - xuất hàng hóa, giúp quản lý nắm được lượng tồn kho thực tế theo từng tháng. 
+Inputs (Đầu vào)
+Tháng báo cáo, Năm báo cáo. 
+Source (Nguồn)
+Người dùng chọn tham số thời gian từ Datepicker/Combobox. 
+Outputs (Đầu ra)
+Bảng báo cáo hiển thị: Tồn đầu, Số lượng mua vào, Số lượng bán ra, Tồn cuối.
+Destination (Đích)
+Màn hình hiển thị phần mềm, File Excel/PDF (nếu thao tác xuất file).
+Action (Hành động)
+Tiếp nhận tháng/năm cần báo cáo.
+Tổng hợp dữ liệu từ bảng Hóa đơn bán, Phiếu mua hàng và Tồn kho.
+Tính toán: Tồn cuối = Tồn đầu + Nhập - Xuất.
+Trình bày dữ liệu lên báo cáo.
+Requires (Yêu cầu)
+Tuyệt đối không được có sai số trong các phép tính tổng hợp số lượng. 
+Precondition (Điều kiện tiên quyết)
+Hệ thống đã có phát sinh giao dịch nhập/xuất trong tháng được chọn. 
+Postcondition (Điều kiện sau)
+Bảng báo cáo được hiển thị hoặc file tài liệu được tải xuống máy tính. 
+Side effects (Tác động phụ)
+Việc xuất file báo cáo (chứa số liệu kinh doanh nhạy cảm) sẽ được ghi log tự động để theo dõi. 
+Đặc tả chức năng Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+Function (Chức năng)
+Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+Description (Mô tả)
+Bộ lọc tìm kiếm đa lớp giúp nhân viên tra cứu nhanh chóng một mặt hàng cụ thể dựa trên việc kết hợp nhiều điều kiện tìm kiếm. 
+Inputs (Đầu vào)
+Tham số lọc: Đơn vị tính (Chỉ, Phân, Gram...), Loại sản phẩm (Nhẫn, Dây chuyền...), Tên sản phẩm. 
+Source (Nguồn)
+Người dùng tick chọn hoặc nhập text từ các bộ lọc trên màn hình tra cứu. 
+Outputs (Đầu ra)
+Danh sách sản phẩm thỏa mãn đồng thời các điều kiện đã chọn, kèm thông tin tồn kho và giá hiện tại. 
+Destination (Đích)
+Màn hình danh sách sản phẩm. 
+Action (Hành động)
+Nhận các tham số lọc từ UI.
+Khởi tạo câu truy vấn động, kết hợp (JOIN) các bảng Đơn vị tính, Loại sản phẩm, Sản phẩm với toán tử AND/OR.
+Trả về kết quả và render lên màn hình.
+Requires (Yêu cầu)
+Hỗ trợ tìm kiếm tương đối (cho phép người dùng để trống một vài điều kiện lọc mà vẫn ra kết quả).
+Precondition (Điều kiện tiên quyết)
+Cơ sở dữ liệu danh mục phải được thiết lập đầy đủ từ trước. 
+Postcondition (Điều kiện sau)
+Cập nhật giao diện với danh sách sản phẩm mới. 
+Side effects (Tác động phụ)
+Không có. 
+Đặc tả chức năng Tra cứu phiếu dịch vụ
+Function (Chức năng)
+Tra cứu phiếu dịch vụ 
+Description (Mô tả)
+Cho phép nhân viên tìm kiếm và theo dõi tình trạng xử lý các phiếu dịch vụ của khách hàng một cách nhanh chóng.
+Inputs (Đầu vào)
+Từ khóa tìm kiếm: Tên khách hàng, Số điện thoại, hoặc Mã phiếu dịch vụ.
+Source (Nguồn)
+Bàn phím người dùng. 
+Outputs (Đầu ra)
+Danh sách các phiếu dịch vụ khớp với thông tin tìm kiếm, hiển thị rõ tình trạng (Đã giao/Chưa giao). 
+Destination (Đích)
+Màn hình giao diện tra cứu của người dùng. 
+Action (Hành động)
+Hệ thống nhận từ khóa tìm kiếm.
+Truy vấn dữ liệu phiếu dịch vụ khớp với điều kiện.
+Đổ dữ liệu và hiển thị lên lưới dữ liệu (DataGrid).
+Requires (Yêu cầu)
+Tốc độ truy vấn và phản hồi kết quả tìm kiếm phải thấp hơn 1 giây.
+Precondition (Điều kiện tiên quyết)
+Người dùng đã đăng nhập hệ thống. 
+Postcondition (Điều kiện sau)
+Hiển thị kết quả tìm kiếm (Không làm thay đổi dữ liệu hệ thống). 
+Side effects (Tác động phụ)
+Không có.
+Đặc tả chức năng Tra cứu tồn kho
+Function (Chức năng)
+Tra cứu tồn kho
+Description (Mô tả)
+Cho phép nhân viên tìm kiếm và kiểm tra số lượng, thông tin chi tiết cũng như vị trí trưng bày của một mặt hàng cụ thể.
+Inputs (Đầu vào)
+Từ khóa tìm kiếm (Mã sản phẩm, tên món, loại vàng - ví dụ: "Dây chuyền 18k", "Nhẫn tròn trơn 9999").
+Source (Nguồn)
+Nhân viên nhập từ khóa vào ô tìm kiếm trên giao diện phần mềm.
+Outputs (Đầu ra)
+Danh sách các sản phẩm khớp với từ khóa kèm thông tin chi tiết (Hình ảnh, trọng lượng, số lượng tồn, vị trí tủ/két).
+Destination (Đích)
+Màn hình hiển thị kết quả tìm kiếm của nhân viên.
+Action (Hành động)
+Hệ thống tiếp nhận từ khóa tìm kiếm từ nhân viên.
+Truy vấn cơ sở dữ liệu kho hàng để tìm các bản ghi khớp với điều kiện.
+Lấy thông tin chi tiết và số lượng tồn hiện tại của các sản phẩm đó.
+Trả về và hiển thị danh sách kết quả lên màn hình.
+Nếu không có sản phẩm nào khớp, hiển thị thông báo "Không tìm thấy sản phẩm".
+Requires (Yêu cầu)
+Kết nối đến cơ sở dữ liệu kho hàng phải hoạt động ổn định.
+Precondition (Điều kiện tiên quyết)
+Nhân viên đã đăng nhập thành công vào hệ thống phần mềm cửa hàng.
+Postcondition (Điều kiện sau)
+Hệ thống hiển thị danh sách kết quả tìm kiếm cho người dùng.
+Side effects (Tác động phụ)
+Không có (Thao tác này chỉ đọc dữ liệu, không làm thay đổi trạng thái hệ thống).
+Đặc tả chức năng Kết xuất báo cáo tài chính
+Function (Chức năng)
+Kết xuất báo cáo tài chính
+Description (Mô tả)
+Lập và xuất các báo cáo thống kê quan trọng (doanh thu bán hàng, lợi nhuận gộp, tổng giá trị tồn kho, và biến động sổ quỹ) trong một khoảng thời gian cụ thể để Quản lý nắm bắt tình hình kinh doanh, hoặc xuất ra file Excel/PDF làm tài liệu lưu trữ.
+Inputs (Đầu vào)
+Loại báo cáo cần xem (Báo cáo doanh thu, Báo cáo tồn kho, Sổ quỹ), Khoảng thời gian lọc (Từ ngày - Đến ngày), Định dạng xuất file (Excel hoặc PDF).
+Source (Nguồn)
+Các tùy chọn (Combobox, DatePicker) và nút bấm trên giao diện do người dùng (Kế toán/Quản lý) thao tác.
+Outputs (Đầu ra)
+Các biểu đồ trực quan (Cột, Tròn) hoặc bảng số liệu thống kê trên màn hình; File tài liệu (.xlsx, .pdf) được tải xuống máy tính.
+Destination (Đích)
+Màn hình hiển thị phần mềm (UI/Dashboard), Hệ thống bộ nhớ cục bộ (Local Storage) của máy tính người dùng.
+Action (Hành động)
+Tiếp nhận tham số lọc (thời gian, loại báo cáo) từ giao diện.
+Gửi câu truy vấn (Query) xuống cơ sở dữ liệu để gom nhóm (Group by) và tính tổng (Sum) các bản ghi từ bảng Hóa đơn, Bảng Thu/Chi.
+Hiển thị kết quả lên giao diện dạng biểu đồ hoặc lưới dữ liệu (DataGrid).
+Nếu người dùng chọn "Xuất file", hệ thống sử dụng thư viện (như EPPlus cho Excel hoặc iTextSharp cho PDF) để đóng gói dữ liệu và lưu thành file.
+Requires (Yêu cầu)
+Các phép toán cộng dồn doanh thu phải sử dụng kiểu dữ liệu Decimal chính xác tuyệt đối. Thời gian truy vấn và vẽ biểu đồ không nên vượt quá 3 giây để tránh làm đơ ứng dụng.
+Precondition (Điều kiện tiên quyết)
+Người dùng đang đăng nhập với quyền Kế toán, Quản lý hoặc Admin. Hệ thống phải có sẵn dữ liệu giao dịch trong khoảng thời gian được chọn.
+Postcondition (Điều kiện sau)
+File báo cáo được tạo thành công trên máy tính. Dữ liệu gốc trên hệ thống không bị thay đổi (đây là thao tác chỉ đọc - Read-only).
+Side effects (Tác động phụ)
+Mọi hành động xuất file dữ liệu nhạy cảm (như báo cáo lợi nhuận hoặc giá vốn) đều phải được hệ thống lưu lại vào Audit Log (Ví dụ: "Kế toán A đã xuất báo cáo doanh thu tháng 10").
+Đặc tả chức năng Theo dõi nhật ký hệ thống
+Function (Chức năng)
+Theo dõi nhật ký hệ thống
+Description (Mô tả)
+Xem lại toàn bộ lịch sử thao tác để truy vết (Ai xóa hóa đơn? Ai sửa giá?).
+Inputs (Đầu vào)
+Khoảng thời gian (Từ ngày - Đến ngày), Loại hành động (Delete, Update), ID Người dùng.
+Source (Nguồn)
+Admin hệ thống.
+Outputs (Đầu ra)
+Danh sách các bản ghi log chi tiết (Thời gian, IP, Người thực hiện, Hành động, Dữ liệu cũ, Dữ liệu mới).
+Destination (Đích)
+ Màn hình hiển thị.
+Action (Hành động)
+Truy vấn bảng Audit Logs theo bộ lọc và hiển thị.
+Requires (Yêu cầu)
+Dữ liệu bảng Log chỉ được phép đọc (Read-only), tuyệt đối không cung cấp tính năng "Xóa Log" kể cả với Admin.
+Precondition (Điều kiện tiên quyết)
+Các chức năng khác đã hoạt động và có sinh ra log.
+Postcondition (Điều kiện sau)
+Đọc dữ liệu (không thay đổi trạng thái hệ thống).
+Side effects (Tác động phụ)
+Không có.
+Phân loại các yêu cầu chức năng
+STT
+Tên yêu cầu
+Phân loại yêu cầu
+1
+Đăng nhập hệ thống
+2
+Quản lý tài khoản & Phân quyền
+3
+Quản lý loại sản phẩm
+4
+Quản lý sản phẩm
+5
+Quản lý loại dịch vụ
+6
+Quản lý danh mục nhà cung cấp
+7
+Quản lý công nợ
+8
+Quản lý khách hàng
+9
+Lập phiếu bán hàng
+10
+Lập phiếu mua hàng
+11
+Lập phiếu dịch vụ
+12
+Lập báo cáo tồn kho
+13
+Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+14
+Tra cứu phiếu dịch vụ
+15
+Tra cứu tồn kho
+16
+Kết xuất báo cáo tài chính
+17
+Theo dõi nhật ký hệ thống
+18
+Đăng nhập hệ thống
+Chương 2. THIẾT KẾ HỆ THỐNG
+Kiến trúc hệ thống.
+Mô tả các thành phần trong hệ thống
+Chương 3. THIẾT KẾ DỮ LIỆU
+Thuật toán thiết kế dữ liệu
+Xét yêu cầu Quản lý tài khoản & Phân quyền
+Biểu mẫu
+BM1:                                      THÔNG TIN TÀI KHOẢN
+ID:                                                                           Ngày tạo tài khoản:
+Tên người dùng:                                                      Mật khẩu:   
+SĐT:                                                     Chức vụ:                             Trạng thái:
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM1 – Thông tin tài khoản. 
+Phân tích:
+ Dựa trên biểu mẫu BM1, hệ thống cần lưu trữ thông tin nhân viên để thực hiện đăng nhập và phân chia quyền hạn truy cập các chức năng.
+Các thuộc tính mới:
+ username (Tên đăng nhập), password_hash (Mật khẩu đã mã hóa), full_name (Họ tên), role (Quyền hạn), status (Trạng thái hoạt động).
+Thực thể mới: 
+Tạo bảng users. 
+Thuộc tính trừu tượng:
+ Thêm user_id làm khóa chính (Primary Key). 
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Admin
+Tiến trình (Process):
+ 1.0 – Xử lý quản trị tài khoản và phân quyền.
+Kho dữ liệu (Data Store):
+D_users: Lưu trữ thông tin định danh, mật khẩu mã hóa, quyền hạn và trạng thái hoạt động của nhân viên.
+D_audit_logs: Lưu vết nhật ký tất cả các thay đổi liên quan đến cấu hình người dùng và quyền hạn.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu Thêm/Sửa/Khóa tài khoản, username, role, status] 
+D2: Yêu cầu truy vấn [Kiểm tra sự tồn tại của username]
+D3: Trả về [Dữ liệu tài khoản hiện có]
+D4: Thực thi [Lệnh Insert (Tạo mới) / Update (Đổi mật khẩu, thay đổi role hoặc khóa tài khoản)] 
+D5: Ghi nhận [Lệnh Insert nhật ký: "Admin thay đổi quyền/trạng thái tài khoản..."] 
+D6: Trả về [Thông báo thành công, Danh sách người dùng hệ thống]
+Xét yêu cầu Đăng nhập hệ thống
+Biểu mẫu
+BM2:                                         ĐĂNG NHẬP
+Tên người dùng:
+Mật khẩu:
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM2 – Đăng nhập.  
+Phân tích:
+ Chức năng này yêu cầu xác thực thông tin người dùng dựa trên tên đăng nhập và mật khẩu. Qua đối soát, các thuộc tính cần thiết (username, password_hash) đã được thiết kế đầy đủ tại bảng 
+users
+ ở Bước 1.
+Các thuộc tính mới:
+ Không có.
+Thực thể mới: 
+Không có.
+Thuộc tính trừu tượng mới: 
+Không có. 
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Người dùng.
+Tiến trình (Process):
+ 2.0 - Xử lý đăng nhập.
+Kho dữ liệu (Data Store):
+D_users: Lưu trữ thông tin tài khoản (username, password_hash) và phân quyền (role).
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [username, password]
+D2: Yêu cầu xác thực [Thông tin đăng nhập]
+D3: Trả về [Kết quả xác thực, role, status]
+D4: Trả về [Thông báo thành công, Chuyển hướng giao diện theo role]
+Xét yêu cầu Quản lý loại sản phẩm
+Biểu mẫu
+BM3:                                         LOẠI SẢN PHẨM
+Tên loại sản phẩm:
+Đơn vị tính:
+Lợi nhuận:
+QĐ3:
+ Mỗi loại sản phẩm có một phần trăm lợi nhuận định mức khác nhau để phục vụ việc tính toán đơn giá bán. 
+Thiết kế dữ liệu với tính đúng đắn
+Các thuộc tính mới: BM3 – Loại sản phẩm. 
+Phân tích:
+ Dựa trên biểu mẫu BM3, hệ thống cần lưu trữ danh mục các loại hình kinh doanh (ví dụ: Vàng 24K, Nhẫn bạc, Kim cương...) và đơn vị tính tương ứng để làm nền tảng cho việc quản lý sản phẩm sau này.
+Các thuộc tính mới:
+ 
+category_name
+ (Tên loại sản phẩm), 
+unit_name
+ (Đơn vị tính). 
+Thực thể mới:
+ Tạo bảng product_categories. 
+Thuộc tính trừu tượng:
+ Thêm 
+category_id
+ làm khóa chính (Primary Key). 
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan: 
+QĐ3 – Mỗi loại sản phẩm có một phần trăm lợi nhuận định mức khác nhau để phục vụ việc tính toán đơn giá bán.
+Phân tích: 
+Để đáp ứng quy định này, thực thể loại sản phẩm cần lưu trữ thêm tỷ lệ lợi nhuận. Khi tỷ giá vàng hoặc giá vốn thay đổi, hệ thống sẽ căn cứ vào phần trăm này để tự động tính toán lại đơn giá bán cho các sản phẩm thuộc loại đó.
+Thuộc tính mới:
+ 
+profit_percentage
+ (Phần trăm lợi nhuận).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Admin / Quản lý.  
+Tiến trình (Process):
+ 3.0 – Xử lý quản lý loại sản phẩm. 
+Kho dữ liệu (Data Store):
+D_product_categories: Lưu trữ thông tin phân loại hàng hóa và đơn vị tính định danh.
+D_products: Truy vấn để kiểm tra ràng buộc trước khi xóa (không cho phép xóa loại đang có hàng tồn).
+D_audit_logs: Lưu vết nhật ký thay đổi cấu trúc danh mục sản phẩm.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu Thêm/Sửa/Xóa(Ẩn), category_name, unit_name]  
+D2: Yêu cầu truy vấn [Kiểm tra trùng tên hoặc kiểm tra hàng tồn liên quan]    
+D3: Trả về [Dữ liệu đối soát]
+D4: Thực thi [Lệnh Insert (Thêm) / Update (Sửa) / Update status (Ẩn)] 
+D5: Ghi nhận [Lệnh Insert nhật ký: "Cập nhật danh mục sản phẩm"]    
+D6: Trả về [Thông báo kết quả, Danh sách loại sản phẩm mới] 
+Xét yêu cầu Quản lý sản phẩm
+Biểu mẫu
+BM4:                                         SẢN PHẨM
+Tên sản phẩm:
+Mã loại sản phẩm:
+Đơn vị tính:
+Lợi nhuận: 
+QĐ4: 
+Tên sản phẩm không được trùng lặp. Khi xóa, hệ thống không xóa vĩnh viễn mà thực hiện ẩn sản phẩm (Soft-delete) nếu sản phẩm đó đã từng phát sinh giao dịch để đảm bảo tính toàn vẹn dữ liệu.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan: 
+BM4 – Sản phẩm.
+Phân tích: 
+Dựa trên biểu mẫu BM4, hệ thống cần lưu trữ các thông tin vật lý và giá trị gia công của từng món trang sức. Để xác định được đơn vị tính (chỉ, cái, viên...), mỗi sản phẩm bắt buộc phải thuộc về một loại sản phẩm nhất định.
+Các thuộc tính mới: 
+product_name
+ (Tên sản phẩm), 
+weight
+ (Trọng lượng), 
+labor_cost
+ (Tiền công), 
+stock_quantity
+ (Số lượng tồn kho).
+Thực thể mới: 
+Tạo bảng products.
+Thuộc tính trừu tượng: 
+Thêm 
+product_id
+ làm khóa chính.
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan: 
+QĐ4 – Tên sản phẩm không được trùng lặp. Khi xóa, hệ thống không xóa vĩnh viễn mà thực hiện ẩn sản phẩm (Soft-delete) nếu sản phẩm đó đã từng phát sinh giao dịch để đảm bảo tính toàn vẹn dữ liệu.
+Phân tích: 
+Để đáp ứng quy định về việc ẩn sản phẩm thay vì xóa, thực thể sản phẩm cần bổ sung thuộc tính trạng thái.
+Thuộc tính mới: 
+status
+ (Trạng thái: ACTIVE/INACTIVE).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Xét yêu cầu Quản lý loại dịch vụ
+Biểu mẫu
+BM5:                                         LOẠI DỊCH VỤ
+Tên loại dịch vụ:
+Đơn giá:
+Phần trăm trả trước: 
+QĐ5:
+ Tên loại dịch vụ không được trùng lặp. Tương tự như sản phẩm, khi một loại dịch vụ không còn cung cấp, hệ thống sẽ chuyển trạng thái sang "Ngừng phục vụ" (Soft-delete) thay vì xóa vĩnh viễn để bảo toàn dữ liệu lịch sử trên các phiếu dịch vụ cũ.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan: 
+BM5 – Loại dịch vụ.
+Phân tích: 
+Để quản lý các hoạt động gia công và sửa chữa trang sức, hệ thống cần lưu trữ danh mục các loại dịch vụ kèm theo giá sàn (giá cơ bản) để nhân viên có căn cứ báo giá cho khách hàng.
+Các thuộc tính mới:
+ 
+service_name
+ (Tên loại dịch vụ), 
+base_price
+ (Đơn giá dịch vụ).
+Thực thể mới: 
+Tạo bảng services.
+Thuộc tính trừu tượng:
+ Thêm 
+service_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan: 
+QĐ5 – Tên loại dịch vụ không được trùng lặp. Tương tự như sản phẩm, khi một loại dịch vụ không còn cung cấp, hệ thống sẽ chuyển trạng thái sang "Ngừng phục vụ" (Soft-delete) thay vì xóa vĩnh viễn để bảo toàn dữ liệu lịch sử trên các phiếu dịch vụ cũ.
+Phân tích: 
+Để đáp ứng quy định này, thực thể loại dịch vụ cần bổ sung thuộc tính trạng thái để quản lý việc hiển thị trên giao diện lập phiếu.
+Thuộc tính mới: 
+status
+ (Trạng thái: ACTIVE/INACTIVE).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Quản lý / Admin.
+Tiến trình (Process):
+ 5.0 - Quản lý loại dịch vụ.  
+Kho dữ liệu (Data Store):
+D_services: Danh mục quản lý các loại hình dịch vụ gia công, kiểm định tại cửa hàng.
+D_audit_logs: Lưu vết nhật ký thay đổi thông tin hệ thống.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu Thêm/Sửa/Xóa(Ẩn), thông tin dịch vụ, đơn giá] 
+D2: Yêu cầu truy vấn [Kiểm tra trùng lặp hoặc kiểm tra sự tồn tại của dịch vụ]
+D3: Trả về [Dữ liệu hiện tại của dịch vụ]  
+D4: Thực thi [Lệnh Insert (Thêm mới) / Update (Chỉnh sửa) / Update status (Ẩn)] 
+D5: Ghi nhận [Lệnh Insert nhật ký: "Thêm/Sửa/Ẩn loại dịch vụ"]
+D6: Trả về [Thông báo thành công, Danh sách dịch vụ sau khi cập nhật]
+Xét yêu cầu Quản lý danh mục nhà cung cấp
+Biểu mẫu
+BM15:                                         NHÀ CUNG CẤP
+Tên NCC:
+Địa chỉ:
+Số điện thoại:
+QĐ6:
+ Tên nhà cung cấp không được trùng lặp. Khi ngừng hợp tác, hệ thống thực hiện chuyển trạng thái sang "Ngừng giao dịch" (Soft-delete) để giữ lại lịch sử công nợ và phiếu nhập hàng cũ. Đồng thời, hệ thống cần theo dõi tổng nợ hiện tại với từng nhà cung cấp.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM6 – Nhà cung cấp.
+Phân tích:
+ Để phục vụ việc nhập hàng và theo dõi nguồn gốc trang sức, hệ thống cần lưu trữ thông tin các đối tác cung ứng. Dựa trên biểu mẫu BM6, các thông tin định danh và liên lạc cơ bản là cần thiết.
+Các thuộc tính mới:
+ 
+supplier_name
+ (Tên nhà cung cấp), 
+phone
+ (Số điện thoại), 
+address
+ (Địa chỉ), 
+tax_code
+ (Mã số thuế).
+Thực thể mới:
+ Tạo bảng suppliers.
+Thuộc tính trừu tượng:
+ Thêm 
+supplier_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan:
+ QĐ6 – Tên nhà cung cấp không được trùng lặp. Khi ngừng hợp tác, hệ thống thực hiện chuyển trạng thái sang "Ngừng giao dịch" (Soft-delete) để giữ lại lịch sử công nợ và phiếu nhập hàng cũ. Đồng thời, hệ thống cần theo dõi tổng nợ hiện tại với từng nhà cung cấp.
+Phân tích:
+ Để đáp ứng quy định này, thực thể nhà cung cấp cần bổ sung thuộc tính trạng thái và số dư nợ để phục vụ chức năng Quản lý công nợ ở các bước sau.
+Thuộc tính mới:
+ 
+total_debt
+ (Tổng nợ), 
+status
+ (Trạng thái: ACTIVE/INACTIVE).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Quản lý / Admin.
+Tiến trình (Process):
+ 6.0 – Xử lý danh mục nhà cung cấp.
+Kho dữ liệu (Data Store):
+D_suppliers: Lưu trữ thông tin liên hệ, mã số thuế và tổng nợ hiện tại của nhà cung cấp.
+D_inventory_receipts: Truy vấn để kiểm tra lịch sử nhập hàng trước khi thực hiện thao tác xóa.
+D_audit_logs: Lưu vết nhật ký các thao tác thêm mới hoặc điều chỉnh thông tin đối tác.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu Thêm/Sửa/Xóa(Ẩn), supplier_name, phone, address, tax_code] 
+D2: Yêu cầu truy vấn [Kiểm tra trùng lặp mã số thuế hoặc kiểm tra dư nợ/lịch sử giao dịch]
+D3: Trả về [Dữ liệu đối soát]
+D4: Thực thi [Lệnh Insert (Thêm) / Update (Sửa) / Update status (Ẩn)]
+D5: Ghi nhận [Lệnh Insert nhật ký: "Cập nhật thông tin nhà cung cấp..."] 
+D6: Trả về [Thông báo thành công, Danh sách nhà cung cấp đã cập nhật]
+Xét yêu cầu Quản lý công nợ
+Biểu mẫu
+BM7:
+DANH SÁCH CÔNG NỢ
+Tên NCC:
+STT
+Mã công nợ
+Loại thay đổi
+Số tiền nợ trước
+Số tiền nợ sau
+Số tiền thay đổi
+Ngày cập nhật
+1
+2
+                                                            Số tiền phải trả:
+QĐ7: 
+Một nhà cung cấp có nhiều lần cập nhật công nợ khác nhau (Thanh toán hoặc Tăng nợ). Việc cập nhật nợ phải gắn liền với nhân viên thực hiện giao dịch. 
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan
+: BM7 – Danh sách công nợ.
+Phân tích
+: Để theo dõi việc thanh toán tiền cho các đối tác cung ứng, hệ thống cần ghi lại các chứng từ/giao dịch liên quan đến công nợ. Dựa trên biểu mẫu BM7, cần biết số tiền giao dịch, loại chứng từ và trạng thái thanh toán.
+Các thuộc tính mới
+: 
+amount
+ (Số tiền giao dịch), 
+document_type
+ (Loại chứng từ: Thanh toán/Tăng nợ), 
+payment_status
+ (Trạng thái giao dịch).
+Thực thể mới
+: Tạo bảng debt_payments.
+Thuộc tính trừu tượng
+: Thêm 
+payment_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan
+: QĐ7 – Một nhà cung cấp có nhiều lần cập nhật công nợ khác nhau (Thanh toán hoặc Tăng nợ). Việc cập nhật nợ phải gắn liền với nhân viên thực hiện giao dịch.
+Phân tích
+: Để đáp ứng quy định này, thực thể công nợ không thể đứng độc lập mà phải có mối quan hệ liên kết với Nhà cung cấp (đã tạo ở Bước 6) và Người dùng (nhân viên thực hiện, đã tạo ở Bước 1). Đồng thời, giá trị 
+total_debt
+ trong bảng 
+suppliers
+ sẽ là kết quả tổng hợp từ các giao dịch trong bảng này.
+Thuộc tính mới
+: 
+supplier_id
+ (Khóa ngoại), 
+user_id
+ (Khóa ngoại).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Kế toán / Quản lý.
+Tiến trình (Process):
+ 7.0 – Xử lý công nợ nhà cung cấp.
+Kho dữ liệu (Data Store):
+D_suppliers: Lưu trữ thông tin nhà cung cấp và số dư nợ hiện tại (total_debt).
+D_debt_payments: Lưu trữ lịch sử các lần trả nợ cho nhà cung cấp.
+D_audit_logs: Ghi lại nhật ký các giao dịch thanh toán để đối soát.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Mã nhà cung cấp, Số tiền thanh toán, Phương thức thanh toán] 
+D2: Yêu cầu truy vấn [Lấy số dư nợ hiện tại] 
+D3: Trả về [Thông tin nợ hiện tại]  
+D4: Thực thi [Lệnh Insert tạo phiếu thanh toán]
+D5: Thực thi Thực thi [Lệnh Update giảm total_debt]
+D6: Ghi nhận [Lệnh Insert nhật ký: "Thanh toán nợ cho NCC..."]
+D7: Trả về [Thông báo thanh toán thành công, Biên lai chi tiền]
+Xét yêu cầu Quản lý khách hàng
+Biểu mẫu
+BM8:                     THÔNG TIN KHÁCH HÀNG
+Mã KH:
+Tên KH:
+Ngày sinh:
+SĐT:
+Điểm tích lũy:
+Hạng:
+QĐ8:
+ Hệ thống hỗ trợ tích điểm thưởng cho khách hàng dựa trên giá trị giao dịch. Hạng thành viên (member_tier) sẽ được tự động cập nhật dựa trên tổng số điểm tích lũy này.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM8 – Thông tin khách hàng.
+Phân tích:
+ Để thực hiện các hoạt động chăm sóc khách hàng và lưu vết giao dịch, hệ thống cần quản lý thông tin định danh cá nhân. Dựa trên biểu mẫu BM8, các thông tin cơ bản về liên lạc và cá nhân là cần thiết.
+Các thuộc tính mới:
+ 
+phone_number
+ (Số điện thoại), 
+full_name
+ (Họ tên), 
+dob
+ (Ngày sinh).
+Thực thể mới:
+ Tạo bảng customers.
+Thuộc tính trừu tượng:
+ Thêm 
+customer_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan:
+ QĐ8 – Hệ thống hỗ trợ tích điểm thưởng cho khách hàng dựa trên giá trị giao dịch. Hạng thành viên (member_tier) sẽ được tự động cập nhật dựa trên tổng số điểm tích lũy này.
+Phân tích:
+ Để đáp ứng quy định về chính sách hậu mãi, thực thể khách hàng cần bổ sung các thuộc tính để theo dõi năng lực mua sắm và phân hạng thành viên.
+Thuộc tính mới:
+ 
+total_points
+ (Tổng điểm tích lũy), 
+member_tier
+ (Hạng thành viên).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Quản lý / Admin.
+Tiến trình (Process):
+ 8.0 – Xử lý thông tin khách hàng.
+Kho dữ liệu (Data Store):
+D_customers: Lưu trữ thông tin cá nhân, số điện thoại, điểm tích lũy và hạng thành viên.
+D_audit_logs: Lưu vết nhật ký các thao tác thêm mới hoặc thay đổi thông tin khách hàng.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu Thêm/Sửa/Xóa, phone_number, full_name, dob...]
+D2: Yêu cầu truy vấn [Kiểm tra trùng lặp số điện thoại hoặc tìm khách hàng cần sửa]
+D3: Trả về [Kết quả đối soát dữ liệu] 
+D4: Thực thi [Lệnh Insert / Update]
+D5: Ghi nhận [Lệnh Insert nhật ký: "Thêm/Sửa khách hàng..."]
+D6: Trả về [Thông báo thành công, Danh sách khách hàng cập nhật]
+Xét yêu cầu Lập phiếu bán hàng
+Biểu mẫu
+BM9:                                       PHIẾU BÁN HÀNG
+Số phiếu:                                  Ngày lập:
+Khách hàng:   
+STT
+Sản phẩm
+Loại sản phẩm
+Số lượng
+Đơn vị tính
+Đơn giá
+Thành tiền
+1
+2
+                                                                                                      Tổng tiền:            
+QĐ9: 
+Có nhiều loại sản phẩm. Các sản phẩm trong cùng loại sản phẩm có cùng một đơn vị tính, cần lưu lại danh sách các đơn vị tính này.
+Đơn giá là đơn giá bán ra.
+Đơn giá bán ra = Đơn giá mua vào + (Đơn giá mua vào x Phần trăm lợi nhuận).
+Phần trăm lợi nhuận có thể là 1% hoặc 2% hoặc 5%... tùy theo loại sản phẩm.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM9 – Phiếu bán hàng.
+Phân tích:
+ Dựa trên biểu mẫu BM9, hệ thống cần lưu trữ thông tin về hóa đơn bán lẻ. Hóa đơn phải được lập cho một Khách hàng (đã có ở Bước 8) bởi một Nhân viên (đã có ở Bước 1). Nội dung phiếu bao gồm thông tin tổng quát và danh sách các sản phẩm được bán.
+Các thuộc tính mới:
+ 
+total_amount
+ (Tổng tiền), 
+quantity
+ (Số lượng bán), 
+unit_price
+ (Đơn giá bán tại thời điểm lập phiếu).
+Thực thể mới:
+ Tạo bảng invoices (Hóa đơn) và invoice_details (Chi tiết hóa đơn).
+Thuộc tính trừu tượng:
+ Thêm 
+invoice_id
+ và 
+detail_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan (QĐ9):
+ 
+"Đơn giá bán ra = Đơn giá mua vào + (Đơn giá mua vào $\times$ Phần trăm lợi nhuận)".
+"Phần trăm lợi nhuận (1%, 2%, 5%...) và Đơn vị tính (Chỉ, Cái, Viên...) được quy định theo từng Loại sản phẩm".
+Phân tích:
+ Để hệ thống tự động tính toán đơn giá bán và quản lý đơn vị tính đồng bộ, ta cần mở rộng các bảng đã thiết kế trước đó:
+Bảng
+ 
+product_categories
+ (tạo từ Bước 3) cần thêm % Lợi nhuận và Đơn vị tính.
+Bảng
+ 
+products
+ (tạo từ Bước 4) cần thêm Đơn giá mua vào.
+Thuộc tính bổ sung (Tiến hóa):
+Cập
+ 
+nhật bảng
+ 
+product_categories
+: profit_percentage, unit_name.
+Cập nhật bảng
+ 
+products
+: purchase_price.
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Nhân viên bán hàng.
+Tiến trình (Process):
+ 9.0 - Lập hóa đơn bán hàng. 
+Kho dữ liệu (Data Store):
+D_products: Thông tin hàng hóa và số lượng tồn (stock_quantity). 
+D_gold_exchange_rates: Lấy tỷ giá bán ra (sell_rate) nếu sản phẩm bán theo giá vàng hiện hành.
+D_invoices: Lưu thông tin chung của hóa đơn. 
+D_invoice_details: Lưu chi tiết các mặt hàng trong hóa đơn. 
+D_audit_logs: Lưu vết nhật ký thay đổi thông tin hệ thống. 
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Mã KH, Mã sản phẩm, Số lượng, Mức ưu đãi] 
+D2: Yêu cầu truy vấn [Thông tin sản phẩm, số lượng tồn kho] 
+D3: Trả về [Đơn giá, stock_quantity]
+D4: Yêu cầu truy vấn [sell_rate]
+D5: Trả về [sell_rate]
+D6: Lưu thông tin [Lệnh Insert hóa đơn] 
+D7: Cập nhật thông tin [Lệnh Update giảm stock_quantity] 
+D8: Cập nhật thông tin [Lệnh Update tăng total_points] 
+D9: Ghi nhận [Lệnh Insert nhật ký: "Lập hóa đơn mới"] 
+D10: Trả về [Biên lai với thông tin final_amount] 
+Xét yêu cầu Lập phiếu mua hàng
+Biểu mẫu
+BM10:                                       PHIẾU MUA HÀNG
+Số phiếu:                                  Ngày lập:                             Tình trạng:
+Nhà cung cấp:                          Địa chỉ:                                SĐT:   
+STT
+Sản phẩm
+Loại sản phẩm
+Số lượng
+Đơn vị tính
+Đơn giá
+Thành tiền
+1
+2
+                                                                                 Tổng tiền:                         
+QĐ10:
+ Cửa hàng mua hàng từ nhiều nhà cung cấp khác nhau, cần lưu lại thông tin về các nhà cung cấp này. Đơn giá là đơn giá mua vào của từng sản phẩm.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM10 – Phiếu mua hàng (Số phiếu, Ngày lập, Nhà cung cấp, Bảng danh sách sản phẩm, Tổng tiền).
+Phân tích:
+ Theo biểu mẫu BM10, hệ thống cần ghi nhận các giao dịch nhập hàng từ nhà cung cấp. Một phiếu mua hàng bao gồm thông tin hành chính (liên kết với nhà cung cấp đã tạo ở Bước 6 và nhân viên lập phiếu ở Bước 1) và danh sách chi tiết các mặt hàng.
+Các thuộc tính mới:
+ 
+purchase_date
+ (Ngày lập), 
+total_amount
+ (Tổng tiền), 
+quantity
+ (Số lượng), 
+purchase_price
+ (Đơn giá mua vào).
+Thực thể mới:
+ Tạo bảng purchase_receipts (Phiếu mua hàng) và purchase_receipt_details (Chi tiết phiếu mua hàng).
+Thuộc tính trừu tượng:
+ Thêm 
+purchase_id
+ và 
+detail_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan (QĐ10):
+ "Cửa hàng mua hàng từ nhiều nhà cung cấp khác nhau, cần lưu lại thông tin về các nhà cung cấp này. Đơn giá là đơn giá mua vào của từng sản phẩm."
+Phân tích:
+ Quy định này nhấn mạnh việc lưu trữ đơn giá mua vào riêng biệt cho từng sản phẩm trong mỗi lần nhập. Để đáp ứng tính tiến hóa cho công thức tính giá bán ở Bước 9 (Giá bán = Giá mua + Lợi nhuận), giá trị 
+purchase_price
+ từ chi tiết phiếu mua hàng này sẽ được dùng để cập nhật thuộc tính 
+purchase_price
+ hiện hành của thực thể Sản phẩm.
+Thuộc tính bổ sung (Tiến hóa):
+ Cập nhật thực thể products (đã tạo ở Bước 4) thêm thuộc tính 
+purchase_price
+ để lưu trữ đơn giá mua vào mới nhất.
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Nhân viên kho / Quản lý.
+Tiến trình (Process):
+ 10.0 - Lập phiếu mua hàng. 
+Kho dữ liệu (Data Store):
+D_suppliers: Đối soát nhà cung cấp.
+D_inventory_receipts: Thông tin phiếu nhập.
+D_inventory_receipt_details: Chi tiết từng món nhập.
+D_audit_logs: Lưu vết nhật ký thay đổi thông tin hệ thống. 
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [supplier_id, danh sách product_id, số lượng, đơn giá mua] 
+D2: Xác thực [Thông tin nhà cung cấp] 
+D3: Trả về [Trạng thái nhà cung cấp]
+D4: Lưu thông tin [Lệnh Insert phiếu nhập kho]  
+D5: Cập nhật thông tin [Lệnh Update tăng stock_quantity] 
+D6: Ghi nhận [Lệnh Insert nhật ký: "Nhập kho sản phẩm"] 
+D7: Trả về [Thông báo nhập kho thành công]
+Xét yêu cầu Lập phiếu dịch vụ
+Biểu mẫu
+BM11:                                                    PHIẾU DỊCH VỤ
+Số phiếu:                                                                 Ngày lập:
+Khách hàng:                                                                   SĐT:   
+Tổng tiền:                             Tổng tiền trả trước:                          Tổng tiền trả sau:
+STT
+Loại dịch vụ
+Đơn giá dịch vụ
+Số lượng
+Thành tiền
+Thanh toán
+Ngày giao
+Tình trạng
+Trả trước
+Còn lại
+1
+2
+QĐ11:
+ Có nhiều loại dịch vụ (cân thử vàng, gia công nữ trang…), mỗi loại dịch vụ có đơn giá riêng. Đơn giá được tính = Đơn giá dịch vụ + chi phí riêng cho từng trường hợp (nếu có). 
+Thành tiền = Số lượng x Đơn giá được tính. 
+Số tiền trả trước của từng loại dịch vụ phải >= (50% x Thành tiền) của loại dịch vụ đó. 
+Tình trạng là “Đã giao” hoặc “Chưa giao”.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM11 – Phiếu dịch vụ (Số phiếu, Ngày lập, Khách hàng, Bảng danh sách dịch vụ, Tổng tiền).
+Phân tích:
+ Dựa trên biểu mẫu BM11, hệ thống cần quản lý các yêu cầu dịch vụ của khách hàng. Một phiếu dịch vụ bao gồm thông tin chung (liên kết với Khách hàng ở Bước 8 và Nhân viên ở Bước 1) và một danh sách các dịch vụ cụ thể mà khách hàng yêu cầu (liên kết với Loại dịch vụ ở Bước 5).
+Các thuộc tính mới:
+ 
+extra_cost
+ (Chi phí riêng), 
+quantity
+ (Số lượng), 
+calculated_price
+ (Đơn giá được tính), 
+subtotal
+ (Thành tiền), 
+prepaid_amount
+ (Trả trước), 
+remaining_amount
+ (Còn lại), 
+delivery_date
+ (Ngày giao), 
+grand_total
+ (Tổng tiền phiếu).
+Thực thể mới:
+ Tạo bảng service_tickets (Thông tin chung phiếu dịch vụ) và service_ticket_details (Chi tiết các loại dịch vụ trong phiếu).
+Thuộc tính trừu tượng:
+ Thêm 
+ticket_id
+ và 
+detail_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan (QĐ11):
+ 
+"Đơn giá được tính = Đơn giá dịch vụ + chi phí riêng". 
+"Thành tiền = Số lượng x Đơn giá được tính". 
+"Số tiền trả trước >= (50% x Thành tiền) của loại dịch vụ đó".
+"Tình trạng là Đã giao hoặc Chưa giao".
+Phân tích:
+ 
+Để đáp ứng quy định về tính toán, hệ thống cần lưu trữ cả 
+base_price
+ (Đơn giá dịch vụ - lấy từ bảng services) và 
+extra_cost
+ để làm căn cứ tính 
+calculated_price
+.
+Thuộc tính 
+status
+ cần được thêm vào để quản lý tình trạng của từng dòng dịch vụ trong phiếu (theo biểu mẫu BM11, tình trạng nằm ở từng dòng chi tiết).
+Thuộc tính bổ sung (Tiến hóa):
+ Thêm thuộc tính 
+status
+ và các ràng buộc kiểm tra (Constraint) cho số tiền trả trước.
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Nhân viên bán hàng.
+Tiến trình (Process):
+ 11.0 - Lập phiếu dịch vụ.  
+Kho dữ liệu (Data Store):
+D_customers: Quản lý thông tin cá nhân, hạng thẻ và tổng điểm tích lũy của khách hàng.
+D_service_tickets: Quản lý biên nhận dịch vụ của khách, theo dõi ngày hẹn giao và số tiền khách đã đặt cọc.
+D_services: Danh mục quản lý các loại hình dịch vụ gia công, kiểm định tại cửa hàng.
+D_audit_logs: Ghi nhận thao tác Lập phiếu dịch vụ
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [customer_id, service_id, prepaid_amount, expected_delivery_date, note] 
+D2: Truy vấn [base_price]
+D3: Trả về [base_price]  
+D4: Xác thực [Khách hàng đã đăng ký chưa] 
+D5: Trả về kết quả xác thực [Khách hàng đã đăng ký chưa]
+D6: Lưu thông tin [Lệnh Insert phiếu dịch vụ]
+D7: Ghi nhận [Lệnh Insert nhật ký: "Lập phiếu dịch vụ"]
+D8: Trả về [Biên nhận phiếu dịch vụ kèm số tiền còn lại phải thanh toán]
+Xét yêu cầu Lập báo cáo tồn kho
+Biểu mẫu
+BM12:
+BÁO CÁO TỒN KHO
+Tháng/Năm:
+STT
+Sản phẩm
+Đơn vị tính
+Tồn đầu
+Số lượng mua vào
+Số lượng bán ra
+Tồn cuối
+1
+2
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM12 – Báo cáo tồn kho (Tháng, Năm, Bảng chi tiết tồn kho từng sản phẩm).
+Phân tích:
+ Để quản lý biến động hàng hóa theo thời gian, hệ thống cần lưu trữ các bản báo cáo tồn kho định kỳ theo tháng. Một báo cáo tồn kho bao gồm thông tin xác định thời điểm (Tháng/Năm) và danh sách chi tiết tình trạng kho của từng sản phẩm trong khoảng thời gian đó. Dữ liệu này được tổng hợp từ số dư đầu kỳ và các giao dịch nhập (Phiếu mua hàng) - xuất (Hóa đơn bán hàng/dịch vụ).
+Các thuộc tính mới:
+ 
+report_month
+ (Tháng báo cáo), 
+report_year
+ (Năm báo cáo), 
+opening_stock
+ (Tồn đầu), 
+in_quantity
+ (Số lượng nhập), 
+out_quantity
+ (Số lượng xuất), 
+closing_stock
+ (Tồn cuối).
+Thực thể mới:
+ Tạo bảng inventory_reports (Thông tin chung báo cáo) và inventory_report_details (Chi tiết tồn kho từng mặt hàng).
+Thuộc tính trừu tượng:
+ Thêm 
+report_id
+ và 
+detail_id
+ làm khóa chính (Primary Key).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Quản lý / Kế toán. 
+Tiến trình (Process):
+ 12.0 – Xử lý lập báo cáo tồn kho.    
+Kho dữ liệu (Data Store):
+D_products: Lấy danh sách sản phẩm và thông tin đơn vị tính.
+D_inventory_receipt_details: Lấy tổng số lượng nhập kho trong kỳ báo cáo.
+D_invoice_details: Lấy tổng số lượng bán ra (xuất kho) trong kỳ báo cáo.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu báo cáo, Tháng/Năm cần lập]  
+D2: Yêu cầu truy vấn [Danh sách mã sản phẩm (SKU)]  
+D3: Trả về [Thông tin sản phẩm]     
+D4: Yêu cầu truy vấn [Tổng số lượng nhập theo từng mã hàng trong tháng] 
+D5: Trả về [Số lượng nhập]  
+D6: Trả về [Bảng báo cáo tồn kho hoàn chỉnh (Tồn đầu, Nhập, Xuất, Tồn cuối)]
+Xét yêu cầu Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+Biểu mẫu
+BM13.1:
+DANH SÁCH ĐƠN VỊ TÍNH
+STT
+Mã đơn vị
+Tên đơn vị
+1
+2
+BM13.2:
+DANH SÁCH LOẠI SẢN PHẨM
+STT
+Mã loại sản phẩm
+Tên loại sản phẩm
+Đơn vị tính
+Lợi nhuận
+1
+2
+BM13.3:
+DANH SÁCH SẢN PHẨM
+STT
+Mã sản phẩm
+Tên sản phẩm
+Mã loại sản phẩm
+Đơn vị tính
+Lợi nhuận
+1
+2
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM13 – Tra cứu sản phẩm (Tên sản phẩm, Loại sản phẩm, Đơn vị tính, Đơn giá mua, Đơn giá bán, Tình trạng).
+Phân tích:
+ Chức năng này cho phép người dùng tìm kiếm thông tin chi tiết của sản phẩm dựa trên các tiêu chí lọc. Qua đối soát với các thực thể đã thiết kế:
+Tên sản phẩm
+, 
+Đơn giá mua
+, 
+Tình trạng
+: Đã có trong bảng products (Bước 4, 10).
+Loại sản phẩm
+, 
+Đơn vị tính
+: Đã có trong bảng product_categories (Bước 3, 9).
+Đơn giá bán
+: Được tính toán động từ 
+Đơn giá mua
+ và 
+% Lợi nhuận
+ (Quy định tại Bước 9).
+Kết luận:
+ Yêu cầu tra cứu sử dụng hoàn toàn các thuộc tính hiện có, không phát sinh thêm thuộc tính trừu tượng hay thực thể mới.
+Database Diagram: 
+Không đổi.
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Tất cả người dùng  
+Tiến trình (Process):
+ 10.0 – Xử lý tra cứu hàng hóa.     
+Kho dữ liệu (Data Store):
+D_products: Lưu trữ thông tin SKU, tên sản phẩm, trọng lượng và tiền công.
+D_product_categories: Lưu trữ tên loại sản phẩm và đơn vị tính định danh (unit_name) như Chỉ, Phân, Gram, Cái....
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Từ khóa tìm kiếm, Lọc theo loại sản phẩm, Lọc theo đơn vị tính]  
+D2: Yêu cầu truy vấn [Lọc dữ liệu theo tham số người dùng chọn]   
+D3: Trả về [Danh sách category_id và unit_name thỏa điều kiện]    
+D4: Yêu cầu truy vấn [Lấy thông tin sản phẩm dựa trên category_id tìm được]  
+D5: Trả về [Chi tiết sản phẩm và tồn kho]   
+D6: Trả về [Danh sách kết quả tìm kiếm đa điều kiện] 
+Xét yêu cầu Tra cứu phiếu dịch vụ
+Biểu mẫu
+BM14:
+                            DANH SÁCH PHIẾU DỊCH VỤ
+STT
+Số phiếu
+Ngày lập
+Khách hàng
+Tổng tiền
+Trả trước
+Còn lại
+Tình trạng
+1
+2
+QĐ14:
+ Tình trạng của phiếu dịch vụ là “Hoàn thành” nếu tất cả các loại dịch vụ trong phiếu dịch vụ đó đã được giao. Ngược lại là “Chưa hoàn thành”.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM14 – Tra cứu phiếu dịch vụ (Mã phiếu, Khách hàng, Ngày lập, Tổng tiền, Số tiền trả trước, Số tiền còn lại, Tình trạng).
+Phân tích:
+ Chức năng này cho phép người dùng tìm kiếm và theo dõi trạng thái tổng quát của các phiếu dịch vụ. Qua đối soát với các thực thể đã thiết kế ở Bước 11:
+Mã phiếu
+ (
+ticket_id
+), 
+Ngày lập
+ (
+created_at
+), 
+Tổng tiền
+ (
+grand_total
+): Đã có trong bảng service_tickets.
+Khách hàng
+: Lấy từ bảng customers thông qua khóa ngoại 
+customer_id
+.
+Số tiền trả trước
+, 
+Số tiền còn lại
+: Được tổng hợp (SUM) từ bảng service_ticket_details.
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan (QĐ14):
+ "Tình trạng của phiếu dịch vụ là “Hoàn thành” nếu tất cả các loại dịch vụ trong phiếu dịch vụ đó đã được giao. Ngược lại là “Chưa hoàn thành”."
+Phân tích:
+ Đây là một quy định về logic trạng thái tổng hợp. Tình trạng của một phiếu dịch vụ không được lưu trữ tĩnh mà phụ thuộc vào trạng thái 
+status
+ của từng dòng chi tiết trong bảng service_ticket_details.
+Nếu tồn tại ít nhất một dòng chi tiết có trạng thái là 'CHƯA GIAO', thì phiếu đó là 'Chưa hoàn thành'.
+Nếu tất cả các dòng đều là 'ĐÃ GIAO', phiếu đó mới là 'Hoàn thành'.
+Kết luận:
+ Yêu cầu này không phát sinh thêm thuộc tính lưu trữ mới trong các bảng nhưng yêu cầu một logic truy vấn phức tạp để đáp ứng quy định QĐ14.
+Database Diagram: 
+Không đổi.
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Nhân viên bán hàng / Quản lý.
+Tiến trình (Process):
+ 14.0 – Xử lý tra cứu phiếu dịch vụ.   
+Kho dữ liệu (Data Store):
+D_service_tickets: Kho lưu trữ thông tin cốt lõi của phiếu dịch vụ.
+D_customers: Lấy thông tin định danh khách hàng (họ tên, số điện thoại) liên kết với phiếu.
+D_services: Lấy tên loại dịch vụ tương ứng với phiếu.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Từ khóa tìm kiếm (Mã phiếu / SĐT / Tên KH)] 
+D2: Yêu cầu truy vấn [Tìm kiếm theo điều kiện]
+D3: Trả về [Dữ liệu các phiếu dịch vụ khớp điều kiện]  
+D4: Yêu cầu truy vấn [Thông tin tên khách hàng và tên dịch vụ] 
+D5: Trả về [Dữ liệu định danh]
+D6: Trả về [Danh sách kết quả tra cứu kèm trạng thái phiếu và số tiền còn lại] 
+Xét yêu cầu Tra cứu tồn kho
+Biểu mẫu
+BM15:
+TRA CỨU TỒN KHO
+Sản phẩm:
+Đơn vị tính:
+Số lượng tồn:
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM15 – Tra cứu tồn kho (Tên sản phẩm, Loại sản phẩm, Tồn cuối, Đơn vị tính).
+Phân tích:
+ Chức năng này hỗ trợ người dùng kiểm tra nhanh số lượng hàng hóa hiện còn trong kho tại thời điểm truy vấn. Qua đối soát với các thực thể đã thiết kế:
+Tên sản phẩm
+: Đã có trong bảng products (Bước 4).
+Loại sản phẩm
+, 
+Đơn vị tính
+: Đã có trong bảng product_categories (Bước 3, 9).
+Tồn cuối
+: Chính là thuộc tính 
+stock_quantity
+ (Số lượng tồn kho hiện hành) trong bảng products, vốn được cập nhật tự động sau mỗi phiếu nhập (Bước 10) và phiếu xuất (Bước 9).
+Kết luận:
+ Tương tự như yêu cầu tra cứu sản phẩm, yêu cầu tra cứu tồn kho sử dụng các thuộc tính đã có sẵn trong hệ thống, không phát sinh thêm thực thể mới.
+Database Diagram: 
+Không đổi.
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Tất cả người dùng.
+Tiến trình (Process):
+ 15.0 – Xử lý tra cứu tồn kho.   
+Kho dữ liệu (Data Store):
+D_products: Lưu trữ thông tin chi tiết sản phẩm và số lượng tồn kho hiện tại.
+D_product_categories: Lưu trữ thông tin phân loại sản phẩm (Nhẫn, Dây chuyền, Vàng 24K...) để hỗ trợ lọc dữ liệu.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Từ khóa tìm kiếm (SKU/Tên SP), Bộ lọc loại sản phẩm] 
+D2: Yêu cầu truy vấn [Lọc sản phẩm theo điều kiện]  
+D3: Trả về [Danh sách sản phẩm và số lượng stock_quantity]    
+D4: Yêu cầu truy vấn [Lấy tên loại sản phẩm tương ứng]
+D5: Trả về [Tên loại sản phẩm] 
+D6: Trả về [Bảng danh sách tồn kho chi tiết]
+Xét yêu cầu Kết xuất báo cáo tài chính
+Biểu mẫu
+BM16:                              BÁO CÁO DOANH THU
+Trong tháng/năm: mm/yyyy
+Doanh thu bán hàng:                                       Doanh thu dịch vụ:
+Tiền nhập hàng:
+Tổng doanh thu:                                              Tổng lợi nhuận:
+Tỷ lệ tăng trưởng so với tháng gần nhất:
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM16 – Báo cáo doanh thu (Tháng, Năm, Tổng doanh thu, Bảng chi tiết doanh thu theo từng loại sản phẩm).
+Phân tích:
+ Để theo dõi hiệu quả kinh doanh, hệ thống cần lưu trữ các báo cáo doanh thu định kỳ. Một bản báo cáo bao gồm thông tin xác định thời gian (Tháng/Năm), tổng doanh thu của cả cửa hàng và danh sách chi tiết doanh thu đóng góp từ từng loại sản phẩm cùng với tỉ lệ phần trăm tương ứng.
+Các thuộc tính mới:
+ 
+report_month
+ (Tháng báo cáo), 
+report_year
+ (Năm báo cáo), 
+total_revenue
+ (Tổng doanh thu), 
+revenue_amount
+ (Doanh thu của loại sản phẩm), 
+percentage
+ (Tỉ lệ %).
+Thực thể mới:
+ Tạo bảng revenue_reports (Thông tin chung báo cáo) và revenue_report_details (Chi tiết doanh thu theo loại sản phẩm).
+Thuộc tính trừu tượng:
+ Thêm 
+report_id
+ và 
+detail_id
+ làm khóa chính (Primary Key).
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Quản lý / Kế toán.
+Tiến trình (Process):
+ 16.0 – Xử lý kết xuất báo cáo tài chính.
+Kho dữ liệu (Data Store):
+D_invoices: Lấy dữ liệu doanh thu từ các hóa đơn bán trang sức.
+D_service_tickets: Lấy dữ liệu doanh thu từ các hoạt động dịch vụ gia công, sửa chữa.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu báo cáo, Tham số thời gian (Tháng/Năm)] 
+D2: Yêu cầu truy vấn [Tổng số tiền thanh toán trong tháng]
+D3: Trả về [Dữ liệu doanh thu bán lẻ]
+D4: Yêu cầu truy vấn [Tổng phí dịch vụ đã thu trong tháng] 
+D5: Trả về [Dữ liệu doanh thu dịch vụ] 
+D6: Trả về [Bảng báo cáo tài chính tổng hợp và Biểu đồ tăng trưởng]
+Xét yêu cầu Theo dõi nhật ký hệ thống
+Biểu mẫu
+BM17:                                        NHẬT KÝ HỆ THỐNG
+STT
+Thời gian
+Người thực hiện
+Hành động
+Dữ liệu cũ
+Dữ liệu mới
+1
+2
+QĐ17:
+ Nhật ký hệ thống là dữ liệu chỉ đọc, không cho phép xóa kể cả quyền Admin để đảm bảo tính minh bạch.
+Thiết kế dữ liệu với tính đúng đắn
+Biểu mẫu liên quan:
+ BM17 – Nhật ký hệ thống (Tên người dùng, Thời gian, Hành động, Bảng tác động).
+Phân tích:
+ Để giám sát hoạt động của hệ thống, mỗi khi có một thao tác làm thay đổi dữ liệu (Thêm, Sửa, Xóa), hệ thống cần ghi lại dấu vết. Dữ liệu này liên kết với bảng users (đã tạo ở Bước 1) để biết ai là người thực hiện.
+Các thuộc tính mới:
+ 
+log_time
+ (Thời gian ghi nhận), 
+action_type
+ (Loại hành động: Thêm/Sửa/Xóa), 
+affected_table
+ (Tên bảng bị tác động), 
+description
+ (Mô tả chi tiết hành động).
+Thực thể mới:
+ Tạo bảng audit_logs.
+Thuộc tính trừu tượng:
+ Thêm 
+log_id
+ làm khóa chính (Primary Key).
+Thiết kế dữ liệu với tính tiến hóa
+Quy định liên quan (QĐ17):
+ "Nhật ký hệ thống là dữ liệu chỉ đọc, không cho phép xóa kể cả quyền Admin để đảm bảo tính minh bạch."
+Phân tích:
+ Quy định này yêu cầu một ràng buộc cực kỳ khắt khe về tính toàn vẹn dữ liệu. Bảng audit_logs không chỉ là nơi lưu trữ mà còn phải được bảo vệ khỏi các lệnh 
+DELETE
+ hoặc 
+UPDATE
+.
+Giải pháp tiến hóa:
+ Sử dụng tính năng Trigger hoặc Rule của PostgreSQL để chặn mọi thao tác xóa hoặc sửa đổi trên bảng này sau khi dữ liệu đã được ghi vào.
+Database Diagram:
+Sơ đồ luồng dữ liệu
+Hình
+Thực thể ngoài (Tác nhân):
+ Admin
+Tiến trình (Process):
+ 17.0 – Xử lý hiển thị nhật ký hệ thống.
+Kho dữ liệu (Data Store):
+D_audit_logs: Kho lưu trữ toàn bộ vết lịch sử các thao tác làm thay đổi dữ liệu (Insert, Update, Delete) và các sự kiện đăng nhập.
+D_users: Truy vấn để hiển thị tên đầy đủ hoặc username của người thực hiện hành động thay vì chỉ hiển thị mã ID.
+Chi tiết các luồng dữ liệu:
+D1:
+ 
+Gửi [Yêu cầu xem nhật ký, Bộ lọc (Thời gian/Nhân viên/Loại hành động)] 
+D2: Yêu cầu truy vấn [Dữ liệu nhật ký theo điều kiện lọc]
+D3: Trả về [Danh sách các bản ghi nhật ký]
+D4: Yêu cầu truy vấn [Thông tin định danh người dùng]
+D5: Trả về [Tên người dùng tương ứng] 
+D6: Trả về [Bảng danh sách nhật ký hoạt động chi tiết]
+Sơ đồ hoàn chỉnh.
+Danh sách các bảng dữ liệu (table) trong sơ đồ:
+Bảng 3.1. Bảng danh sách các dữ liệu trong sơ đồ
+STT
+Tên bảng dữ liệu
+Diễn giải
+1
+users
+Lưu trữ thông tin tài khoản, họ tên và phân quyền của nhân viên/quản lý vận hành hệ thống.
+2
+product_categories
+Quản lý danh mục loại sản phẩm, lưu trữ tập trung tên đơn vị tính (ĐVT) và phần trăm lợi nhuận định mức theo quy định.
+3
+products
+Lưu trữ thông tin chi tiết của từng sản phẩm trang sức (tên, trọng lượng, tiền công, giá mua hiện hành, số lượng tồn và trạng thái hoạt động).
+4
+services
+Danh mục các loại dịch vụ sửa chữa, gia công trang sức mà cửa hàng cung cấp kèm đơn giá sàn cố định và trạng thái kinh doanh.
+5
+suppliers
+Lưu trữ thông tin định danh, liên hệ của các đối tác cung ứng và theo dõi lũy kế tổng nợ hiện tại với từng nhà cung cấp.
+6
+debt_payments
+Nhật ký chi tiết các giao dịch công nợ (phiếu tăng nợ hoặc phiếu chi thanh toán tiền nợ) gắn liền với nhà cung cấp và nhân viên thực hiện.
+7
+customers
+Quản lý hồ sơ khách hàng, số điện thoại định danh, ngày sinh, tổng điểm tích lũy và phân hạng thành viên tự động.
+8
+invoices
+Lưu trữ thông tin hành chính tổng quát của hóa đơn bán lẻ sản phẩm (mã phiếu, ngày lập, khách hàng, nhân viên bán hàng, tổng tiền).
+9
+invoice_details
+Chi tiết danh sách sản phẩm trong từng hóa đơn bán hàng, lưu trữ số lượng bán và đơn giá bán ra thực tế tại thời điểm chốt hóa đơn.
+10
+purchase_receipts
+Lưu trữ thông tin chung của phiếu nhập kho/mua hàng từ nhà cung cấp (số phiếu, nhà cung cấp, nhân viên lập, ngày nhập, tổng tiền).
+11
+purchase_receipt_details
+Chi tiết các mặt hàng trong phiếu mua, lưu trữ số lượng và đơn giá mua vào thực tế của từng sản phẩm trong đợt nhập hàng.
+12
+service_tickets
+Lưu trữ thông tin tổng quát của phiếu nhận yêu cầu dịch vụ từ khách hàng (ngày lập, nhân viên tiếp nhận, tổng tiền của toàn bộ phiếu).
+13
+service_ticket_details
+Chi tiết từng loại dịch vụ trong phiếu yêu cầu, lưu trữ đơn giá chốt, chi phí riêng, số lượng, tiền trả trước (≥ 50%), tiền còn lại, ngày hẹn giao và tình trạng (Đã giao/Chưa giao).
+14
+inventory_reports
+Quản lý thông tin chung của báo cáo tồn kho định kỳ, xác định mốc thời gian báo cáo theo tháng/năm.
+15
+inventory_report_details
+Số liệu biến động kho chi tiết của từng sản phẩm trong tháng báo cáo bao gồm: số lượng tồn đầu, số lượng mua vào, số lượng bán ra và tồn cuối kỳ.
+16
+revenue_reports
+Lưu trữ báo cáo kết xuất kinh doanh theo tháng/năm, tổng hợp động các chỉ số tài chính: doanh thu bán hàng, doanh thu dịch vụ, tiền nhập hàng, tổng doanh thu, tổng lợi nhuận và tỷ lệ tăng trưởng.
+17
+audit_logs
+Hệ thống nhật ký bảo mật ở chế độ chỉ đọc (Read-only), ghi vết dòng thời gian, tài khoản thực hiện, hành động tác động, dữ liệu cũ và dữ liệu mới.
+Mô tả từng bảng dữ liệu
+Bảng users
+Bảng 3.4.1. Bảng mô tả thành phần của bảng users
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+user_id
+SERIAL
+PRIMARY KEY
+Mã định danh người dùng hệ thống tự động tăng.
+2
+username
+VARCHAR(50)
+UNIQUE, NOT NULL
+Tên tài khoản đăng nhập của nhân viên/quản lý.
+3
+password
+VARCHAR(255)
+NOT NULL
+Mật khẩu truy cập tài khoản (đã băm bảo mật).
+4
+full_name
+VARCHAR(100)
+NOT NULL
+Họ và tên đầy đủ của nhân viên.
+5
+role
+VARCHAR(20)
+NOT NULL
+Phân quyền tài khoản hành chính (QUAN_LY / NHAN_VIEN).
+Bảng product_categories 
+Bảng 3.4.2. Bảng mô tả thành phần của bảng product_categories 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+category_id
+SERIAL
+PRIMARY KEY
+Mã định danh loại sản phẩm tự động tăng.
+2
+category_name
+VARCHAR(255)
+UNIQUE, NOT NULL
+Tên phân loại sản phẩm (Vàng tây, nhẫn cưới, đá quý...).
+3
+unit_name
+VARCHAR(50)
+NOT NULL
+Tên đơn vị tính áp dụng đồng bộ cho loại sản phẩm (Chỉ, Cái, Viên).
+4
+profit_percentage
+DECIMAL(5, 2)
+DEFAULT 0
+Phần trăm lợi nhuận định mức của loại sản phẩm (1%, 2%, 5%...).
+Bảng products 
+Bảng 3.4.3. Bảng mô tả thành phần của bảng products 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+product_id
+SERIAL
+PRIMARY KEY
+Mã định danh sản phẩm vàng bạc đá quý tự tăng.
+2
+category_id
+INT
+FOREIGN KEY
+Mã loại sản phẩm (Tham chiếu đến bảng 
+product_categories
+).
+3
+product_name
+VARCHAR(255)
+UNIQUE, NOT NULL
+Tên chi tiết của sản phẩm trang sức.
+4
+weight
+DECIMAL(18, 3)
+CHECK (> 0)
+Trọng lượng vật lý thực tế của món sản phẩm.
+5
+labor_cost
+DECIMAL(18, 2)
+CHECK (>= 0)
+Tiền công chế tác, gia công cố định của sản phẩm.
+6
+purchase_price
+DECIMAL(18, 2)
+CHECK (>= 0)
+Đơn giá mua vào hiện hành của sản phẩm (cập nhật từ phiếu nhập).
+7
+stock_quantity
+INT
+DEFAULT 0
+Số lượng hàng hóa hiện hành đang tồn kho vật lý.
+8
+status
+VARCHAR(20)
+DEFAULT 'ACTIVE'
+Trạng thái sản phẩm (ACTIVE/INACTIVE) hỗ trợ Soft-delete.
+Bảng services 
+Bảng 3.4.4. Bảng mô tả thành phần của bảng services 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+service_id
+SERIAL
+PRIMARY KEY
+Mã định danh loại dịch vụ kỹ thuật tự tăng.
+2
+service_name
+VARCHAR(255)
+UNIQUE, NOT NULL
+Tên loại dịch vụ cung cấp (Cân thử vàng, làm sạch, đính đá).
+3
+base_price
+DECIMAL(18, 2)
+CHECK (>= 0)
+Đơn giá dịch vụ sàn/cơ bản quy định cho hạng mục đó.
+4
+status
+VARCHAR(20)
+DEFAULT 'ACTIVE'
+Trạng thái hiển thị hoạt động kinh doanh của loại dịch vụ.
+Bảng suppliers
+Bảng 3.4.5. Bảng mô tả thành phần của bảng suppliers 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+supplier_id
+SERIAL
+PRIMARY KEY
+Mã định danh nhà cung cấp sản xuất tự tăng.
+2
+supplier_name
+VARCHAR(255)
+UNIQUE, NOT NULL
+Tên đơn vị đối tác cung ứng hàng hóa cho cửa hàng.
+3
+phone
+VARCHAR(15)
+Số điện thoại liên lạc trực tiếp của nhà cung cấp.
+4
+address
+TEXT
+Địa chỉ văn phòng/xưởng chế tác của đối tác.
+5
+tax_code
+VARCHAR(50)
+UNIQUE
+Mã số thuế của pháp nhân nhà cung cấp đối tác.
+6
+total_debt
+DECIMAL(18, 2)
+CHECK (>= 0)
+Tổng số dư tiền nợ lũy kế hiện tại đối với nhà cung cấp này.
+7
+status
+VARCHAR(20)
+DEFAULT 'ACTIVE'
+Trạng thái hợp tác giao dịch với nhà cung cấp.
+Bảng debt_payments 
+Bảng 3.4.6. Bảng mô tả thành phần của bảng debt_payments 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+payment_id
+SERIAL
+PRIMARY KEY
+Mã chứng từ ghi nhận lịch sử biến động công nợ.
+2
+supplier_id
+INT
+FOREIGN KEY
+Mã nhà cung cấp liên đới (Tham chiếu đến bảng 
+suppliers
+).
+3
+user_id
+INT
+FOREIGN KEY
+Mã nhân viên thực hiện (Tham chiếu đến bảng 
+users
+).
+4
+amount
+DECIMAL(18, 2)
+CHECK (> 0)
+Số tiền phát sinh trong giao dịch chứng từ công nợ.
+5
+document_type
+VARCHAR(50)
+NOT NULL
+Phân loại biến động chứng từ ('THANH TOÁN' hoặc 'TĂNG NỢ').
+6
+payment_status
+VARCHAR(50)
+Trạng thái kiểm duyệt chứng từ kế toán.
+7
+created_at
+TIMESTAMP
+DEFAULT
+Thời gian hệ thống ghi nhận phát sinh chứng từ nợ.
+Bảng customers 
+Bảng 3.4.7. Bảng mô tả thành phần của bảng customers  
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+customer_id
+SERIAL
+PRIMARY KEY
+Mã định danh hồ sơ khách hàng thành viên tự tăng.
+2
+phone_number
+VARCHAR(15)
+UNIQUE, NOT NULL
+Số điện thoại khách hàng (Dùng định danh chính trong tra cứu).
+3
+full_name
+VARCHAR(100)
+NOT NULL
+Họ và tên của khách hàng.
+4
+dob
+DATE
+Ngày tháng năm sinh của khách hàng phục vụ hậu mãi.
+5
+total_points
+INT
+CHECK (>= 0)
+Lũy kế tổng số điểm thưởng tích lũy qua mua sắm.
+6
+member_tier
+VARCHAR(50)
+DEFAULT
+Hạng thành viên hiện tại của khách hàng dựa trên điểm số.
+7
+created_at
+TIMESTAMP
+DEFAULT
+Ngày giờ khởi tạo hồ sơ thông tin khách hàng trên hệ thống.
+Bảng invoices 
+Bảng 3.4.8. Bảng mô tả thành phần của bảng invoices  
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+invoice_id
+SERIAL
+PRIMARY KEY
+Số phiếu / Mã định danh hóa đơn bán lẻ sản phẩm.
+2
+customer_id
+INT
+FOREIGN KEY
+Mã khách hàng mua hàng (Tham chiếu đến bảng 
+customers
+).
+3
+user_id
+INT
+FOREIGN KEY
+Mã nhân viên lập hóa đơn (Tham chiếu đến bảng 
+users
+).
+4
+total_amount
+DECIMAL(18, 2)
+NOT NULL
+Tổng số tiền phải trả chốt trên hóa đơn (Không có giảm giá).
+5
+created_at
+TIMESTAMP
+DEFAULT
+Ngày lập / Thời gian kết xuất xuất hóa đơn bán hàng.
+Bảng invoice_details  
+Bảng 3.4.9. Bảng mô tả thành phần của bảng invoice_details   
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+detail_id
+SERIAL
+PRIMARY KEY
+Mã định danh dòng chi tiết danh sách của hóa đơn.
+2
+invoice_id
+INT
+FOREIGN KEY
+Liên kết hóa đơn gốc (Tham chiếu bảng 
+invoices
+ - ON DELETE CASCADE).
+3
+product_id
+INT
+FOREIGN KEY
+Mã sản phẩm được bán ra (Tham chiếu đến bảng 
+products
+).
+4
+quantity
+INT
+CHECK (> 0)
+Số lượng sản phẩm bán lẻ tương ứng trên dòng hóa đơn.
+5
+unit_price
+DECIMAL(18, 2)
+NOT NULL
+Đơn giá bán ra chốt tại thời điểm bán (= Giá mua + Giá mua $\times$ % Lợi nhuận).
+Bảng purchase_receipts 
+Bảng 3.4.10. Bảng mô tả thành phần của bảng purchase_receipts 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+purchase_id
+SERIAL
+PRIMARY KEY
+Số phiếu / Mã định danh phiếu mua hàng nhập kho.
+2
+supplier_id
+INT
+FOREIGN KEY
+Mã đối tác cung ứng lô hàng (Tham chiếu đến bảng 
+suppliers
+).
+3
+user_id
+INT
+FOREIGN KEY
+Mã nhân viên kho lập chứng từ nhập (Tham chiếu bảng 
+users
+).
+4
+purchase_date
+TIMESTAMP
+DEFAULT
+Ngày lập / Thời gian thực tế nhập kho hàng hóa.
+5
+total_amount
+DECIMAL(18, 2)
+CHECK (>= 0)
+Tổng tiền thanh toán cho toàn bộ giá trị phiếu nhập mua.
+Bảng purchase_receipt_details 
+Bảng 3.4.11. Bảng mô tả thành phần của bảng purchase_receipt_details 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+detail_id
+SERIAL
+PRIMARY KEY
+Mã dòng định danh chi tiết của danh sách phiếu nhập mua.
+2
+purchase_id
+INT
+FOREIGN KEY
+Liên kết phiếu mua gốc (Tham chiếu 
+purchase_receipts
+ - ON DELETE CASCADE).
+3
+product_id
+INT
+FOREIGN KEY
+Mã mặt hàng sản phẩm được nhập (Tham chiếu đến bảng 
+products
+).
+4
+quantity
+INT
+CHECK (> 0)
+Số lượng mặt hàng nhập kho thực tế của dòng hàng đó.
+5
+purchase_price
+DECIMAL(18, 2)
+CHECK (> 0)
+Đơn giá mua vào thực tế của sản phẩm được ghi nhận cho đợt nhập.
+Bảng service_tickets 
+Bảng 3.4.12. Bảng mô tả thành phần của bảng service_tickets 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+ticket_id
+SERIAL
+PRIMARY KEY
+Số phiếu / Mã định danh chứng từ nhận yêu cầu dịch vụ.
+2
+customer_id
+INT
+FOREIGN KEY
+Mã khách hàng sử dụng dịch vụ (Tham chiếu đến bảng 
+customers
+).
+3
+user_id
+INT
+FOREIGN KEY
+Mã nhân viên tiếp nhận nhận máy (Tham chiếu đến bảng 
+users
+).
+4
+created_at
+TIMESTAMP
+DEFAULT
+Ngày lập / Ghi nhận biên nhận phiếu dịch vụ tổng quát.
+5
+grand_total
+DECIMAL(18, 2)
+DEFAULT 0
+Tổng tiền của toàn bộ tất cả hạng mục dịch vụ cộng lại trên phiếu.
+Bảng service_ticket_details 
+Bảng 3.4.13. Bảng mô tả thành phần của bảng service_ticket_details 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+detail_id
+SERIAL
+PRIMARY KEY
+Mã định danh dòng chi tiết kỹ thuật trong phiếu dịch vụ.
+2
+ticket_id
+INT
+FOREIGN KEY
+Liên kết phiếu dịch vụ gốc (
+service_tickets
+ - ON DELETE CASCADE).
+3
+service_id
+INT
+FOREIGN KEY
+Mã loại hình dịch vụ áp dụng (Tham chiếu đến bảng 
+services
+).
+4
+service_price
+DECIMAL(18, 2)
+NOT NULL
+Đơn giá gốc của loại dịch vụ tại thời điểm đó.
+5
+extra_cost
+DECIMAL(18, 2)
+CHECK (>= 0)
+Khoản chi phí riêng phát sinh thêm cho từng trường hợp cụ thể.
+6
+quantity
+INT
+CHECK (> 0)
+Số lượng thực hiện hạng mục dịch vụ kỹ thuật.
+7
+calculated_price
+DECIMAL(18, 2)
+NOT NULL
+Đơn giá chốt sau khi tính (= 
+service_price
+ + 
+extra_cost
+).
+8
+subtotal
+DECIMAL(18, 2)
+NOT NULL
+Giá trị thành tiền của dòng dịch vụ (= 
+quantity
+ × 
+calculated_price
+).
+9
+prepaid_amount
+DECIMAL(18, 2)
+NOT NULL
+Số tiền khách trả trước (Bắt buộc ≥ 50% × 
+subtotal
+ theo QĐ11).
+10
+remaining_amount
+DECIMAL(18, 2)
+NOT NULL
+Số tiền còn lại phải thu sau khi trừ khoản trả trước.
+11
+delivery_date
+DATE
+NOT NULL
+Thời hạn / Ngày giao nhận trả hàng lại cho khách.
+12
+status
+VARCHAR(50)
+CHECK (IN)
+Tình trạng xử lý giao nhận của dòng dịch vụ ('ĐÃ GIAO' / 'CHƯA GIAO').
+Bảng inventory_reports 
+Bảng 3.4.14. Bảng mô tả thành phần của bảng inventory_reports 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+report_id
+SERIAL
+PRIMARY KEY
+Mã số định danh bản báo cáo kho lưu trữ.
+2
+report_month
+INT
+CHECK (1-12)
+Kỳ báo cáo kho: Tháng thực hiện kết xuất.
+3
+report_year
+INT
+NOT NULL
+Kỳ báo cáo kho: Năm thực hiện kết xuất.
+4
+created_at
+TIMESTAMP
+DEFAULT
+Ngày khởi tạo lập bảng tổng hợp số liệu tồn kho.
+Bảng inventory_report_details 
+Bảng 3.4.15. Bảng mô tả thành phần của bảng inventory_report_details 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+detail_id
+SERIAL
+PRIMARY KEY
+Mã định danh dòng chi tiết thống kê của báo cáo tồn.
+2
+report_id
+INT
+FOREIGN KEY
+Liên kết kỳ báo cáo (Tham chiếu 
+inventory_reports
+ - ON DELETE CASCADE).
+3
+product_id
+INT
+FOREIGN KEY
+Mã mặt hàng sản phẩm được đối soát (Tham chiếu đến bảng 
+products
+).
+4
+opening_stock
+INT
+DEFAULT 0
+Số lượng sản phẩm còn tồn ở thời điểm đầu kỳ (Tồn đầu).
+5
+in_quantity
+INT
+DEFAULT 0
+Tổng lượng hàng hóa nhập thêm vào kho trong kỳ (Số lượng mua vào).
+6
+out_quantity
+INT
+DEFAULT 0
+Tổng lượng hàng hóa xuất đi bán/giao trong kỳ (Số lượng bán ra).
+7
+closing_stock
+INT
+DEFAULT 0
+Lượng hàng còn lại cuối kỳ chốt (Tồn cuối = Tồn đầu + Mua vào - Bán ra).
+Bảng revenue_reports  
+Bảng 3.4.16. Bảng mô tả thành phần của bảng revenue_reports 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+report_id
+SERIAL
+PRIMARY KEY
+Mã số định danh của báo cáo kết quả tài chính doanh thu.
+2
+report_month
+INT
+CHECK (1-12)
+Xác định mốc thời gian báo cáo: Trong tháng.
+3
+report_year
+INT
+NOT NULL
+Xác định mốc thời gian báo cáo: Năm.
+4
+total_revenue
+DECIMAL(18, 2)
+DEFAULT 0
+Tổng doanh thu hợp nhất ghi nhận của toàn bộ cửa hàng.
+5
+created_at
+TIMESTAMP
+DEFAULT
+Thời điểm thực hiện hành động kết xuất đóng kỳ tài chính.
+Bảng revenue_report_details   
+Bảng 3.4.17. Bảng mô tả thành phần của bảng revenue_report_details
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+detail_id
+SERIAL
+PRIMARY KEY
+Mã dòng dữ liệu chi tiết cấu thành doanh số.
+2
+report_id
+INT
+FOREIGN KEY
+Liên kết báo cáo tài chính (
+revenue_reports
+ - ON DELETE CASCADE).
+3
+category_id
+INT
+FOREIGN KEY
+Mã phân loại nhóm hàng hóa/mục thống kê (Tham chiếu bảng 
+product_categories
+).
+4
+revenue_amount
+DECIMAL(18, 2)
+DEFAULT 0
+Doanh thu đóng góp chi tiết phân rã riêng cho nhóm mục này.
+5
+percentage
+DECIMAL(5, 2)
+DEFAULT 0
+Tỉ lệ phần trăm đóng góp của phân loại đối với tổng doanh thu.
+Bảng audit_logs    
+Bảng 3.4.18. Bảng mô tả thành phần của bảng audit_logs 
+STT
+Thuộc tính
+Kiểu dữ liệu
+Ràng buộc
+Diễn giải
+1
+log_id
+SERIAL
+PRIMARY KEY
+Mã dấu vết nhật ký bảo mật hệ thống tự động tăng.
+2
+user_id
+INT
+FOREIGN KEY
+Mã tài khoản thực hiện hành động (Tham chiếu đến bảng 
+users
+).
+3
+log_time
+TIMESTAMP
+DEFAULT
+Thời gian chính xác thực thi thao tác nghiệp vụ.
+4
+action_type
+VARCHAR(50)
+NOT NULL
+Loại hành động can thiệp dữ liệu hệ thống (INSERT/UPDATE/DELETE).
+5
+affected_table
+VARCHAR(100)
+NOT NULL
+Tên bảng dữ liệu vật lý chịu tác động trực tiếp của hành động.
+6
+description
+TEXT
+Nội dung văn bản mô tả chi tiết, sao lưu trạng thái tác động bảo mật.
+Chương 4. THIẾT KẾ SƠ ĐỒ LỚP
+Chương 5. THIẾT KẾ XỬ LÝ
+Sơ đồ xử lý yêu cầu Quản lý tài khoản & Phân Quyền
+Sơ đồ xử lý
+Hình 5.1. Sơ đồ xử lý yêu cầu Quản lý tài khoản & Phân quyền
+Phân tích sơ đồ
+Mục đích:
+ Mô tả kịch bản xử lý khi Admin hệ thống yêu cầu tạo mới hoặc chỉnh sửa tài khoản nhân viên.
+Các đối tượng tham gia:
+AccountForm (UI Object)
+:
+ Giao diện tiếp nhận dữ liệu đầu vào.
+EmployeeBO (Business Object)
+:
+ Lớp xử lý nghiệp vụ tài khoản.
+Employee (Entity Object)
+:
+ Đối tượng ánh xạ dữ liệu nhân viên.
+Database, AuditLog (System Object)
+:
+ Cơ sở dữ liệu và hệ thống ghi vết.
+Kịch bản xử lý chi tiết:
+Tiếp nhận & Truy vấn:
+ Khi Admin gửi yêu cầu, 
+EmployeeBO
+ sẽ gọi CSDL (
+Database
+) để kiểm tra xem 
+username
+ đã tồn tại hay chưa.
+Kịch bản ngoại lệ (Tên đăng nhập trùng):
+ Nếu CSDL trả về kết quả đã tồn tại, khối 
+alt
+ rẽ nhánh lỗi. Hệ thống ngưng xử lý và 
+AccountForm
+ hiển thị cảnh báo cho Admin.
+Kịch bản thành công (Luồng chính):
+Nếu 
+username
+ hợp lệ, 
+EmployeeBO
+ tự gọi hàm nội bộ 
+hashPassword()
+ để mã hóa mật khẩu nhằm đảm bảo bảo mật.
+Một đối tượng 
+Employee
+ mới được khởi tạo (thông điệp 
+<<create>>
+).
+EmployeeBO
+ gửi lệnh 
+save()
+ tới 
+Database
+ để lưu dữ liệu.
+Sau khi lưu thành công, hệ thống gửi thông điệp tới 
+AuditLog
+ để lưu vết thao tác.
+Kết quả thành công được trả ngược về 
+AccountForm
+ để phản hồi cho người dùng.
+Sơ đồ xử lý yêu cầu Đăng nhập hệ thống
+Sơ đồ xử lý
+Hình 5.2. Sơ đồ xử lý yêu cầu Đăng nhập hệ thống
+Phân tích sơ đồ
+Mục đích:
+ Xác thực danh tính của người dùng khi truy cập vào phần mềm và cấp quyền (Session) tương ứng. Các đối tượng tham gia: 
+LoginForm (UI)
+, 
+AuthBO (BO)
+, 
+Database (System)
+, 
+AuditLog (System)
+.
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu:
+ Người dùng nhập thông tin tại 
+LoginForm
+. Hệ thống truyền dữ liệu xuống 
+AuthBO
+.
+Truy vấn:
+ 
+AuthBO
+ gọi hàm 
+getEmployeeByUsername()
+ từ CSDL để lấy bản ghi nhân viên tương ứng.
+Kịch bản ngoại lệ (Sai thông tin): 
+Trong khối 
+alt
+, nếu bản ghi trả về 
+null
+ hoặc mật khẩu không khớp với mã băm trong hệ thống, 
+AuthBO
+ lập tức trả về lỗi xác thực để UI hiển thị.
+Kịch bản thành công:
+Nếu xác thực đúng, 
+AuthBO
+ gọi 
+AuditLog
+ để ghi nhận sự kiện đăng nhập (thời gian, người đăng nhập).
+AuthBO
+ khởi tạo User Session và trả về kèm theo Role (Nhóm quyền) của người dùng.
+LoginForm
+ dựa vào Role để chuyển hướng người dùng đến giao diện Dashboard phù hợp.
+Sơ đồ xử lý yêu cầu Quản lý loại sản phẩm
+Sơ đồ xử lý
+Hình 5.3. Sơ đồ xử lý yêu cầu Quản lý loại sản phẩm
+Phân tích sơ đồ
+Mục đích:
+ Xử lý các thao tác Thêm, Sửa, Xóa danh mục phân loại hàng hóa (Nhẫn, Dây chuyền...). Các đối tượng tham gia: 
+ProductTypeForm (UI)
+, 
+ProductTypeBO (BO)
+, 
+Database (System)
+, 
+AuditLog (System)
+.
+Kịch bản xử lý chi tiết:
+Xác thực dữ liệu (Validation):
+ Ngay khi nhận yêu cầu, 
+ProductTypeBO
+ thực hiện bước 
+validate()
+ (kiểm tra rỗng, kiểm tra định dạng). Nếu sai, rẽ nhánh báo lỗi ngay lập tức mà không gọi CSDL.
+Xử lý thao tác (Luồng hợp lệ): 
+Dựa vào hành động của Admin, hệ thống rẽ nhánh 
+alt
+ lồng nhau:
+Nhánh Xóa:
+ Hệ thống gửi lệnh 
+checkTransactionsExist()
+ xuống CSDL. Nếu phân loại này đã từng phát sinh giao dịch hoặc đang có tồn kho, hệ thống áp dụng cơ chế Soft Delete bằng hàm 
+updateStatus("Ẩn")
+. Nếu chưa từng sử dụng, CSDL thực thi hàm 
+delete(id)
+ để xóa vĩnh viễn (Hard Delete).
+Nhánh Thêm/Sửa:
+ 
+ProductTypeBO
+ gửi lệnh 
+save()
+ để cập nhật CSDL.
+Lưu vết & Hoàn tất:
+ Sau khi tương tác CSDL thành công, hành động được ghi lại qua 
+AuditLog
+ và giao diện tải lại danh sách mới nhất.
+Sơ đồ xử lý yêu cầu Quản lý sản phẩm
+Sơ đồ xử lý
+Hình 5.4. Sơ đồ xử lý yêu cầu Quản lý sản phẩm
+Phân tích sơ đồ
+Mục đích:
+ Xử lý tính hợp lệ nhiều tầng khi cập nhật thông tin một mặt hàng cụ thể. Các đối tượng tham gia: 
+ProductForm (UI)
+, 
+ProductBO (BO)
+, 
+ProductTypeBO (BO)
+, 
+Database (System)
+, 
+AuditLog (System)
+.
+Kịch bản xử lý chi tiết:
+Kiểm tra tính toàn vẹn (Cross-validation):
+ Yêu cầu tính toàn vẹn dữ liệu ở đây phức tạp hơn. Ngoài việc 
+ProductBO
+ tự 
+validate
+ các trường thông tin cơ bản, nó còn phải giao tiếp chéo với 
+ProductTypeBO
+ bằng hàm 
+checkTypeExists(maLoai)
+ để đảm bảo mã loại sản phẩm mà Admin chọn thực sự tồn tại trong CSDL.
+Kịch bản ngoại lệ:
+ Nếu một trong hai bước kiểm tra (lỗi dữ liệu cơ bản hoặc mã loại không hợp lệ) thất bại, luồng xử lý bị chặn đứng và báo lỗi tại giao diện.
+Kịch bản thành công:
+ (Tương tự Quản lý loại sản phẩm)
+Hệ thống chia nhánh thực hiện Xóa (kiểm tra tồn kho/giao dịch trước khi xóa thật hoặc chỉ đổi trạng thái sang Ẩn).
+Thực hiện Thêm/Sửa bằng lệnh 
+save()
+.
+Lưu vết thao tác hệ thống bằng 
+AuditLog
+ và trả về kết quả cuối cùng cho UI.
+Sơ đồ xử lý yêu cầu Quản lý loại dịch vụ
+Sơ đồ xử lý
+Hình 5.5. Sơ đồ xử lý yêu cầu Quản lý loại dịch vụ
+Phân tích sơ đồ
+Mục đích:
+ Quản lý cấu hình các dịch vụ cửa hàng cung cấp (đánh bóng, gia công...) với nghiệp vụ xóa dữ liệu được tối ưu hóa. Các đối tượng tham gia: 
+ServiceTypeForm (UI)
+, 
+ServiceTypeBO (BO)
+, 
+Database (System)
+, 
+AuditLog (System)
+.
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu (Validation):
+ 
+ServiceTypeBO
+ thực hiện kiểm tra khắt khe về mặt nghiệp vụ: Tên dịch vụ không được trùng và Đơn giá bắt buộc phải > 0. Nếu vi phạm, trả về lỗi ngay cho UI.
+Xử lý thao tác:
+Nhánh Thêm/Sửa:
+ Gọi lệnh 
+save()
+ thông thường để cập nhật CSDL.
+Nhánh Xóa:
+ Khác với xử lý Xóa của phần Sản Phẩm, đối với Loại dịch vụ, hệ thống đặc tả tuân thủ tuyệt đối quy tắc Soft Delete. Khi nhận yêu cầu xóa, 
+ServiceTypeBO
+ không cần tốn chi phí truy vấn kiểm tra giao dịch cũ (
+checkTransactionsExist
+) mà tiến hành gọi thẳng hàm 
+updateStatus("Ẩn")
+. Điều này đảm bảo hiệu năng và toàn vẹn dữ liệu cho các phiếu dịch vụ cũ.
+Lưu vết & Hoàn tất: 
+Hệ thống gọi 
+AuditLog
+ để ghi chú việc đổi giá/thay đổi trạng thái dịch vụ và trả kết quả thành công để hiển thị lên màn hình.
+Sơ đồ xử lý yêu cầu Quản lý danh mục nhà cung cấp
+Sơ đồ xử lý
+Hình 5.6. Sơ đồ xử lý yêu cầu Quản lý danh mục nhà cung cấp
+Phân tích sơ đồ
+Mục đích:
+ Quản lý danh mục nhà cung cấp phục vụ cho nghiệp vụ nhập hàng và theo dõi công nợ. Sơ đồ thể hiện quá trình thêm mới, cập nhật thông tin hoặc ngừng giao dịch với nhà cung cấp. Các đối tượng tham gia gồm: SupplierForm (UI), SupplierBO (BO), Database (System), AuditLog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu (Validation):
+ SupplierBO thực hiện kiểm tra các thông tin bắt buộc như tên nhà cung cấp, số điện thoại, địa chỉ và mã số thuế. Đồng thời, hệ thống kiểm tra ràng buộc nghiệp vụ theo QĐ6: tên nhà cung cấp không được trùng lặp. Nếu dữ liệu nhập không hợp lệ hoặc tên nhà cung cấp đã tồn tại, hệ thống trả lỗi về SupplierForm để hiển thị cho người dùng.
+Xử lý thao tác:
+Nhánh Thêm/Sửa
+: Khi dữ liệu hợp lệ, SupplierBO gọi lệnh save(data) để thêm mới hoặc cập nhật thông tin nhà cung cấp trong bảng suppliers. Các thông tin được lưu gồm supplier_name, phone, address, tax_code, total_debt và status.
+Nhánh Ngừng giao dịch
+: Khi người dùng yêu cầu ngừng hợp tác với nhà cung cấp, hệ thống không xóa dữ liệu vật lý mà cập nhật trạng thái của nhà cung cấp sang “Ngừng giao dịch” hoặc INACTIVE. Cách xử lý này tuân thủ quy tắc Soft Delete, giúp giữ lại lịch sử công nợ và các phiếu nhập hàng cũ có liên quan.
+Lưu vết & Hoàn tất:
+ Sau khi thao tác dữ liệu thành công, SupplierBO gọi AuditLog để ghi nhận hành động thay đổi thông tin nhà cung cấp. Cuối cùng, hệ thống trả kết quả thành công về giao diện, cập nhật lại danh sách nhà cung cấp và hiển thị thông báo cho người dùng.
+Sơ đồ xử lý yêu cầu Quản lý công nợ
+Sơ đồ xử lý
+Hình 5.7. Sơ đồ xử lý yêu cầu Quản lý công nợ
+Phân tích sơ đồ
+Mục đích
+: Quản lý các lần cập nhật công nợ của nhà cung cấp, bao gồm nghiệp vụ thanh toán nợ và tăng nợ. Sơ đồ thể hiện cách hệ thống ghi nhận lịch sử giao dịch công nợ, đồng thời cập nhật số dư nợ hiện tại của từng nhà cung cấp. Các đối tượng tham gia gồm: DebtForm (UI), DebtBO (BO), Database (System), AuditLog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu (Validation)
+: DebtBO kiểm tra các thông tin đầu vào gồm mã nhà cung cấp, mã nhân viên thực hiện, loại thay đổi công nợ và số tiền giao dịch. Số tiền cập nhật phải hợp lệ, lớn hơn 0. Đồng thời, hệ thống truy vấn Database để lấy số dư nợ hiện tại của nhà cung cấp thông qua supplier_id. Nếu nhà cung cấp không tồn tại hoặc dữ liệu giao dịch không hợp lệ, hệ thống trả lỗi về DebtForm.
+Xử lý cập nhật công nợ:
+Nhánh Thanh toán: 
+Khi loại thay đổi là “Thanh toán”, hệ thống tạo một bản ghi mới trong bảng debt_payments để lưu lịch sử thanh toán. Sau đó, hệ thống cập nhật lại total_debt trong bảng suppliers theo công thức: nợ sau = nợ hiện tại - số tiền thanh toán.
+Nhánh Tăng nợ:
+ Khi loại thay đổi là “Tăng nợ”, hệ thống cũng tạo một bản ghi mới trong bảng debt_payments để lưu lịch sử phát sinh nợ. Sau đó, hệ thống cập nhật lại total_debt theo công thức: nợ sau = nợ hiện tại + số tiền tăng nợ.
+Ràng buộc người thực hiện:
+ Theo QĐ7, mỗi lần cập nhật công nợ phải gắn với nhân viên thực hiện giao dịch. Vì vậy, bản ghi trong debt_payments lưu user_id để phục vụ việc đối soát, truy vết trách nhiệm và lập báo cáo sau này.
+Lưu vết & Hoàn tất: 
+Sau khi ghi nhận công nợ và cập nhật số dư nợ thành công, DebtBO gọi AuditLog để lưu nhật ký “Cập nhật công nợ nhà cung cấp”. Cuối cùng, hệ thống trả kết quả thành công cho DebtForm, hiển thị biên lai giao dịch và số nợ mới của nhà cung cấp.
+Sơ đồ xử lý yêu cầu Quản lý khách hàng
+Sơ đồ xử lý
+Hình 5.8. Sơ đồ xử lý yêu cầu Quản lý khách hàng
+Phân tích sơ đồ
+Mục đích:
+ Quản lý thông tin khách hàng và hỗ trợ chính sách tích điểm, phân hạng thành viên. Sơ đồ thể hiện quá trình thêm mới, cập nhật hoặc xóa thông tin khách hàng, đồng thời tự động xác định hạng thành viên dựa trên tổng điểm tích lũy. Các đối tượng tham gia gồm: CustomerForm (UI), CustomerBO (BO), Database (System), AuditLog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu (Validation):
+ CustomerBO kiểm tra các thông tin khách hàng như họ tên, số điện thoại, ngày sinh và điểm tích lũy. Trong đó, số điện thoại đóng vai trò thông tin liên hệ quan trọng nên hệ thống cần kiểm tra trùng lặp trước khi lưu. Nếu dữ liệu không hợp lệ hoặc số điện thoại đã tồn tại, hệ thống trả lỗi về CustomerForm để hiển thị cho người dùng.
+Xử lý điểm tích lũy và hạng thành viên:
+ Khi dữ liệu hợp lệ, CustomerBO tính toán hạng thành viên dựa trên total_points. Quy tắc này đáp ứng QĐ8, trong đó member_tier không nên nhập thủ công mà được hệ thống tự động cập nhật dựa trên tổng điểm tích lũy của khách hàng.
+Xử lý thao tác:
+Nhánh Thêm/Sửa:
+ Hệ thống gọi save(data, memberTier) để thêm mới hoặc cập nhật thông tin khách hàng vào bảng customers. Các dữ liệu chính gồm phone_number, full_name, dob, total_points và member_tier.
+Nhánh Xóa:
+ Khi người dùng yêu cầu xóa khách hàng, hệ thống thực hiện thao tác deleteCustomer(id) theo thiết kế hiện tại. Tuy nhiên, nếu khách hàng đã phát sinh hóa đơn, hệ thống nên ưu tiên cơ chế ẩn hoặc khóa trạng thái trong các phiên bản mở rộng để bảo toàn lịch sử giao dịch.
+Lưu vết & Hoàn tất: 
+Sau khi thao tác dữ liệu thành công, CustomerBO gọi AuditLog để ghi nhận thay đổi thông tin khách hàng. Kết quả được trả về CustomerForm, danh sách khách hàng được cập nhật và thông báo thành công được hiển thị cho người dùng.
+Sơ đồ xử lý yêu cầu Lập phiếu bán hàng
+Sơ đồ xử lý
+Hình 5.9. Sơ đồ xử lý yêu cầu Lập phiếu bán hàng
+Phân tích sơ đồ
+Mục đích
+: Lập phiếu bán hàng cho khách hàng, tự động tính đơn giá bán, tổng tiền hóa đơn, cập nhật tồn kho và cộng điểm tích lũy cho khách hàng. Các đối tượng tham gia gồm: InvoiceForm (UI), InvoiceBO (BO), Database (System), AuditLog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu đầu vào
+: InvoiceBO kiểm tra thông tin khách hàng, danh sách sản phẩm, số lượng bán và mức ưu đãi nếu có. Hệ thống truy vấn Database để lấy thông tin khách hàng, sản phẩm, loại sản phẩm, số lượng tồn kho, đơn giá mua vào và phần trăm lợi nhuận. Nếu khách hàng không tồn tại, sản phẩm không hợp lệ hoặc số lượng tồn kho không đủ, hệ thống trả lỗi về InvoiceForm.
+Tính toán đơn giá và tổng tiền: 
+Khi dữ liệu hợp lệ, InvoiceBO tính đơn giá bán ra theo QĐ9: đơn giá bán = đơn giá mua vào + đơn giá mua vào × phần trăm lợi nhuận. Phần trăm lợi nhuận và đơn vị tính được lấy từ loại sản phẩm. Sau đó, hệ thống tính thành tiền cho từng dòng sản phẩm và tổng tiền cuối cùng của hóa đơn. Nếu hệ thống có áp dụng giá vàng hiện hành, InvoiceBO có thể truy vấn thêm tỷ giá bán ra để tính giá cho các sản phẩm phụ thuộc vào biến động giá vàng.
+Ghi nhận hóa đơn: 
+Hệ thống tạo bản ghi hóa đơn trong bảng invoices, bao gồm customer_id, user_id, total_amount và thời điểm lập phiếu. Sau đó, hệ thống lưu danh sách sản phẩm bán ra vào bảng invoice_details, bao gồm invoice_id, product_id, quantity và unit_price tại thời điểm lập phiếu.
+Cập nhật dữ liệu liên quan:
+ Sau khi lưu hóa đơn và chi tiết hóa đơn, hệ thống cập nhật giảm stock_quantity trong bảng products tương ứng với số lượng đã bán. Đồng thời, hệ thống cập nhật total_points của khách hàng dựa trên giá trị giao dịch và tự động cập nhật member_tier nếu tổng điểm đạt ngưỡng hạng mới.
+Lưu vết & Hoàn tất:
+ Sau khi toàn bộ thao tác bán hàng hoàn tất, InvoiceBO gọi AuditLog để ghi nhận nhật ký “Lập hóa đơn bán hàng”. Cuối cùng, hệ thống trả kết quả thành công về InvoiceForm và hiển thị biên lai bán hàng với tổng tiền cuối cùng cho nhân viên bán hàng.
+Sơ đồ xử lý yêu cầu Lập phiếu mua hàng
+Sơ đồ xử lý
+Phân tích sơ đồ
+Mục đích:
+ Cho phép ghi nhận việc nhập hàng từ các nhà cung cấp nhằm tăng số lượng tồn kho trên hệ thống và cập nhật công nợ. Các đối tượng tham gia: PurchaseForm (UI Object), PurchaseBO (Business Object), Database (System Object), AuditLog (System Object). Tác nhân thực hiện là Nhân viên kho hoặc Quản lý. 
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu đầu vào: 
+PurchaseBO kiểm tra các thông tin cơ bản trước khi mở kết nối CSDL. Các tham số như số lượng nhập, đơn giá mua bắt buộc phải là số dương lớn hơn 0. Nếu vi phạm, hệ thống ngắt luồng và báo lỗi ngay tại giao diện. Hệ thống truy vấn Database để kiểm tra tính hợp lệ của mã nhà cung cấp và danh sách các mã sản phẩm 
+Tính toán và Lưu trữ:
+ Hệ thống tính tổng tiền hóa đơn bằng tổng của (Số lượng × Đơn giá mua). Sau đó, PurchaseBO thực hiện lưu thông tin hành chính vào bảng 
+purchase_receipts
+ và lưu chi tiết mặt hàng vào bảng 
+purchase_receipt_details
+. 
+Cập nhật dữ liệu liên quan:
+ Ngay khi lưu phiếu thành công, hệ thống thực hiện hai lệnh cập nhật quan trọng: tăng số lượng tồn kho (
+stock_quantity
+) trong bảng 
+products
+ và cộng dồn số tiền phiếu mua vào tổng nợ (
+total_debt
+) của nhà cung cấp đó trong bảng 
+suppliers
+. 
+Lưu vết & Hoàn tất:
+ Hệ thống ghi nhận hành động "Nhập kho sản phẩm" vào AuditLog và trả về thông báo lưu thành công trên màn hình. 
+Sơ đồ xử lý yêu cầu Lập phiếu dịch vụ
+Sơ đồ xử lý
+Phân tích sơ đồ
+Mục đích: 
+Ghi nhận các yêu cầu dịch vụ gia công, sửa chữa của khách hàng, tính toán tổng chi phí chính xác và quản lý số tiền khách hàng đặt cọc. Các đối tượng tham gia: ServiceForm (UI Object), ServiceBO (Business Object), Database (System Object), Printer (Hardware Object), AuditLog (System Object). Tác nhân thực hiện là Nhân viên bán hàng hoặc Quản lý. 
+Kịch bản xử lý chi tiết: 
+Kiểm tra dữ liệu đầu vào: 
+Phiếu dịch vụ có thêm các ràng buộ: ngày hẹn giao không được trước ngày lập phiếu, và số tiền trả trước phải ≥ 50% tổng thành tiền của dịch vụ đó. ServiceBO sẽ validate các trường này trước tiên. Hệ thống kiểm tra xem khách hàng có tồn tại trong hệ thống hay không và các loại hình dịch vụ được chọn có đang ở trạng thái kích hoạt hay không. 
+Tính toán và Lưu trữ:
+ Tính toán đơn giá chốt bằng đơn giá dịch vụ cơ bản cộng với chi phí phát sinh. Dữ liệu sau đó được lưu vào 
+service_tickets
+ và chi tiết các dịch vụ được lưu vào 
+service_ticket_details
+. 
+Cập nhật điểm thưởng:
+ Hệ thống gọi lệnh cập nhật tự động tăng điểm tích lũy cho khách hàng dựa trên tổng tiền dịch vụ.
+Giao tiếp ngoại vi & Hoàn tất:
+ ServiceBO ghi log hệ thống , đồng thời gửi lệnh kèm dữ liệu sang đối tượng Máy in để tiến hành in biên lai vật lý giao cho khách hàng. 
+Sơ đồ xử lý yêu cầu Lập báo cáo tồn kho
+Sơ đồ xử lý
+Phân tích sơ đồ
+Mục đích:
+ Thống kê và đối soát chi tiết tình hình nhập - xuất hàng hóa, giúp Quản lý nắm được lượng tồn kho thực tế theo từng tháng/năm. Các đối tượng tham gia: StockReportForm (UI Object), StockReportBO (Business Object), Database (System Object), AuditLog (System Object). Tác nhân thực hiện là Quản lý hoặc Kế toán.
+Kịch bản xử lý chi tiết: 
+Tiếp nhận tham số:
+ Quản lý chọn mốc thời gian (Tháng/Năm) cần báo cáo từ giao diện. StockReportBO tiến hành kiểm tra tính hợp lệ của mốc thời gian này.
+Truy vấn dữ liệu tổng hợp:
+ StockReportBO gửi lệnh xuống Database để lấy danh sách toàn bộ các sản phẩm hiện có. Sau đó, hệ thống tiếp tục truy vấn để lấy tổng số lượng nhập vào (từ 
+purchase_receipt_details
+) và tổng số lượng xuất ra (từ 
+invoice_details
+) trong đúng khoảng thời gian đã chọn.
+Xử lý tính toán:
+ Tầng nghiệp vụ thực hiện phép tính tự động cho từng sản phẩm theo công thức quy định: Tồn cuối = Tồn đầu + Nhập - Xuất.
+Lưu vết & Hoàn tất:
+ Hành động lập/xuất báo cáo chứa dữ liệu nhạy cảm được ghi nhận ngay lập tức vào AuditLog. Cuối cùng, StockReportBO đóng gói danh sách thành cấu trúc dữ liệu mảng và trả về cho StockReportForm để render lên lưới dữ liệu (DataGrid).
+Sơ đồ xử lý yêu cầu Tra cứu theo đơn vị tính, loại sản phẩm, sản phẩm
+Sơ đồ xử lý
+Phân tích sơ đồ
+Mục đích:
+ Cung cấp bộ lọc tìm kiếm đa lớp giúp nhân viên tra cứu nhanh chóng một mặt hàng cụ thể dựa trên việc kết hợp nhiều điều kiện tìm kiếm. Các đối tượng tham gia: SearchProductForm (UI Object), SearchProductBO (Business Object), Database (System Object). Do là chức năng chỉ đọc (Read-only) không nhạy cảm, tiến trình này không cần gọi đến AuditLog.
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu đầu vào:
+ SearchProductBO nhận các tham số lọc từ UI. Hệ thống cho phép tìm kiếm tương đối nhưng yêu cầu ít nhất một tiêu chí (ĐVT, Loại SP hoặc Tên SP) phải có dữ liệu để tránh việc truy vấn toàn bộ bảng gây nghẽn CSDL. Nếu trống hoàn toàn, hệ thống báo lỗi.
+Truy vấn: Nếu có tiêu chí hợp lệ, SearchProductBO khởi tạo câu truy vấn kết hợp (JOIN) dữ liệu giữa bảng 
+products
+ và 
+product_categories
+.
+Phản hồi kết quả: Hệ thống xử lý hai nhánh:
+Nếu không có sản phẩm nào khớp với bộ lọc, hệ thống trả về thông báo "Danh sách rỗng" để UI hiển thị cho người dùng.
+Nếu có kết quả, SearchProductBO trả về danh sách chi tiết các mặt hàng kèm thông tin tồn kho và giá hiện hành. SearchProductForm cập nhật và hiển thị danh sách sản phẩm tìm được lên màn hình.
+Sơ đồ xử lý yêu cầu Tra cứu phiếu dịch vụ
+Sơ đồ xử lý
+Hình 5.14. Sơ đồ xử lý yêu cầu tra cứu phiếu dịch vụ
+Phân tích sơ đồ
+Mục đích: 
+Tra cứu và hiển thị thông tin chi tiết cùng trạng thái hiện tại của phiếu dịch vụ trong hệ thống dựa trên mã phiếu do nhân viên cung cấp.
+Các đối tượng tham gia: 
+Nhân viên bán hàng (Actor), ServiceTicketLookupForm (UI), ServiceTicketBO (BO), Database (System), Auditlog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu đầu vào
+: 
+Nhân viên bán hàng nhập mã phiếu dịch vụ (
+maPhieu
+) lên giao diện. 
+ServiceTicketLookupForm
+ gửi yêu cầu 
+traCuuTicket(maPhieu)
+ tới 
+ServiceTicketBO
+. Tại đây, đối tượng nghiệp vụ tiếp tục truy vấn trực tiếp xuống CSDL qua lệnh 
+queryTicketAndDetails(maPhieu)
+ để lấy thông tin phiếu cùng các chi tiết đi kèm và nhận về kết quả dữ liệu (hoặc giá trị 
+null
+ nếu không tìm thấy).
+Xử lý các nhánh kết quả (alt)
+:
+- Không tìm thấy dữ liệu phiếu dịch vụ: 
+ServiceTicketBO
+ lập tức phản hồi thông báo mã phiếu không tồn tại về cho UI, 
+ServiceTicketLookupForm
+ sau đó hiển thị thông báo lỗi "không tìm thấy phiếu" lên màn hình để thông báo cho nhân viên bán hàng.
+- 
+Nhánh Có dữ liệu phiếu dịch vụ
+: Hệ thống tiến hành xử lý nghiệp vụ. 
+ServiceTicketBO
+ tự kích hoạt hàm nội bộ để chuẩn hóa thông tin và tính toán chính xác trạng thái hiện tại của phiếu dịch vụ.
+Lưu vết & Hoàn tất
+: Sau khi chuẩn bị xong dữ liệu, 
+ServiceTicketBO
+ gọi hệ thống 
+Auditlog
+ để ghi nhận lại lịch sử tra cứu của mã phiếu này. Khi nhận được phản hồi "OK" từ hệ thống log, 
+ServiceTicketBO
+ đóng gói dữ liệu vào đối tượng 
+TicketLookupDTO
+, truyền về cho 
+ServiceTicketLookupForm
+ để hiển thị đầy đủ thông tin chi tiết của phiếu dịch vụ lên màn hình.
+Sơ đồ xử lý yêu cầu Tra cứu tồn kho
+Sơ đồ xử lý
+Hình 5.15. Sơ đồ xử lý yêu cầu tra cứu tồn kho
+Phân tích sơ đồ
+Mục đích
+: Tra cứu và kiểm tra thông tin tồn kho chi tiết của sản phẩm (bao gồm tên sản phẩm, tên loại, số lượng tồn và đơn vị tính) dựa trên các tiêu chí tìm kiếm do nhân viên cung cấp.
+Các đối tượng tham gia
+: Nhân viên bán hàng (Actor), ProductStockLookupForm (UI), ProductBO (BO), Database (System), Auditlog (System).
+Kịch bản xử lý chi tiết:
+Kiểm tra dữ liệu đầu vào
+: Nhân viên bán hàng nhập các tiêu chí tìm kiếm bao gồm Mã sản phẩm (
+maSP
+) hoặc Tên sản phẩm (
+tenSP
+) trên giao diện. Hệ thống tiếp nhận, kiểm tra tính hợp lệ ban đầu của các tham số này trước khi chuyển giao xuống tầng xử lý nghiệp vụ.
+Truy vấn thông tin kho
+: Sau khi tiếp nhận tiêu chí, 
+ProductStockLookupForm
+ gọi hàm 
+traCuuTonKho(ProductID, ProductName)
+ đến 
+ProductBO
+. Tại đây, đối tượng nghiệp vụ tiếp tục thực hiện lệnh query xuống 
+Database
+ để tìm kiếm dữ liệu sản phẩm và nhận về kết quả
+Xử lý trường hợp không tồn tại
+: Nếu kết quả trả về từ CSDL là trống, 
+ProductBO
+ sẽ gửi phản hồi thông báo lỗi về cho UI. 
+ProductStockLookupForm
+ hiển thị thông báo lên màn hình để nhân viên bán hàng nhận biết.
+Xử lý chuẩn hóa dữ liệu (Nhánh dữ liệu product tồn tại)
+: Trong trường hợp sản phẩm có tồn tại trong hệ thống, 
+ProductBO
+ sẽ tự kích hoạt hàm nội bộ để tính toán, phân loại và đồng bộ lại các thông số số lượng tồn kho của mặt hàng đó.
+Lưu vết (auditlog)
+: Ngay sau khi xử lý dữ liệu xong, 
+ProductBO
+ gửi lệnh 
+write
+ sang hệ thống 
+Auditlog
+ để lưu vết lại lịch sử tra cứu của nhân viên. Hệ thống log tiến hành ghi nhận và phản hồi trạng thái 
+Success
+ về cho BO.
+Đóng gói và hiển thị kết quả
+: Sau khi nhận tín hiệu thành công từ log, 
+ProductBO
+ tiến hành đóng gói toàn bộ thông tin sản phẩm vào đối tượng dữ liệu 
+StockLookupDTO
+ (chứa các thuộc tính: 
+tenSP
+, 
+tenLoai
+, 
+soLuongTon
+, 
+donViTinh
+) và truyền về giao diện. 
+ProductStockLookupForm
+ nhận được DTO này và hiển thị đầy đủ thông tin tồn kho trực quan lên màn hình cho nhân viên.
+Sơ đồ xử lý yêu cầu Kết xuất báo cáo tài chính
+Sơ đồ xử lý
+Hình 5.16. Sơ đồ xử lý yêu kết xuất báo cáo tài chính
+Phân tích sơ đồ
+Mục đích
+: Tổng hợp, tính toán, kết xuất và lưu trữ báo cáo doanh thu tài chính (bao gồm doanh thu bán hàng và doanh thu dịch vụ) theo mốc thời gian được chọn, đồng thời hiển thị bảng chi tiết trực quan cho người dùng.
+Các đối tượng tham gia
+: Kế toán (Actor), RevenueReportForm (UI), ReportBO (BO), Database (System), Auditlog (System).
+Kịch bản xử lý chi tiế
+t:
+Kiểm tra dữ liệu đầu vào
+: Kế toán tiến hành chọn mốc thời gian cần lập báo cáo (
+month
+, 
+year
+) trên giao diện. 
+RevenueReportForm
+ tiếp nhận tham số, thực hiện kiểm tra tính hợp lệ ban đầu của dữ liệu thời gian trước khi chuyển giao xuống tầng xử lý nghiệp vụ tới 
+ReportBO
+.
+Truy vấn tổng hợp dữ liệu
+: 
+ReportBO
+ gửi lệnh 
+querySalesServiceData(month, year)
+ xuống 
+Database
+. Hệ thống cơ sở dữ liệu sẽ quét và gom dữ liệu tổng hợp từ hai nguồn là Hóa đơn (
+Invoices
+) và Phiếu dịch vụ (
+ServiceTickets
+) phát sinh trong tháng/năm đó để trả ngược lại cho BO.
+Xử lý trường hợp nhánh điều kiện không hợp lệ
+: Nếu kết quả trả về cho thấy không tồn tại bất kỳ dữ liệu kinh doanh nào trong khoảng thời gian yêu cầu, 
+ReportBO
+ ngắt quy trình và phản hồi mã lỗi về tầng giao diện. 
+RevenueReportForm
+ tiếp nhận và hiển thị thông báo lỗi lên màn hình để thông báo cho kế toán.
+Tính toán nghiệp vụ (Nhánh dữ liệu kinh doanh hợp lệ)
+: Trong trường hợp có dữ liệu kinh doanh, 
+ReportBO
+ tự kích hoạt hàm nội bộ 
+tinhToanDoanhThuKinhDoanh()
+ nhằm bóc tách, cộng dồn tổng thu nhập và tính toán tỷ trọng phần trăm doanh thu của từng nhóm mặt hàng/dịch vụ.
+Lưu trữ báo cáo vào cơ sở dữ liệu
+: Tiến trình lưu trữ thông tin báo cáo được thực hiện qua hai giai đoạn chặt chẽ:
+Lưu thông tin tổng quát: 
+ReportBO
+ gọi hàm xuống 
+Database
+ để khởi tạo báo cáo cha và nhận về mã định danh 
+report_id
+.
+Lưu thông tin chi tiết: Sử dụng 
+report_id
+ vừa nhận, 
+ReportBO
+ tiếp tục gọi hàm 
+save 
+để lưu toàn bộ các dòng dữ liệu chi tiết cấu thành nên báo cáo.
+Lưu vết (auditlog)
+: Ngay sau khi dữ liệu được lưu kho thành công, 
+ReportBO
+ gọi hàm 
+write 
+sang 
+Auditlog 
+nhằm lưu lại nhật ký vận hành hệ thống.
+Đóng gói và hiển thị kết quả
+: Cuối cùng, 
+ReportBO
+ đóng gói toàn bộ thông tin tài chính đã xử lý vào đối tượng 
+RevenueReportDTO
+ (chứa 
+report_id
+, 
+month
+, 
+year
+, 
+total_revenue
+ và danh sách 
+listDetails
+) truyền về cho UI. Giao diện 
+RevenueReportForm
+ tiếp nhận DTO này và hiển thị thành một Bảng chi tiết doanh thu theo loại sản phẩm trực quan trên màn hình cho Kế toán.
+Sơ đồ xử lý yêu cầu Theo dõi nhật ký hệ thống
+Sơ đồ xử lý
+Hình 5.17. Sơ đồ xử lý yêu theo dõi nhật ký hệ thống
+Phân tích sơ đồ
+Mục đích
+: Hỗ trợ quản trị viên truy xuất, theo dõi và giám sát toàn bộ lịch sử nhật ký hoạt động (audit logs) trong hệ thống gắn liền với thông tin của từng người dùng cụ thể.
+Các đối tượng tham gia
+: Admin (Actor), LogsReadForm (UI), AuditLogBO (BO), Database (System), AuditLog (System).
+Kịch bản xử lý chi tiết
+:
+Kiểm tra dữ liệu đầu vào & Gửi yêu cầu
+: Admin thực hiện "Yêu cầu xem Nhật ký hệ thống" trên giao diện. Giao diện 
+LogsReadForm
+ tiếp nhận, kiểm tra tính hợp lệ của yêu cầu rồi gọi hàm để chuyển giao sang tầng xử lý nghiệp vụ tại 
+AuditLogBO
+.
+Truy vấn dữ liệu liên kết
+: 
+AuditLogBO
+ gọi lệnh 
+query
+ xuống 
+Database
+. Để có đầy đủ thông tin, 
+Database
+ tiếp tục thực hiện câu lệnh truy vấn liên kết dữ liệu 
+SELECT audit_logs kết hợp bảng users
+ từ 
+AuditLog
+ để lấy về danh sách nhật ký chi tiết kèm thông tin tài khoản thực hiện, sau đó phản hồi toàn bộ kết quả này ngược lại cho BO.
+Chuẩn hóa & Hiển thị kết quả
+: Sau khi tiếp nhận dữ liệu thô, 
+AuditLogsBO
+ tự kích hoạt hàm nội bộ để sắp xếp, định dạng lại các mốc thời gian và hành động cho tường minh. Ngay sau đó, BO đóng gói kết quả vào đối tượng dữ liệu 
+AuditLogDTO
+ trả về cho UI. 
+LogsReadForm
+ tiếp nhận DTO và hiển thị danh sách Nhật ký hệ thống hoàn chỉnh lên màn hình cho Admin.
+Chương 6. THIẾT KẾ GIAO DIỆN
+Sơ đồ liên kết các màn hình
+Danh sách các màn hình
+Bảng 4.2.1. Bảng danh sách các màn hình
+STT
+Màn hình
+Loại màn hình
+Chức năng
+1
+2
+Mô tả các màn hình
+Màn hình [Tên màn hình 1]
+Giao diện
+Mô tả các đối tượng trên màn hình
+Bảng 4.3.1.1. Bảng danh sách các đối tượng trên màn hình [Tên màn hình 1]
+STT
+Tên
+Kiểu
+Ràng buộc
+Chức năng
+1
+2
+Danh sách các biến cố và xử lý tương ứng trên màn hình
+Bảng 4.3.1.2. Bảng danh sách các biến cố và xử lý trên màn hình [Tên màn hình 1]
+STT
+Tên
+Kiểu
+Ràng buộc
+Chức năng
+1
+2
+Màn hình [Tên màn hình 2]
+…
+Chương 7. TRIỂN KHAI, KIỂM THỬ VÀ TỔNG KẾT
+Kiểm thử các chức năng
+Tổng kết
+BẢNG PHÂN CÔNG CÔNG VIỆC
+TÀI LIỆU THAM KHẢO
