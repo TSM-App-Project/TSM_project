@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import { api } from '../services/apiClient';
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -11,16 +12,27 @@ export default function Login() {
 
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
-    const handleLogin = (e) => {
+    
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         if (!id || !password) {
             setIsError(true);
-        } else
-        {
-            alert('Đăng nhập thành công!')
-            setIsError(false);
-            navigate('/dashboard');
+            return;
+        } 
+        
+        try {
+            const token = await api.post("/api/users/login", { username: id, password: password });
+            if (token) {
+                localStorage.setItem("token", token);
+                setIsError(false);
+                navigate('/dashboard');
+            } else {
+                setIsError(true);
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+            setIsError(true);
         }
     }
     return (

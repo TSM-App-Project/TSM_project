@@ -13,6 +13,12 @@ const readErrorMessage = async (response) => {
 
 const request = async (path, options = {}) => {
   const headers = options.headers || {};
+  const token = localStorage.getItem("token");
+  
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const config = {
     ...options,
     headers: {
@@ -32,7 +38,13 @@ const request = async (path, options = {}) => {
   }
 
   const text = await response.text();
-  return text ? JSON.parse(text) : null;
+  if (!text) return null;
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    return text;
+  }
 };
 
 export const api = {

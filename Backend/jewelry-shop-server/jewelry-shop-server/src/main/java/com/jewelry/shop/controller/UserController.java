@@ -24,4 +24,24 @@ public class UserController {
         String token = userService.login(request);
         return ResponseEntity.ok(token);
     }
+
+    @GetMapping
+    public java.util.List<User> getAllUsers() {
+        return userService.getAll();
+    }
+
+    @PostMapping
+    public User createUser(@Valid @RequestBody com.jewelry.shop.dto.UserRequest request) {
+        return userService.create(request);
+    }
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Integer id, @Valid @RequestBody com.jewelry.shop.dto.UserRequest request) {
+        return userService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userService.delete(id);
+    }
 }
