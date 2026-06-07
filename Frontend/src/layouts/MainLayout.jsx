@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar';
 
-export default function MainLayout({ children, title = "Dashboard Overview", subtitle = "Welcome back!" }) {
+export default function MainLayout({ children, title = "Dashboard Overview", subtitle = "Welcome back!", headerActions  }) {
     const [showNotifications, setShowNotifications] = useState(false);
 
     return (
-        <div className="bg-background text-on-background font-body-md min-h-screen">
+        <div className="bg-background text-on-background font-body-md min-h-screen lg:h-screen lg:overflow-hidden">
 
             <Sidebar />
 
-            <div className="md:ml-[260px] flex flex-col min-h-screen">
+            <div className="md:ml-[88px] peer-[.is-expanded]:md:ml-[260px] flex flex-col min-h-screen lg:h-screen lg:overflow-hidden transition-all duration-300 ease-in-out">
 
                 <header className="w-full h-auto bg-transparent flex justify-between items-center py-4 px-gutter z-50 sticky top-0 bg-background/80 backdrop-blur-md">
                     <div className="flex flex-col">
@@ -18,6 +18,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                     </div>
 
                     <div className="flex items-center gap-6">
+                        {headerActions}
                         <div className="relative hidden lg:block w-80">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
                             <input className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-full font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search users, orders, products..." type="text" />
@@ -96,7 +97,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                     </div>
                 </header>
 
-                <main className="flex-1 p-gutter pt-2 flex flex-col gap-stack-md">
+                <main className="flex-1 p-gutter pt-2 flex flex-col gap-stack-md lg:overflow-hidden lg:min-h-0">
                     {children}
                 </main>
             </div>

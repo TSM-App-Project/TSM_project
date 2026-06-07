@@ -27,7 +27,7 @@ export default function Login() {
         <AuthLayout>
             <div className="max-w-md mx-auto w-full">
                 {/* Tiêu đề */}
-                <h2 className="text-3xl font-black text-[#9a7a3b] mb-8">Đăng nhập</h2>
+                <h2 className="text-3xl font-black text-primary-container mb-8">Đăng nhập</h2>
 
                 <form className="space-y-5" onSubmit={handleLogin} noValidate>
                     {/* Input ID */}
@@ -41,7 +41,7 @@ export default function Login() {
                                 setId(e.target.value);
                                 setIsError(false);
                             }}
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#e6d3a1] focus:ring-1 focus:ring-[#e6d3a1]"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container"
                         />
                     </div>
 
@@ -57,7 +57,7 @@ export default function Login() {
                                     setPassword(e.target.value)
                                     setIsError(false);
                                 }}
-                                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-[#e6d3a1] focus:ring-1 focus:ring-[#e6d3a1]"
+                                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container"
                             />
                             <button
                                 type="button"
@@ -72,17 +72,34 @@ export default function Login() {
                     {/* Remember me & Forgot Password */}
                     <div className="flex items-center justify-between text-sm mt-2">
                         <label className="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" className="w-4 h-4 accent-[#e6d3a1] rounded border-gray-300 focus:ring-[#9a7a3b] cursor-pointer" />
+                            <div className="relative w-4 h-4">
+                                {/* 1. Input ẩn phủ kín */}
+                                <input
+                                    type="checkbox"
+                                    className="peer absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
+                                />
+                                <div className="w-full h-full border border-gray-300 rounded bg-surface-bright peer-checked:bg-[#10b981] peer-checked:border-[#10b981] transition-colors"></div>
+                                {/* 3. Dấu tick SVG màu trắng*/}
+                                <svg
+                                    className="w-2.5 h-2.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth="4"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                             <span className="font-medium text-gray-700">Remember me</span>
                         </label>
                     </div>
 
-                        {isError && (
-                            <span className="block mt-1 text-red-500 text-sm font-medium">Sai tài khoản hoặc mật khẩu</span>
-                        )}
+                    {isError && (
+                        <span className="block mt-1 text-red-500 text-sm font-medium">Sai tài khoản hoặc mật khẩu</span>
+                    )}
                     <button
                         type="submit"
-                        className="w-full bg-gradient-to-r from-[#9a7a3b] to-[#e6d3a1] hover:opacity-90 text-white font-bold py-3.5 rounded-2xl transition-colors duration-200 text-lg"
+                        className="w-full bg-primary-container hover:opacity-90 text-white font-bold py-3.5 rounded-2xl transition-colors duration-200 text-lg"
                     >
                         Đăng Nhập
                     </button>

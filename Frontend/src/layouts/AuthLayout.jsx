@@ -5,7 +5,7 @@ export default function AuthLayout({ children }) {
         <div className="min-h-screen bg-[#242424] flex items-center justify-center p-6">
 
             {/* Khung chính chứa giao diện */}
-            <div className="w-full max-w-[1000px] bg-[#e6d3a1] h-[600px] flex overflow-hidden rounded-2xl shadow-2xl relative">
+            <div className="w-full max-w-[1000px] bg-primary-container h-[600px] flex overflow-hidden rounded-2xl shadow-2xl relative">
 
                 {/* Nửa bên trái: Màu xanh */}
                 <div className="w-1/2 hidden md:block">
