@@ -130,7 +130,7 @@ export default function Trading() {
     return (
         <MainLayout title="Trading & Transactions" subtitle="Manage Sales Invoices and Purchase Receipts">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
                         <span className="text-sm text-on-surface-variant block mb-1">Total Sales Revenue</span>
@@ -158,7 +158,7 @@ export default function Trading() {
             <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col">
 
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <div className="flex p-1 bg-surface-container-low rounded-lg inline-flex">
+                    <div className="p-1 bg-surface-container-low rounded-lg inline-flex">
                         <button
                             onClick={() => { setActiveTab('sales'); setSearchQuery(''); }}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'sales' ? 'bg-surface-bright text-on-surface shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}`}
@@ -286,7 +286,7 @@ export default function Trading() {
                                         </button>
                                     </div>
                                     <div className="p-4 bg-surface-bright flex flex-col gap-3">
-                                        {salesForm.items.map((item, index) => (
+                                        {salesForm.items.map((item) => (
                                             <div key={item.id} className="flex flex-wrap md:flex-nowrap gap-3 items-end">
                                                 <div className="w-full md:w-[40%]">
                                                     <label className="block text-xs text-on-surface-variant mb-1">Product ID <span className="text-error">*</span></label>
@@ -357,7 +357,7 @@ export default function Trading() {
                                         </button>
                                     </div>
                                     <div className="p-4 bg-surface-bright flex flex-col gap-3">
-                                        {purchaseForm.items.map((item, index) => (
+                                        {purchaseForm.items.map((item) => (
                                             <div key={item.id} className="flex flex-wrap md:flex-nowrap gap-3 items-end">
                                                 <div className="w-full md:w-[40%]">
                                                     <label className="block text-xs text-on-surface-variant mb-1">Product ID <span className="text-error">*</span></label>
