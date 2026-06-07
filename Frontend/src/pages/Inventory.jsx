@@ -163,8 +163,10 @@ export default function Inventory() {
     const totalClosingStock = filteredInventory.reduce((sum, item) => sum + item.closing_stock, 0);
 
     return (
-        <MainLayout title="Inventory Reports" subtitle="Manage monthly stock movements and closing balances">
-
+        <MainLayout title="Inventory Reports" subtitle="Manage monthly stock movements and closing balances"headerActions={
+            <button className="flex items-center gap-2 h-10 px-4 bg-[#10b981] hover:bg-[#0e9f6e] text-white active:scale-95 transition-all duration-200 rounded-full font-title-sm text-sm font-semibold shadow-md">
+                <span className="material-symbols-outlined text-[18px]">download</span>Export
+            </button>}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
@@ -427,7 +429,6 @@ export default function Inventory() {
                     </div>
                 </div>
             )}
-
         </MainLayout>
     );
 }
