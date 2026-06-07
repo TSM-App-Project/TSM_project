@@ -1,0 +1,26 @@
+src/main/resources/application-local.yml
+
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Bỏ qua file log
+*.log
+
+# Bỏ qua các file do hệ điều hành tự sinh ra
+.DS_Store
+Thumbs.db
+
+# Bỏ qua thư mục build của Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar

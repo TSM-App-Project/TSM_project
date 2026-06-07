@@ -1,0 +1,35 @@
+.DS_Store
+Thumbs.db
+
+# Java / Maven
+**/target/
+*.log
+
+# Node
+Frontend/node_modules/
+node_modules/
+Frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Local tools and downloaded JDKs
+.tools/
+*.zip
+
+# OS temp
+*.tmp
+*.swp
+
+# Others
+*.class
+*.db
+
+# Ignore compiled output
+**/target/
+
+# Ignore environment files
+.env
+
