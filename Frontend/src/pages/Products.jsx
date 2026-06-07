@@ -231,7 +231,7 @@ export default function Products() {
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
                         <span className="text-sm text-on-surface-variant block mb-1">Low Stock Products</span>
-                        <span className="font-headline-md text-headline-md font-bold text-on-surface text-error">
+                        <span className="font-headline-md text-headline-md font-bold text-error">
                             {productList.filter(p => p.stock_quantity <= 5).length}
                         </span>
                     </div>
@@ -247,7 +247,7 @@ export default function Products() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
 
                     {/* Component Tabs */}
-                    <div className="flex p-1 bg-surface-container-low rounded-lg inline-flex">
+                    <div className="p-1 bg-surface-container-low rounded-lg inline-flex">
                         <button
                             onClick={() => { setActiveTab('products'); setSearchQuery(''); }}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'products' ? 'bg-surface-bright text-on-surface shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}`}
@@ -355,7 +355,7 @@ export default function Products() {
                             {filteredCategories.length > 0 ? filteredCategories.map((cat) => (
                                 <tr key={cat.category_id} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
                                     <td className="py-3 px-4 font-medium text-on-surface">{cat.category_id}</td>
-                                    <td className="py-3 px-4 font-mono text-xs text-primary font-bold bg-primary-container/20 px-2 py-1 rounded inline-block mt-2 ml-4">{cat.category_code}</td>
+                                    <td className="py-3 px-4 font-medium text-on-surface">{cat.category_code}</td>
                                     <td className="py-3 px-4 font-medium text-on-surface">{cat.category_name}</td>
                                     <td className="py-3 px-4 text-on-surface-variant">{cat.unit}</td>
                                     <td className="py-3 px-4">

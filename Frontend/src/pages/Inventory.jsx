@@ -180,7 +180,7 @@ export default function Inventory() {
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
                         <span className="text-sm text-on-surface-variant block mb-1">Total Purchased (In)</span>
-                        <span className="font-headline-md text-headline-md font-bold text-on-surface text-primary">
+                        <span className="font-headline-md text-headline-md font-bold text-primary">
                             +{totalInQuantity}
                         </span>
                     </div>
@@ -191,7 +191,7 @@ export default function Inventory() {
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
                         <span className="text-sm text-on-surface-variant block mb-1">Total Sold (Out)</span>
-                        <span className="font-headline-md text-headline-md font-bold text-on-surface text-error">
+                        <span className="font-headline-md text-headline-md font-bold text-error">
                             -{totalOutQuantity}
                         </span>
                     </div>
@@ -224,7 +224,7 @@ export default function Inventory() {
                 </div>
 
                 <div className="w-full max-h-[500px] overflow-y-auto custom-scrollbar border border-outline-variant/10 rounded-lg">
-                    <table className="w-full text-left border-collapse min-w-[1200px] relative">
+                    <table className="w-full text-left border-collapse min-w-[900px] relative">
                         <thead>
                         <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                             <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Period (Rep ID)</th>

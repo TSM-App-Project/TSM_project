@@ -9,7 +9,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
 
             <Sidebar />
 
-            <div className="md:ml-[260px] flex flex-col min-h-screen">
+            <div className="md:ml-[88px] peer-[.is-expanded]:md:ml-[260px] flex flex-col min-h-screen transition-all duration-300 ease-in-out">
 
                 <header className="w-full h-auto bg-transparent flex justify-between items-center py-4 px-gutter z-50 sticky top-0 bg-background/80 backdrop-blur-md">
                     <div className="flex flex-col">
