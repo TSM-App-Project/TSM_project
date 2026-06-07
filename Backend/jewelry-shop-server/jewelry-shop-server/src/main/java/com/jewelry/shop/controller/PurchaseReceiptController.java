@@ -6,6 +6,7 @@ import com.jewelry.shop.entity.PurchaseReceiptDetail;
 import com.jewelry.shop.repository.PurchaseReceiptDetailRepository;
 import com.jewelry.shop.repository.PurchaseReceiptRepository;
 import com.jewelry.shop.service.PurchaseReceiptService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -44,7 +45,7 @@ public class PurchaseReceiptController {
     }
 
     @PostMapping
-    public PurchaseReceipt createReceipt(@RequestBody PurchaseReceiptRequest request) {
+    public PurchaseReceipt createReceipt(@Valid @RequestBody PurchaseReceiptRequest request) {
         return purchaseReceiptService.create(request);
     }
 

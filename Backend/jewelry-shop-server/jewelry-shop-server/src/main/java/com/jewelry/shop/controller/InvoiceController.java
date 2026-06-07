@@ -6,6 +6,7 @@ import com.jewelry.shop.entity.InvoiceDetail;
 import com.jewelry.shop.repository.InvoiceDetailRepository;
 import com.jewelry.shop.repository.InvoiceRepository;
 import com.jewelry.shop.service.InvoiceService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -43,8 +44,9 @@ public class InvoiceController {
         return invoiceDetailRepository.findByInvoice_InvoiceId(id);
     }
 
+
     @PostMapping
-    public Invoice createInvoice(@RequestBody InvoiceRequest request) {
+    public Invoice createInvoice(@Valid @RequestBody InvoiceRequest request) {
         return invoiceService.create(request);
     }
 

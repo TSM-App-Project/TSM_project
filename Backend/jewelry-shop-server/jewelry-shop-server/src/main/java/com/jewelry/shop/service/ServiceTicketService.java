@@ -49,19 +49,16 @@ public class ServiceTicketService {
         ServiceTicket ticket = new ServiceTicket();
         ticket.setCustomer(customer);
         ticket.setUser(user);
-        if (request.getCreatedAt() != null) {
-            ticket.setCreatedAt(request.getCreatedAt());
-        }
 
         BigDecimal grandTotal = BigDecimal.ZERO;
         List<ServiceTicketDetail> details = new ArrayList<>();
 
-        if (request.getDetails() != null) {
-            for (ServiceTicketRequest.ServiceTicketDetailRequest item : request.getDetails()) {
+        if (request.getItems() != null) {
+            for (ServiceTicketRequest.ServiceTicketItemRequest item : request.getItems()) {
                 com.jewelry.shop.entity.Service service = serviceRepository.findById(item.getServiceId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
 
-                BigDecimal servicePrice = item.getServicePrice() != null ? item.getServicePrice() : service.getBasePrice();
+                BigDecimal servicePrice = service.getBasePrice();
                 BigDecimal extraCost = item.getExtraCost() != null ? item.getExtraCost() : BigDecimal.ZERO;
                 int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
 
@@ -69,6 +66,7 @@ public class ServiceTicketService {
                 BigDecimal subtotal = calculatedPrice.multiply(BigDecimal.valueOf(quantity));
                 BigDecimal prepaid = item.getPrepaidAmount() != null ? item.getPrepaidAmount() : BigDecimal.ZERO;
                 BigDecimal remaining = subtotal.subtract(prepaid);
+
                 if (remaining.compareTo(BigDecimal.ZERO) < 0) {
                     remaining = BigDecimal.ZERO;
                 }
@@ -84,9 +82,7 @@ public class ServiceTicketService {
                 detail.setPrepaidAmount(prepaid);
                 detail.setRemainingAmount(remaining);
                 detail.setDeliveryDate(item.getDeliveryDate());
-                if (item.getStatus() != null) {
-                    detail.setStatus(item.getStatus());
-                }
+                detail.setStatus("CHƯA GIAO");
 
                 grandTotal = grandTotal.add(subtotal);
                 details.add(detail);

@@ -1,11 +1,11 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "inventory_report_details")
-@Data
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class InventoryReportDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,15 +19,19 @@ public class InventoryReportDetail {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @Builder.Default
     @Column(name = "opening_stock")
     private Integer openingStock = 0;
 
+    @Builder.Default
     @Column(name = "in_quantity")
     private Integer inQuantity = 0;
 
+    @Builder.Default
     @Column(name = "out_quantity")
     private Integer outQuantity = 0;
 
+    @Builder.Default
     @Column(name = "closing_stock")
     private Integer closingStock = 0;
 }

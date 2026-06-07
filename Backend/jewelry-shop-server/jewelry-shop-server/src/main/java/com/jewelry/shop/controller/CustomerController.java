@@ -2,72 +2,57 @@ package com.jewelry.shop.controller;
 
 import com.jewelry.shop.dto.CustomerRequest;
 import com.jewelry.shop.entity.Customer;
-import com.jewelry.shop.repository.CustomerRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+import com.jewelry.shop.service.CustomerService;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
+@CrossOrigin("*")
 public class CustomerController {
-    private final CustomerRepository customerRepository;
 
-    public CustomerController(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    // Đã thay thế CustomerRepository bằng CustomerService
+    private final CustomerService customerService;
+
+    // Inject qua Constructor
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @GetMapping
     public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+        return customerService.getAll();
     }
 
     @GetMapping("/{id}")
     public Customer getCustomerById(@PathVariable Integer id) {
-        return customerRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+        // Logic kiểm tra tồn tại (orElseThrow) đã được đem xuống viết bên trong Service
+        return customerService.getById(id);
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody CustomerRequest request) {
-        Customer customer = new Customer();
-        customer.setPhoneNumber(request.getPhoneNumber());
-        customer.setFullName(request.getFullName());
-        customer.setDob(request.getDob());
-        customer.setTotalPoints(request.getTotalPoints() == null ? 0 : request.getTotalPoints());
-        customer.setMemberTier(request.getMemberTier() == null ? "Thành viên" : request.getMemberTier());
-        return customerRepository.save(customer);
+    public Customer createCustomer(@Valid @RequestBody CustomerRequest request) {
+        return customerService.create(request);
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Integer id, @RequestBody CustomerRequest request) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
-
-        if (request.getPhoneNumber() != null) {
-            customer.setPhoneNumber(request.getPhoneNumber());
-        }
-        if (request.getFullName() != null) {
-            customer.setFullName(request.getFullName());
-        }
-        if (request.getDob() != null) {
-            customer.setDob(request.getDob());
-        }
-        if (request.getTotalPoints() != null) {
-            customer.setTotalPoints(request.getTotalPoints());
-        }
-        if (request.getMemberTier() != null) {
-            customer.setMemberTier(request.getMemberTier());
-        }
-        return customerRepository.save(customer);
+    public Customer updateCustomer(@PathVariable Integer id, @Valid @RequestBody CustomerRequest request) {
+        return customerService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable Integer id) {
-        if (!customerRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found");
-        }
-        customerRepository.deleteById(id);
+        // Tương tự, logic kiểm tra existsById đã được ẩn đi, Controller chỉ cần ra lệnh "xóa"
+        customerService.delete(id);
     }
 }

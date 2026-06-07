@@ -1,12 +1,12 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "revenue_report_details")
-@Data
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class RevenueReportDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,11 @@ public class RevenueReportDetail {
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
+    @Builder.Default
     @Column(name = "revenue_amount", precision = 18, scale = 2)
     private BigDecimal revenueAmount = BigDecimal.ZERO;
 
+    @Builder.Default
     @Column(precision = 5, scale = 2)
     private BigDecimal percentage = BigDecimal.ZERO;
 }

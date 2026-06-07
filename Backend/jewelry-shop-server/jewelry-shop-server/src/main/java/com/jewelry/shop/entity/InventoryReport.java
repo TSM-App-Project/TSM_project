@@ -1,12 +1,12 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "inventory_reports", uniqueConstraints = {@UniqueConstraint(columnNames = {"report_month", "report_year"})})
-@Data
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class InventoryReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,7 @@ public class InventoryReport {
     @Column(name = "report_year", nullable = false)
     private Integer reportYear;
 
+    @Builder.Default
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }

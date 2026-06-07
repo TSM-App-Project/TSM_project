@@ -11,9 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.List; // Bắt buộc phải import List
 
 @Service
 public class DebtPaymentService {
@@ -27,6 +26,7 @@ public class DebtPaymentService {
         this.userRepository = userRepository;
     }
 
+    // Đã bổ sung hàm getAll()
     public List<DebtPayment> getAll() {
         return debtPaymentRepository.findAll();
     }
@@ -39,10 +39,9 @@ public class DebtPaymentService {
     @Transactional
     public DebtPayment create(DebtPaymentRequest request) {
         Supplier supplier = supplierRepository.findById(request.getSupplierId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy nhà cung cấp"));
-
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy NCC"));
         User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy người dùng"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy User"));
 
         DebtPayment payment = DebtPayment.builder()
                 .supplier(supplier)

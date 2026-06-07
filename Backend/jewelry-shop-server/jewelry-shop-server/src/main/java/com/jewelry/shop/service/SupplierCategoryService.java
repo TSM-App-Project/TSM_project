@@ -29,9 +29,6 @@ public class SupplierCategoryService {
 
     @Transactional
     public SupplierCategory create(SupplierCategoryRequest request) {
-        if (supplierCategoryRepository.existsByCategoryName(request.getCategoryName())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tên danh mục đã tồn tại");
-        }
         SupplierCategory category = SupplierCategory.builder()
                 .categoryName(request.getCategoryName())
                 .description(request.getDescription())
@@ -43,12 +40,7 @@ public class SupplierCategoryService {
     @Transactional
     public SupplierCategory update(Integer id, SupplierCategoryRequest request) {
         SupplierCategory category = getById(id);
-        if (request.getCategoryName() != null && !category.getCategoryName().equals(request.getCategoryName())) {
-            if (supplierCategoryRepository.existsByCategoryName(request.getCategoryName())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tên danh mục đã tồn tại");
-            }
-            category.setCategoryName(request.getCategoryName());
-        }
+        if (request.getCategoryName() != null) category.setCategoryName(request.getCategoryName());
         if (request.getDescription() != null) category.setDescription(request.getDescription());
         if (request.getStatus() != null) category.setStatus(request.getStatus());
 

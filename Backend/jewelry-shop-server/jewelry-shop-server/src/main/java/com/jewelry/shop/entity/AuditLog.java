@@ -1,23 +1,25 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "audit_logs")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuditLog {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer logId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @Column(name = "log_time")
-    private LocalDateTime logTime = LocalDateTime.now();
 
     @Column(name = "action_type", nullable = false, length = 50)
     private String actionType;
@@ -27,4 +29,8 @@ public class AuditLog {
 
     @Column(columnDefinition = "text")
     private String description;
+
+    @Builder.Default
+    @Column(name = "log_time")
+    private LocalDateTime logTime = LocalDateTime.now();
 }

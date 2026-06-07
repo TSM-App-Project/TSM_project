@@ -1,29 +1,36 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "purchase_receipts")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PurchaseReceipt {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer purchaseId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "purchase_date")
-    private LocalDateTime purchaseDate = LocalDateTime.now();
-
+    @Builder.Default
     @Column(name = "total_amount", nullable = false, precision = 18, scale = 2)
     private BigDecimal totalAmount = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "purchase_date")
+    private LocalDateTime purchaseDate = LocalDateTime.now();
 }

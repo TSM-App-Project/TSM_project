@@ -1,65 +1,44 @@
 package com.jewelry.shop.controller;
 
 import com.jewelry.shop.dto.ServiceRequest;
-import com.jewelry.shop.entity.Service;
-import com.jewelry.shop.repository.ServiceRepository;
-import org.springframework.http.HttpStatus;
+import com.jewelry.shop.service.JewelryService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/services")
+@CrossOrigin("*")
 public class ServiceController {
-    private final ServiceRepository serviceRepository;
 
-    public ServiceController(ServiceRepository serviceRepository) {
-        this.serviceRepository = serviceRepository;
+    private final JewelryService jewelryService;
+
+    public ServiceController(JewelryService jewelryService) {
+        this.jewelryService = jewelryService;
     }
 
     @GetMapping
-    public List<Service> getAllServices() {
-        return serviceRepository.findAll();
+    public List<com.jewelry.shop.entity.Service> getAllServices() {
+        return jewelryService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Service getServiceById(@PathVariable Integer id) {
-        return serviceRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
+    public com.jewelry.shop.entity.Service getServiceById(@PathVariable Integer id) {
+        return jewelryService.getById(id);
     }
 
     @PostMapping
-    public Service createService(@RequestBody ServiceRequest request) {
-        Service service = new Service();
-        service.setServiceName(request.getServiceName());
-        service.setBasePrice(request.getBasePrice());
-        service.setStatus(request.getStatus() == null ? "ACTIVE" : request.getStatus());
-        return serviceRepository.save(service);
+    public com.jewelry.shop.entity.Service createService(@Valid @RequestBody ServiceRequest request) {
+        return jewelryService.create(request);
     }
 
     @PutMapping("/{id}")
-    public Service updateService(@PathVariable Integer id, @RequestBody ServiceRequest request) {
-        Service service = serviceRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
-
-        if (request.getServiceName() != null) {
-            service.setServiceName(request.getServiceName());
-        }
-        if (request.getBasePrice() != null) {
-            service.setBasePrice(request.getBasePrice());
-        }
-        if (request.getStatus() != null) {
-            service.setStatus(request.getStatus());
-        }
-        return serviceRepository.save(service);
+    public com.jewelry.shop.entity.Service updateService(@PathVariable Integer id, @Valid @RequestBody ServiceRequest request) {
+        return jewelryService.update(id, request);
     }
 
     @DeleteMapping("/{id}")
     public void deleteService(@PathVariable Integer id) {
-        if (!serviceRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found");
-        }
-        serviceRepository.deleteById(id);
+        jewelryService.delete(id);
     }
 }

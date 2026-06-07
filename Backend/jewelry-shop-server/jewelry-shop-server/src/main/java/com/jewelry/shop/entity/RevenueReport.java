@@ -1,13 +1,13 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "revenue_reports", uniqueConstraints = {@UniqueConstraint(columnNames = {"report_month", "report_year"})})
-@Data
+@Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class RevenueReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +19,11 @@ public class RevenueReport {
     @Column(name = "report_year", nullable = false)
     private Integer reportYear;
 
+    @Builder.Default
     @Column(name = "total_revenue", precision = 18, scale = 2)
     private BigDecimal totalRevenue = BigDecimal.ZERO;
 
+    @Builder.Default
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }

@@ -4,6 +4,7 @@ import com.jewelry.shop.dto.LoginRequest;
 import com.jewelry.shop.entity.User;
 import com.jewelry.shop.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +19,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@Valid @RequestBody LoginRequest request) {
-        return userService.login(request);
-    }
-
-    @GetMapping("/{id}")
-    public User getUserById(@PathVariable Integer id) {
-        return userService.getById(id);
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest request) {
+        // Trả về thẳng chuỗi Token JWT
+        String token = userService.login(request);
+        return ResponseEntity.ok(token);
     }
 }

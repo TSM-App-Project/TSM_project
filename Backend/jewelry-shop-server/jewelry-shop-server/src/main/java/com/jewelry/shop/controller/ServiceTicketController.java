@@ -6,6 +6,7 @@ import com.jewelry.shop.entity.ServiceTicketDetail;
 import com.jewelry.shop.repository.ServiceTicketDetailRepository;
 import com.jewelry.shop.repository.ServiceTicketRepository;
 import com.jewelry.shop.service.ServiceTicketService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -49,7 +50,7 @@ public class ServiceTicketController {
     }
 
     @PostMapping
-    public ServiceTicket createTicket(@RequestBody ServiceTicketRequest request) {
+    public ServiceTicket createTicket(@Valid @RequestBody ServiceTicketRequest request) {
         return serviceTicketService.create(request);
     }
 }

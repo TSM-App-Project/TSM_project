@@ -1,40 +1,48 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.Min;
+import lombok.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "product_name", nullable = false, unique = true)
     private String productName;
 
-    // Khớp với numeric(18, 3) dưới DB
     @Column(nullable = false, precision = 18, scale = 3)
     private BigDecimal weight;
 
-    // Khớp với numeric(18, 2) dưới DB
-    @Column(nullable = false, precision = 18, scale = 2)
+    @Column(name = "labor_cost", nullable = false, precision = 18, scale = 2)
     private BigDecimal laborCost;
 
-    // Khớp với numeric(18, 2) dưới DB
-    @Column(nullable = false, precision = 18, scale = 2)
+    @Column(name = "purchase_price", nullable = false, precision = 18, scale = 2)
     private BigDecimal purchasePrice;
 
-    @Column(columnDefinition = "integer default 0")
+    @Builder.Default
+    @Min(0)
+    @Column(name = "stock_quantity", columnDefinition = "integer default 0")
     private Integer stockQuantity = 0;
 
-    // Khớp với varchar(20) dưới DB
+    @Builder.Default
     @Column(length = 20)
     private String status = "ACTIVE";
+
+    @Version
+    private Integer version;
 }

@@ -1,29 +1,35 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "service_ticket_details")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceTicketDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer detailId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_id", nullable = false)
     private ServiceTicket serviceTicket;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 
     @Column(name = "service_price", nullable = false, precision = 18, scale = 2)
     private BigDecimal servicePrice;
 
+    @Builder.Default
     @Column(name = "extra_cost", precision = 18, scale = 2)
     private BigDecimal extraCost = BigDecimal.ZERO;
 
@@ -45,6 +51,7 @@ public class ServiceTicketDetail {
     @Column(name = "delivery_date", nullable = false)
     private LocalDate deliveryDate;
 
+    @Builder.Default
     @Column(length = 50)
     private String status = "CHƯA GIAO";
 }
