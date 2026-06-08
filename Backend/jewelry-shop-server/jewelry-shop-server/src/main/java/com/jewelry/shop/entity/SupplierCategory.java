@@ -3,7 +3,10 @@ package com.jewelry.shop.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "supplier_categories")
 @Getter
 @Setter

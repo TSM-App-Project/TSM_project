@@ -9,6 +9,7 @@ Thumbs.db
 Frontend/node_modules/
 node_modules/
 Frontend/dist/
+Frontend/release/
 
 # IDE
 .vscode/

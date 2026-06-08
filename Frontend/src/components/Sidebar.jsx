@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getUserRole } from '../utils/auth';
 
 export default function Sidebar() {
     const [isExpanded, setIsExpanded] = useState(window.sidebarExpanded || false);
@@ -14,23 +15,31 @@ export default function Sidebar() {
         setIsExpanded(false);
     };
     const location = useLocation();
+    const navigate = useNavigate();
 
-    // Giả lập role hiện tại (Thay đổi thành 'NHAN_VIEN' để test ẩn tab Master)
-    const currentUserRole = 'QUAN_LY';
+    // Lấy role từ JWT token
+    const currentUserRole = getUserRole();
 
     const mainMenuItems = [
-        { path: '/dashboard', icon: 'dashboard', label: 'Dashboard', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/master', icon: 'manage_accounts', label: 'Master', roles: ['QUAN_LY'] },
-        { path: '/products', icon: 'diamond', label: 'Products', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/trading', icon: 'receipt_long', label: 'Sell / Buy', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/services', icon: 'handyman', label: 'Services', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/customers', icon: 'group', label: 'Customers', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/suppliers', icon: 'local_shipping', label: 'Suppliers', roles: ['QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/inventory', icon: 'inventory_2', label: 'Inventory', roles: ['QUAN_LY', 'NHAN_VIEN'] }
+        { path: '/dashboard', icon: 'dashboard', label: 'Dashboard', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] },
+        { path: '/master', icon: 'manage_accounts', label: 'Master', roles: ['ADMIN', 'QUAN_LY'] },
+        { path: '/products', icon: 'diamond', label: 'Products', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
+        { path: '/trading', icon: 'receipt_long', label: 'Sell / Buy', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
+        { path: '/services', icon: 'handyman', label: 'Services', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
+        { path: '/customers', icon: 'group', label: 'Customers', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
+        { path: '/suppliers', icon: 'local_shipping', label: 'Suppliers', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] },
+        { path: '/inventory', icon: 'inventory_2', label: 'Inventory', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] }
     ];
 
+    const handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        navigate('/login');
+    };
+
     const otherMenuItems = [
-        { path: '/login', icon: 'logout', label: 'Logout' }
+        { path: '/login', icon: 'logout', label: 'Logout', onClick: handleLogout }
     ];
 
     const renderMenuItem = (item) => {
@@ -40,6 +49,21 @@ export default function Sidebar() {
         const baseClass = "flex items-center gap-3 px-4 py-3 rounded-lg font-title-sm text-title-sm transition-all duration-200 hover:bg-surface-container-low dark:hover:bg-surface-variant/10 whitespace-nowrap";
         const activeClass = "text-primary dark:text-primary-fixed bg-surface-container-high dark:bg-secondary-container/20 font-bold scale-98";
         const inactiveClass = "text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed";
+
+        if (item.onClick) {
+            return (
+                <button
+                    key={item.path}
+                    onClick={item.onClick}
+                    className={`${baseClass} ${inactiveClass} text-left`}
+                >
+                    <span className={`material-symbols-outlined shrink-0`}>
+                        {item.icon}
+                    </span>
+                    <span className={`transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0'}`}>{item.label}</span>
+                </button>
+            );
+        }
 
         return (
             <Link

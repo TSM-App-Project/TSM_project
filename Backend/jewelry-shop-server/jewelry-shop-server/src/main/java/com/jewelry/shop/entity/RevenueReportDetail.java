@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "revenue_report_details")
 @Getter @Setter @Builder @NoArgsConstructor @AllArgsConstructor
 public class RevenueReportDetail {

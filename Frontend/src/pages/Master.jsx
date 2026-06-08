@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { api } from '../services/apiClient';
+import { getUserRole } from '../utils/auth';
 
 const formatRole = (roleCode) => {
+    if (roleCode === 'ADMIN') return 'Admin';
     if (roleCode === 'QUAN_LY') return 'Quản lý';
     if (roleCode === 'NHAN_VIEN') return 'Nhân viên';
+    if (roleCode === 'KE_TOAN') return 'Kế toán';
     return roleCode;
 };
 
 export default function Master() {
-    const currentUserRole = 'QUAN_LY';
+    const currentUserRole = getUserRole();
 
     const [userList, setUserList] = useState([]);
     const [logList, setLogList] = useState([]);
@@ -50,8 +53,10 @@ export default function Master() {
     };
 
     const roleColors = {
+        'ADMIN': { bg: '#fee2e2', text: '#991b1b' },
         'QUAN_LY': { bg: '#e0f2fe', text: '#0369a1' },
-        'NHAN_VIEN': { bg: '#f3f4f6', text: '#374151' }
+        'NHAN_VIEN': { bg: '#f3f4f6', text: '#374151' },
+        'KE_TOAN': { bg: '#fef3c7', text: '#92400e' }
     };
 
     const actionColors = {
@@ -122,7 +127,7 @@ export default function Master() {
         (log.username || '').toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (currentUserRole !== 'QUAN_LY') {
+    if (currentUserRole !== 'QUAN_LY' && currentUserRole !== 'ADMIN') {
         return (
             <MainLayout title="Access Denied" subtitle="Unauthorized Access">
                 <div className="flex flex-col items-center justify-center h-[60vh]">
@@ -333,8 +338,10 @@ export default function Master() {
                                 <div>
                                     <label className="block text-sm font-medium text-on-surface mb-1">Role</label>
                                     <select name="role" value={formData.role} onChange={handleInputChange} className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none">
-                                        <option value="NHAN_VIEN">Nhân viên</option>
+                                        <option value="ADMIN">Admin</option>
                                         <option value="QUAN_LY">Quản lý</option>
+                                        <option value="NHAN_VIEN">Nhân viên</option>
+                                        <option value="KE_TOAN">Kế toán</option>
                                     </select>
                                 </div>
                                 <div>

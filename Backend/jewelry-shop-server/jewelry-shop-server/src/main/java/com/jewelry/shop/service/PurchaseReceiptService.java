@@ -89,4 +89,79 @@ public class PurchaseReceiptService {
         productRepository.saveAll(updatedProducts);
         return saved;
     }
+
+    @Transactional
+    public PurchaseReceipt update(Integer id, PurchaseReceiptRequest request) {
+        PurchaseReceipt receipt = purchaseReceiptRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "PurchaseReceipt not found"));
+
+        if (request.getSupplierId() != null) {
+            Supplier supplier = supplierRepository.findById(request.getSupplierId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier not found"));
+            receipt.setSupplier(supplier);
+        }
+        
+        if (request.getPurchaseDate() != null) {
+            receipt.setPurchaseDate(request.getPurchaseDate());
+        }
+
+        // Restore old stock (subtract what was added)
+        List<PurchaseReceiptDetail> oldDetails = purchaseReceiptDetailRepository.findByPurchaseReceipt_PurchaseId(id);
+        List<Product> updatedProducts = new ArrayList<>();
+        for (PurchaseReceiptDetail detail : oldDetails) {
+            Product product = detail.getProduct();
+            product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) - detail.getQuantity());
+            updatedProducts.add(product);
+        }
+        purchaseReceiptDetailRepository.deleteAll(oldDetails);
+
+        // Process new details
+        BigDecimal total = BigDecimal.ZERO;
+        List<PurchaseReceiptDetail> newDetails = new ArrayList<>();
+        
+        if (request.getItems() != null) {
+            for (PurchaseReceiptRequest.PurchaseItemRequest item : request.getItems()) {
+                Product product = productRepository.findById(item.getProductId())
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+                int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
+                BigDecimal purchasePrice = item.getPurchasePrice() != null ? item.getPurchasePrice() : BigDecimal.ZERO;
+
+                total = total.add(purchasePrice.multiply(BigDecimal.valueOf(quantity)));
+
+                product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) + quantity);
+                updatedProducts.add(product);
+
+                PurchaseReceiptDetail detail = new PurchaseReceiptDetail();
+                detail.setPurchaseReceipt(receipt);
+                detail.setProduct(product);
+                detail.setQuantity(quantity);
+                detail.setPurchasePrice(purchasePrice);
+                newDetails.add(detail);
+            }
+        }
+
+        receipt.setTotalAmount(total);
+        PurchaseReceipt saved = purchaseReceiptRepository.save(receipt);
+        purchaseReceiptDetailRepository.saveAll(newDetails);
+        productRepository.saveAll(updatedProducts);
+        return saved;
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        PurchaseReceipt receipt = purchaseReceiptRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "PurchaseReceipt not found"));
+        
+        // Restore old stock (subtract what was added)
+        List<PurchaseReceiptDetail> oldDetails = purchaseReceiptDetailRepository.findByPurchaseReceipt_PurchaseId(id);
+        List<Product> updatedProducts = new ArrayList<>();
+        for (PurchaseReceiptDetail detail : oldDetails) {
+            Product product = detail.getProduct();
+            product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) - detail.getQuantity());
+            updatedProducts.add(product);
+        }
+        productRepository.saveAll(updatedProducts);
+        purchaseReceiptDetailRepository.deleteAll(oldDetails);
+        purchaseReceiptRepository.delete(receipt);
+    }
 }

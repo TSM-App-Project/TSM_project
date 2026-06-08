@@ -3,8 +3,10 @@ package com.jewelry.shop.service;
 import com.jewelry.shop.dto.ProductRequest;
 import com.jewelry.shop.entity.Product;
 import com.jewelry.shop.entity.ProductCategory;
+import com.jewelry.shop.entity.Supplier;
 import com.jewelry.shop.repository.ProductCategoryRepository;
 import com.jewelry.shop.repository.ProductRepository;
+import com.jewelry.shop.repository.SupplierRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +18,12 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
+    private final SupplierRepository supplierRepository;
 
-    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository) {
+    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, SupplierRepository supplierRepository) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
+        this.supplierRepository = supplierRepository;
     }
 
     public List<Product> getAll() {
@@ -44,6 +48,13 @@ public class ProductService {
         product.setPurchasePrice(request.getPurchasePrice());
         product.setStockQuantity(request.getStockQuantity() == null ? 0 : request.getStockQuantity());
         product.setStatus(request.getStatus() == null ? "ACTIVE" : request.getStatus());
+        
+        if (request.getSupplierId() != null) {
+            Supplier supplier = supplierRepository.findById(request.getSupplierId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier not found"));
+            product.setSupplier(supplier);
+        }
+        
         return productRepository.save(product);
     }
 
@@ -73,6 +84,11 @@ public class ProductService {
         }
         if (request.getStatus() != null) {
             product.setStatus(request.getStatus());
+        }
+        if (request.getSupplierId() != null) {
+            Supplier supplier = supplierRepository.findById(request.getSupplierId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Supplier not found"));
+            product.setSupplier(supplier);
         }
         return productRepository.save(product);
     }

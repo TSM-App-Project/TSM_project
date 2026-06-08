@@ -25,6 +25,10 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
     @Column(name = "product_name", nullable = false, unique = true)
     private String productName;
 

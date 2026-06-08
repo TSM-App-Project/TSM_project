@@ -1,6 +1,8 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
+import java.math.BigDecimal;
 import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,9 +35,22 @@ public class Customer {
     @Column(name = "total_points")
     private Integer totalPoints = 0;
 
-    @Builder.Default
-    @Column(name = "member_tier", length = 50)
-    private String memberTier = "Thành viên";
+    @Formula("(SELECT COALESCE((SELECT COUNT(i.invoice_id) FROM invoices i WHERE i.customer_id = customer_id), 0) + COALESCE((SELECT COUNT(st.ticket_id) FROM service_tickets st WHERE st.customer_id = customer_id), 0))")
+    private Integer totalOrders;
+
+    @Formula("(SELECT COALESCE((SELECT SUM(i.total_amount) FROM invoices i WHERE i.customer_id = customer_id), 0) + COALESCE((SELECT SUM(st.grand_total) FROM service_tickets st WHERE st.customer_id = customer_id), 0))")
+    private BigDecimal totalAmountSpent;
+
+    @Transient
+    private String memberTier;
+
+    public String getMemberTier() {
+        if (totalAmountSpent == null) return "Thành viên";
+        if (totalAmountSpent.compareTo(new BigDecimal("30000000")) > 0) return "Platinum";
+        if (totalAmountSpent.compareTo(new BigDecimal("20000000")) > 0) return "Gold";
+        if (totalAmountSpent.compareTo(new BigDecimal("10000000")) > 0) return "Silver";
+        return "Thành viên";
+    }
 
     @Builder.Default
     @Column(name = "created_at")

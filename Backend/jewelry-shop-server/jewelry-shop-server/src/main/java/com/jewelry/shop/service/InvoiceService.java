@@ -93,4 +93,75 @@ public class InvoiceService {
         productRepository.saveAll(updatedProducts);
         return saved;
     }
+
+    @Transactional
+    public Invoice update(Integer id, InvoiceRequest request) {
+        Invoice invoice = invoiceRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
+
+        if (request.getCustomerId() != null) {
+            Customer customer = customerRepository.findById(request.getCustomerId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+            invoice.setCustomer(customer);
+        }
+
+        // Restore old stock
+        List<InvoiceDetail> oldDetails = invoiceDetailRepository.findByInvoice_InvoiceId(id);
+        List<Product> updatedProducts = new ArrayList<>();
+        for (InvoiceDetail detail : oldDetails) {
+            Product product = detail.getProduct();
+            product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) + detail.getQuantity());
+            updatedProducts.add(product);
+        }
+        invoiceDetailRepository.deleteAll(oldDetails);
+
+        // Process new details
+        BigDecimal total = BigDecimal.ZERO;
+        List<InvoiceDetail> newDetails = new ArrayList<>();
+        
+        if (request.getItems() != null) {
+            for (InvoiceRequest.InvoiceItemRequest item : request.getItems()) {
+                Product product = productRepository.findById(item.getProductId())
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+                int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
+                BigDecimal unitPrice = item.getUnitPrice() != null ? item.getUnitPrice() : BigDecimal.ZERO;
+
+                total = total.add(unitPrice.multiply(BigDecimal.valueOf(quantity)));
+
+                product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) - quantity);
+                updatedProducts.add(product);
+
+                InvoiceDetail detail = new InvoiceDetail();
+                detail.setInvoice(invoice);
+                detail.setProduct(product);
+                detail.setQuantity(quantity);
+                detail.setUnitPrice(unitPrice);
+                newDetails.add(detail);
+            }
+        }
+        
+        invoice.setTotalAmount(total);
+        Invoice saved = invoiceRepository.save(invoice);
+        invoiceDetailRepository.saveAll(newDetails);
+        productRepository.saveAll(updatedProducts);
+        return saved;
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        Invoice invoice = invoiceRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
+        
+        // Restore old stock
+        List<InvoiceDetail> oldDetails = invoiceDetailRepository.findByInvoice_InvoiceId(id);
+        List<Product> updatedProducts = new ArrayList<>();
+        for (InvoiceDetail detail : oldDetails) {
+            Product product = detail.getProduct();
+            product.setStockQuantity((product.getStockQuantity() == null ? 0 : product.getStockQuantity()) + detail.getQuantity());
+            updatedProducts.add(product);
+        }
+        productRepository.saveAll(updatedProducts);
+        invoiceDetailRepository.deleteAll(oldDetails);
+        invoiceRepository.delete(invoice);
+    }
 }

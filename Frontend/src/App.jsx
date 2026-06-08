@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // Import các trang đã có
 import Login from './pages/Login';
@@ -14,7 +14,7 @@ import Inventory from "./pages/Inventory.jsx";
 import Trading from "./pages/Trading.jsx";
 function App() {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 {/* Các route cơ bản */}
                 <Route path="/login" element={<Login />} />
@@ -37,7 +37,7 @@ function App() {
                 {/* Tự động chuyển hướng về trang login khi nhập sai URL (LUÔN ĐỂ CUỐI CÙNG) */}
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

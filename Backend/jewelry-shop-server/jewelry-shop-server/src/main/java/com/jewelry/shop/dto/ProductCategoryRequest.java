@@ -13,4 +13,6 @@ public class ProductCategoryRequest {
     private String unitName;
 
     private BigDecimal profitPercentage;
+
+    private String status;
 }
