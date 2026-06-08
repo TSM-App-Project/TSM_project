@@ -23,6 +23,8 @@ export default function Services() {
     status: "ACTIVE",
   });
   const [deleteConfirmType, setDeleteConfirmType] = useState(null);
+  const [deleteConfirmTicket, setDeleteConfirmTicket] = useState(null);
+  const [ticketModalMode, setTicketModalMode] = useState("add");
 
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -193,6 +195,40 @@ export default function Services() {
     }
   };
 
+
+  const confirmDeleteTicket = async () => {
+    if (!deleteConfirmTicket) return;
+    try {
+      await api.del(`/api/service-tickets/${deleteConfirmTicket.ticket_id}`);
+      await loadData();
+      setDeleteConfirmTicket(null);
+    } catch (error) {
+      setPageError(error.message || "Failed to delete ticket");
+    }
+  };
+
+  const handleEditTicket = (e, ticket) => {
+    e.stopPropagation();
+    const details = ticketDetails.filter(d => d.ticket_id === ticket.ticket_id);
+    setNewTicket({
+      ticket_id: ticket.ticket_id,
+      customer_id: ticket.customer_id || "",
+      created_at: ticket.created_at.split("-").reverse().join("-"),
+      details: details.map(d => ({
+        id: Date.now() + Math.random(),
+        service_id: d.service_id,
+        service_price: d.service_price,
+        extra_cost: d.extra_cost,
+        quantity: d.quantity,
+        prepaid_amount: d.prepaid_amount,
+        delivery_date: d.delivery_date ? d.delivery_date.split("-").reverse().join("-") : "",
+        status: d.status
+      }))
+    });
+    setTicketModalMode("edit");
+    setIsTicketModalOpen(true);
+  };
+
   const addDetailRow = () => {
     const newRow = {
       id: Date.now(),
@@ -276,9 +312,15 @@ export default function Services() {
         })),
       };
 
-      await api.post("/api/service-tickets", payload);
+
+      if (ticketModalMode === "edit") {
+        await api.put(`/api/service-tickets/${newTicket.ticket_id}`, payload);
+      } else {
+        await api.post("/api/service-tickets", payload);
+      }
       await loadData();
       setIsTicketModalOpen(false);
+
     } catch (error) {
       setPageError(error.message || "Failed to create ticket");
     }
@@ -404,6 +446,7 @@ export default function Services() {
             {activeTab === "tickets" ? (
               <button
                 onClick={() => {
+                  setTicketModalMode("add");
                   setNewTicket({
                     customer_id: "",
                     created_at: new Date().toISOString().split("T")[0],
@@ -448,6 +491,9 @@ export default function Services() {
                   <th className="p-4 text-center bg-surface-container-lowest">
                     Status
                   </th>
+                  <th className="p-4 text-right bg-surface-container-lowest">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -470,6 +516,7 @@ export default function Services() {
                       <td className="p-4 font-medium">
                         {formatCurrency(t.grand_total)}
                       </td>
+                      
                       <td className="p-4 text-center">
                         <span
                           className={`px-3 py-1 rounded-full text-xs font-bold ${t.status === "ĐÃ GIAO" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"}`}
@@ -477,6 +524,23 @@ export default function Services() {
                           {t.status}
                         </span>
                       </td>
+                      <td className="p-4 flex justify-end gap-2">
+                        <button
+                          onClick={(e) => handleEditTicket(e, t)}
+                          className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
+                          title="Edit Ticket"
+                        >
+                          <span className="material-symbols-outlined text-[20px]">edit</span>
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setDeleteConfirmTicket(t); }}
+                          className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
+                          title="Delete Ticket"
+                        >
+                          <span className="material-symbols-outlined text-[20px]">delete</span>
+                        </button>
+                      </td>
+
                     </tr>
                   ))
                 ) : (
@@ -544,15 +608,7 @@ export default function Services() {
                             edit_square
                           </span>
                         </button>
-                        <button
-                          onClick={() => setDeleteConfirmType(s)}
-                          className="p-1.5 hover:bg-error-container/20 text-on-surface-variant hover:text-error rounded"
-                          title="Delete"
-                        >
-                          <span className="material-symbols-outlined text-[20px]">
-                            delete
-                          </span>
-                        </button>
+                        
                       </td>
                     </tr>
                   ))
@@ -686,12 +742,7 @@ export default function Services() {
                 ? Hành động này không thể hoàn tác.
               </p>
               <div className="flex justify-center gap-3">
-                <button
-                  onClick={() => setDeleteConfirmType(null)}
-                  className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
+                
                 <button
                   onClick={confirmDeleteType}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
@@ -710,8 +761,7 @@ export default function Services() {
           <div className="bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-6xl animate-in zoom-in-95 flex flex-col max-h-[95vh]">
             <div className="p-5 border-b flex justify-between items-center bg-primary/5">
               <h3 className="font-bold text-primary flex items-center gap-2">
-                <span className="material-symbols-outlined">add_task</span> NEW
-                SERVICE TICKET
+                <span className="material-symbols-outlined">add_task</span> {ticketModalMode === "add" ? "NEW SERVICE TICKET" : "EDIT SERVICE TICKET"}
               </h3>
               <button
                 onClick={() => setIsTicketModalOpen(false)}
@@ -1087,6 +1137,38 @@ export default function Services() {
           </div>
         </div>
       )}
+
+      {deleteConfirmTicket && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="p-6 text-center">
+              <div className="w-16 h-16 bg-error-container/30 text-error rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="material-symbols-outlined text-3xl">warning</span>
+              </div>
+              <h3 className="text-title-lg font-bold text-on-surface mb-2">Delete Service Ticket?</h3>
+              <p className="text-on-surface-variant text-sm mb-6">
+                Are you sure you want to delete ticket <span className="font-bold text-on-surface">SRV-{deleteConfirmTicket.ticket_id}</span>? 
+                This action cannot be undone.
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  onClick={() => setDeleteConfirmTicket(null)}
+                  className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-variant/30 rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDeleteTicket}
+                  className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
+
   );
 }

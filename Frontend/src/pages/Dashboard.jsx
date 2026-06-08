@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { api } from "../services/apiClient";
+import RevenueReportModal from "../components/RevenueReportModal";
 
 const StatCard = ({
   id,
@@ -97,6 +98,9 @@ const StatCard = ({
 
 export default function Dashboard() {
   const [activeCard, setActiveCard] = useState("revenue");
+  const [recentInvoices, setRecentInvoices] = useState([]);
+  const [topProducts, setTopProducts] = useState([]);
+  const [categorySales, setCategorySales] = useState([]);
   const [summary, setSummary] = useState({
     totalProducts: 0,
     totalCustomers: 0,
@@ -104,15 +108,25 @@ export default function Dashboard() {
     totalServices: 0,
     totalSales: 0,
     totalPurchases: 0,
+    totalOrders: 0,
   });
+  const [showRevenueModal, setShowRevenueModal] = useState(false);
 
   useEffect(() => {
-    const loadSummary = async () => {
+        const loadSummary = async () => {
       try {
-        const data = await api.get("/api/dashboard/summary");
-        setSummary(data);
-      } catch {
-        // Keep mock numbers if API is unavailable
+        const [sumData, recentData, topData, catData] = await Promise.all([
+          api.get("/api/dashboard/summary"),
+          api.get("/api/dashboard/recent-invoices"),
+          api.get("/api/dashboard/top-products"),
+          api.get("/api/dashboard/sales-by-category")
+        ]);
+        setSummary(sumData || summary);
+        setRecentInvoices(recentData || []);
+        setTopProducts(topData || []);
+        setCategorySales(catData || []);
+      } catch (e) {
+        console.error("Dashboard data load error:", e);
       }
     };
 
@@ -135,7 +149,7 @@ export default function Dashboard() {
     },
     orders: {
       title: "Total Purchases",
-      value: formatCurrency(summary.totalPurchases),
+      value: formatNumber(summary.totalOrders),
       percent: "12.50%",
       isUp: true,
     },
@@ -157,6 +171,15 @@ export default function Dashboard() {
 
   return (
     <MainLayout
+      headerActions={
+        <button
+          onClick={() => setShowRevenueModal(true)}
+          className="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-medium hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2 no-print"
+        >
+          <span className="material-symbols-outlined text-[18px]">download</span>
+          Xuất Báo Cáo
+        </button>
+      }
       title="Dashboard Overview"
       subtitle="Welcome back! Your jewelry store performance view"
     >
@@ -167,7 +190,7 @@ export default function Dashboard() {
           onClick={setActiveCard}
           icon="attach_money"
           title="Total Revenue"
-          value="$24,582"
+          value={formatCurrency(summary.totalSales)}
           percent="18.2% this week"
           isUp={true}
           sparklineClass="sparkline-up-green"
@@ -179,7 +202,7 @@ export default function Dashboard() {
           onClick={setActiveCard}
           icon="shopping_cart"
           title="Total Orders"
-          value="3,842"
+          value={formatNumber(summary.totalOrders)}
           percent="12.5% this week"
           isUp={true}
           sparklineClass="sparkline-up-green"
@@ -191,7 +214,7 @@ export default function Dashboard() {
           onClick={setActiveCard}
           icon="inventory_2"
           title="Total Product"
-          value="1,247"
+          value={formatNumber(summary.totalProducts)}
           percent="2.3% this week"
           isUp={false}
           sparklineClass="sparkline-down-red"
@@ -203,7 +226,7 @@ export default function Dashboard() {
           onClick={setActiveCard}
           icon="group"
           title="Active Customers"
-          value="8,234"
+          value={formatNumber(summary.totalCustomers)}
           percent="24.6% this week"
           isUp={true}
           sparklineClass="sparkline-up-green"
@@ -270,7 +293,7 @@ export default function Dashboard() {
           <div className="relative w-[200px] h-[200px] donut-mockup mt-4">
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="font-headline-md text-headline-md font-bold text-on-surface">
-                16,100
+                {formatCurrency(summary.totalSales)}
               </span>
               <span className="bg-primary-container text-on-primary text-xs px-2 py-0.5 rounded-full mt-1">
                 + 45%
@@ -278,59 +301,38 @@ export default function Dashboard() {
             </div>
           </div>
 
+          
           <div className="grid grid-cols-2 gap-x-8 gap-y-4 mt-8 w-full px-4">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-outline-variant"></div>
-              <div>
-                <span className="text-xs text-on-surface-variant block">
-                  Gold Jewelry
-                </span>
-                <span className="font-semibold text-sm text-on-surface">
-                  25,500
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-primary-container"></div>
-              <div>
-                <span className="text-xs text-on-surface-variant block">
-                  Gemstone Jewelry
-                </span>
-                <span className="font-semibold text-sm text-on-surface">
-                  34,000
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-primary-fixed-dim"></div>
-              <div>
-                <span className="text-xs text-on-surface-variant block">
-                  Silver Jewelry
-                </span>
-                <span className="font-semibold text-sm text-on-surface">
-                  25,600
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-surface-variant"></div>
-              <div>
-                <span className="text-xs text-on-surface-variant block">
-                  Accessories
-                </span>
-                <span className="font-semibold text-sm text-on-surface">
-                  17,000
-                </span>
-              </div>
-            </div>
+            {categorySales.map((cat, index) => {
+              const colors = ['bg-outline-variant', 'bg-primary-container', 'bg-primary-fixed-dim', 'bg-surface-variant', 'bg-secondary', 'bg-error'];
+              const colorClass = colors[index % colors.length];
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-full ${colorClass}`}></div>
+                  <div>
+                    <span className="text-xs text-on-surface-variant block truncate w-24" title={cat.categoryName}>
+                      {cat.categoryName}
+                    </span>
+                    <span className="font-semibold text-sm text-on-surface">
+                      {formatCurrency(cat.totalSales)}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+            {categorySales.length === 0 && (
+              <span className="text-sm text-on-surface-variant col-span-2 text-center">No category data</span>
+            )}
           </div>
+
+
 
           <div className="mt-8 text-center border-t border-outline-variant/20 pt-4 w-full">
             <span className="text-xs text-on-surface-variant block mb-1">
               Total Number of Sales
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
-              3,40,0031
+              {formatNumber(summary.totalOrders)}
             </span>
           </div>
         </div>
@@ -346,68 +348,39 @@ export default function Dashboard() {
               <option>Monthly</option>
             </select>
           </div>
+          
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between p-3 hover:bg-surface-bright rounded-lg transition-colors border border-transparent hover:border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-variant rounded-md overflow-hidden flex items-center justify-center">
-                  <span className="material-symbols-outlined text-outline">
-                    diamond
+            {topProducts.map((product, index) => {
+              const icons = ['diamond', 'watch', 'auto_awesome', 'workspace_premium', 'star'];
+              const icon = icons[index % icons.length];
+              return (
+                <div key={index} className="flex items-center justify-between p-3 hover:bg-surface-bright rounded-lg transition-colors border border-transparent hover:border-outline-variant/10">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-surface-variant rounded-md overflow-hidden flex items-center justify-center">
+                      <span className="material-symbols-outlined text-outline">
+                        {icon}
+                      </span>
+                    </div>
+                    <div>
+                      <h4 className="font-title-sm text-title-sm text-on-surface font-semibold max-w-[150px] truncate" title={product.productName}>
+                        {product.productName}
+                      </h4>
+                      <span className="text-xs text-on-surface-variant">
+                        {product.totalSold} sold
+                      </span>
+                    </div>
+                  </div>
+                  <span className="font-semibold text-on-surface">
+                    {formatCurrency(product.totalRevenue)}
                   </span>
                 </div>
-                <div>
-                  <h4 className="font-title-sm text-title-sm text-on-surface font-semibold">
-                    24K Gold Ring
-                  </h4>
-                  <span className="text-xs text-on-surface-variant">
-                    342 sold
-                  </span>
-                </div>
-              </div>
-              <span className="font-semibold text-on-surface">
-                684,000,000 VND
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 hover:bg-surface-bright rounded-lg transition-colors border border-transparent hover:border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-variant rounded-md overflow-hidden flex items-center justify-center">
-                  <span className="material-symbols-outlined text-outline">
-                    watch
-                  </span>
-                </div>
-                <div>
-                  <h4 className="font-title-sm text-title-sm text-on-surface font-semibold">
-                    White Gold Necklace
-                  </h4>
-                  <span className="text-xs text-on-surface-variant">
-                    256 sold
-                  </span>
-                </div>
-              </div>
-              <span className="font-semibold text-on-surface">
-                512,000,000 VND
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 hover:bg-surface-bright rounded-lg transition-colors border border-transparent hover:border-outline-variant/10">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-surface-variant rounded-md overflow-hidden flex items-center justify-center">
-                  <span className="material-symbols-outlined text-outline">
-                    pending_actions
-                  </span>
-                </div>
-                <div>
-                  <h4 className="font-title-sm text-title-sm text-on-surface font-semibold">
-                    Pearl Bracelet
-                  </h4>
-                  <span className="text-xs text-on-surface-variant">
-                    120 sold
-                  </span>
-                </div>
-              </div>
-              <span className="font-semibold text-on-surface">
-                355,900,000 VND
-              </span>
-            </div>
+              );
+            })}
+            {topProducts.length === 0 && (
+              <div className="p-4 text-center text-on-surface-variant text-sm">No products sold yet</div>
+            )}
           </div>
+
         </div>
 
         <div className="lg:col-span-2 bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col overflow-hidden">
@@ -434,85 +407,49 @@ export default function Dashboard() {
                   <th className="pb-3 font-medium px-4">Customer</th>
                 </tr>
               </thead>
+              
               <tbody className="text-sm">
-                <tr className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
-                  <td className="py-4 px-4 text-on-surface-variant">1</td>
-                  <td className="py-4 px-4 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-surface-variant rounded flex items-center justify-center">
-                      <span className="material-symbols-outlined text-sm">
-                        diamond
-                      </span>
-                    </div>
-                    <span className="font-medium text-on-surface">
-                      Gold Ring Set
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">May 5</td>
-                  <td className="py-4 px-4">
-                    <span className="inline-block bg-primary-fixed-dim/20 text-primary-container px-3 py-1 rounded-full text-xs font-medium">
-                      Completed
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 font-medium text-on-surface">
-                    145,800,000 VND
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">
-                    M-Starlight
-                  </td>
-                </tr>
-                <tr className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
-                  <td className="py-4 px-4 text-on-surface-variant">2</td>
-                  <td className="py-4 px-4 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-surface-variant rounded flex items-center justify-center">
-                      <span className="material-symbols-outlined text-sm">
-                        gemstone
-                      </span>
-                    </div>
-                    <span className="font-medium text-on-surface">
-                      Gemstone Pendant
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">May 4</td>
-                  <td className="py-4 px-4">
-                    <span className="inline-block bg-primary-fixed-dim/20 text-primary-container px-3 py-1 rounded-full text-xs font-medium">
-                      Completed
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 font-medium text-on-surface">
-                    210,300,000 VND
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">
-                    Serene W
-                  </td>
-                </tr>
-                <tr className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
-                  <td className="py-4 px-4 text-on-surface-variant">3</td>
-                  <td className="py-4 px-4 flex items-center gap-3">
-                    <div className="w-8 h-8 bg-surface-variant rounded flex items-center justify-center">
-                      <span className="material-symbols-outlined text-sm">
-                        watch
-                      </span>
-                    </div>
-                    <span className="font-medium text-on-surface">
-                      Silver Bracelet
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">May 3</td>
-                  <td className="py-4 px-4">
-                    <span className="inline-block bg-primary-fixed-dim/20 text-primary-container px-3 py-1 rounded-full text-xs font-medium">
-                      Completed
-                    </span>
-                  </td>
-                  <td className="py-4 px-4 font-medium text-on-surface">
-                    298,400,000 VND
-                  </td>
-                  <td className="py-4 px-4 text-on-surface-variant">James D</td>
-                </tr>
+                {recentInvoices.map((invoice, index) => {
+                  const icons = ['diamond', 'auto_awesome', 'watch', 'star'];
+                  const icon = icons[index % icons.length];
+                  return (
+                    <tr key={index} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
+                      <td className="py-4 px-4 text-on-surface-variant">{invoice.invoiceId}</td>
+                      <td className="py-4 px-4 flex items-center gap-3">
+                        <div className="w-8 h-8 bg-surface-variant rounded flex items-center justify-center">
+                          <span className="material-symbols-outlined text-sm">
+                            {icon}
+                          </span>
+                        </div>
+                        <span className="font-medium text-on-surface truncate max-w-[180px]" title={invoice.firstProductName}>
+                          {invoice.firstProductName}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 text-on-surface-variant">{invoice.date.split("T")[0]}</td>
+                      <td className="py-4 px-4">
+                        <span className="inline-block bg-primary-fixed-dim/20 text-primary-container px-3 py-1 rounded-full text-xs font-medium">
+                          {invoice.status}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4 font-medium text-on-surface">
+                        {formatCurrency(invoice.totalAmount)}
+                      </td>
+                      <td className="py-4 px-4 text-on-surface-variant">
+                        {invoice.customerName}
+                      </td>
+                    </tr>
+                  );
+                })}
+                {recentInvoices.length === 0 && (
+                  <tr><td colSpan="6" className="py-8 text-center text-on-surface-variant">No recent orders found</td></tr>
+                )}
               </tbody>
+
             </table>
           </div>
         </div>
       </div>
+      <RevenueReportModal isOpen={showRevenueModal} onClose={() => setShowRevenueModal(false)} />
     </MainLayout>
   );
 }

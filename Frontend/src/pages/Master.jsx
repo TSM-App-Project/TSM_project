@@ -110,6 +110,18 @@ export default function Master() {
         }
     };
 
+    const filteredUsers = userList.filter((u) => 
+        (u.fullname || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (u.username || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (u.role || '').toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const filteredLogs = logList.filter((log) => 
+        (log.action || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (log.entityName || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (log.username || '').toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     if (currentUserRole !== 'QUAN_LY') {
         return (
             <MainLayout title="Access Denied" subtitle="Unauthorized Access">
@@ -206,7 +218,7 @@ export default function Master() {
                             </tr>
                             </thead>
                             <tbody className="text-sm">
-                            {userList.map((user) => (
+                            {filteredUsers.map((user) => (
                                 <tr key={user.userId} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
                                     <td className="py-3 px-4 font-medium text-on-surface">USR-{user.userId.toString().padStart(3, '0')}</td>
                                     <td className="py-3 px-4 text-on-surface-variant">{user.username}</td>
@@ -232,12 +244,7 @@ export default function Master() {
                                         >
                                             <span className="material-symbols-outlined text-[20px]">edit_square</span>
                                         </button>
-                                        <button
-                                            onClick={() => setDeleteConfirmUser(user)} // Kích hoạt Modal Xóa
-                                            className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors" title="Delete"
-                                        >
-                                            <span className="material-symbols-outlined text-[20px]">delete</span>
-                                        </button>
+                                        
                                     </td>
                                 </tr>
                             ))}
@@ -255,7 +262,7 @@ export default function Master() {
                             </tr>
                             </thead>
                             <tbody className="text-sm">
-                            {logList.map((log) => (
+                            {filteredLogs.map((log) => (
                                 <tr key={log.logId} className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors">
                                     <td className="py-3 px-4 text-on-surface-variant whitespace-nowrap">{log.logTime ? new Date(log.logTime).toLocaleString() : ''}</td>
                                     <td className="py-3 px-4 font-medium text-on-surface">{log.user?.username || ''}</td>
@@ -364,12 +371,7 @@ export default function Master() {
                                 This action cannot be undone.
                             </p>
                             <div className="flex justify-center gap-3">
-                                <button
-                                    onClick={() => setDeleteConfirmUser(null)}
-                                    className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded-lg transition-colors"
-                                >
-                                    Cancel
-                                </button>
+                                
                                 <button
                                     onClick={confirmDelete}
                                     className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
