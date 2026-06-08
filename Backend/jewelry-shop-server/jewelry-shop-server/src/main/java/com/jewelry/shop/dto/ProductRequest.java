@@ -27,5 +27,6 @@ public class ProductRequest {
     private BigDecimal purchasePrice;
 
     private Integer stockQuantity;
+    private Integer supplierId;
     private String status;
 }

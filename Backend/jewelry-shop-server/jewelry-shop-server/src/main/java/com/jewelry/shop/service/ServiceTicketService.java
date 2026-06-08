@@ -97,4 +97,75 @@ public class ServiceTicketService {
         serviceTicketDetailRepository.saveAll(details);
         return saved;
     }
+
+    @Transactional
+    public ServiceTicket update(Integer id, ServiceTicketRequest request) {
+        ServiceTicket ticket = serviceTicketRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ServiceTicket not found"));
+
+        if (request.getCustomerId() != null) {
+            Customer customer = customerRepository.findById(request.getCustomerId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+            ticket.setCustomer(customer);
+        }
+
+        // Delete old details
+        List<ServiceTicketDetail> oldDetails = serviceTicketDetailRepository.findByServiceTicket_TicketId(id);
+        serviceTicketDetailRepository.deleteAll(oldDetails);
+
+        // Process new details
+        BigDecimal grandTotal = BigDecimal.ZERO;
+        List<ServiceTicketDetail> newDetails = new ArrayList<>();
+
+        if (request.getItems() != null) {
+            for (ServiceTicketRequest.ServiceTicketItemRequest item : request.getItems()) {
+                com.jewelry.shop.entity.Service service = serviceRepository.findById(item.getServiceId())
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
+
+                BigDecimal servicePrice = service.getBasePrice();
+                BigDecimal extraCost = item.getExtraCost() != null ? item.getExtraCost() : BigDecimal.ZERO;
+                int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
+
+                BigDecimal calculatedPrice = servicePrice.add(extraCost);
+                BigDecimal subtotal = calculatedPrice.multiply(BigDecimal.valueOf(quantity));
+                BigDecimal prepaid = item.getPrepaidAmount() != null ? item.getPrepaidAmount() : BigDecimal.ZERO;
+                BigDecimal remaining = subtotal.subtract(prepaid);
+
+                if (remaining.compareTo(BigDecimal.ZERO) < 0) {
+                    remaining = BigDecimal.ZERO;
+                }
+
+                ServiceTicketDetail detail = new ServiceTicketDetail();
+                detail.setServiceTicket(ticket);
+                detail.setService(service);
+                detail.setServicePrice(servicePrice);
+                detail.setExtraCost(extraCost);
+                detail.setQuantity(quantity);
+                detail.setCalculatedPrice(calculatedPrice);
+                detail.setSubtotal(subtotal);
+                detail.setPrepaidAmount(prepaid);
+                detail.setRemainingAmount(remaining);
+                detail.setDeliveryDate(item.getDeliveryDate());
+                detail.setStatus("CHƯA GIAO");
+
+                grandTotal = grandTotal.add(subtotal);
+                newDetails.add(detail);
+            }
+        }
+
+        ticket.setGrandTotal(grandTotal);
+        ServiceTicket saved = serviceTicketRepository.save(ticket);
+        serviceTicketDetailRepository.saveAll(newDetails);
+        return saved;
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        ServiceTicket ticket = serviceTicketRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ServiceTicket not found"));
+        
+        List<ServiceTicketDetail> oldDetails = serviceTicketDetailRepository.findByServiceTicket_TicketId(id);
+        serviceTicketDetailRepository.deleteAll(oldDetails);
+        serviceTicketRepository.delete(ticket);
+    }
 }

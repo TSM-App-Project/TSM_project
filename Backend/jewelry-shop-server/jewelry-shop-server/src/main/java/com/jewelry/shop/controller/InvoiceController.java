@@ -50,11 +50,13 @@ public class InvoiceController {
         return invoiceService.create(request);
     }
 
+    @PutMapping("/{id}")
+    public Invoice updateInvoice(@PathVariable Integer id, @Valid @RequestBody InvoiceRequest request) {
+        return invoiceService.update(id, request);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteInvoice(@PathVariable Integer id) {
-        if (!invoiceRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found");
-        }
-        invoiceRepository.deleteById(id);
+        invoiceService.delete(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.jewelry.shop.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Formula;
 import lombok.*;
 import java.math.BigDecimal;
 
@@ -36,9 +37,8 @@ public class Supplier {
     @Column(columnDefinition = "text")
     private String address;
 
-    @Builder.Default
-    @Column(name = "total_debt", precision = 18, scale = 2)
-    private BigDecimal totalDebt = BigDecimal.ZERO;
+    @Formula("(SELECT COALESCE((SELECT SUM(pr.total_amount) FROM purchase_receipts pr WHERE pr.supplier_id = supplier_id), 0) - COALESCE((SELECT SUM(dp.amount) FROM debt_payments dp WHERE dp.supplier_id = supplier_id), 0))")
+    private BigDecimal totalDebt;
 
     @Builder.Default
     @Column(length = 20)

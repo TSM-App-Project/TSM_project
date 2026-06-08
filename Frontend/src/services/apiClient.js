@@ -13,7 +13,7 @@ const readErrorMessage = async (response) => {
 
 const request = async (path, options = {}) => {
   const headers = options.headers || {};
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
   
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;

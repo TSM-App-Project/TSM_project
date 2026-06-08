@@ -49,11 +49,13 @@ public class PurchaseReceiptController {
         return purchaseReceiptService.create(request);
     }
 
+    @PutMapping("/{id}")
+    public PurchaseReceipt updateReceipt(@PathVariable Integer id, @Valid @RequestBody PurchaseReceiptRequest request) {
+        return purchaseReceiptService.update(id, request);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteReceipt(@PathVariable Integer id) {
-        if (!purchaseReceiptRepository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Receipt not found");
-        }
-        purchaseReceiptRepository.deleteById(id);
+        purchaseReceiptService.delete(id);
     }
 }

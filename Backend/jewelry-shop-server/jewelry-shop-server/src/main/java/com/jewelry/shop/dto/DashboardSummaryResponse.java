@@ -9,6 +9,7 @@ public class DashboardSummaryResponse {
     private long totalCustomers;
     private long totalSuppliers;
     private long totalServices;
+    private long totalOrders;
     private BigDecimal totalSales;
     private BigDecimal totalPurchases;
 }

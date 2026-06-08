@@ -53,4 +53,14 @@ public class ServiceTicketController {
     public ServiceTicket createTicket(@Valid @RequestBody ServiceTicketRequest request) {
         return serviceTicketService.create(request);
     }
+
+    @PutMapping("/{id}")
+    public ServiceTicket updateTicket(@PathVariable Integer id, @Valid @RequestBody ServiceTicketRequest request) {
+        return serviceTicketService.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTicket(@PathVariable Integer id) {
+        serviceTicketService.delete(id);
+    }
 }

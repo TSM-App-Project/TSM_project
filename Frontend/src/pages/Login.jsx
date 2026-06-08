@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import { Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,8 +7,9 @@ import { api } from '../services/apiClient';
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
+    const [id, setId] = useState(localStorage.getItem('savedId') || '');
+    const [password, setPassword] = useState(localStorage.getItem('savedPassword') || '');
+    const [rememberMe, setRememberMe] = useState(true);
 
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
@@ -24,7 +25,15 @@ export default function Login() {
         try {
             const token = await api.post("/api/users/login", { username: id, password: password });
             if (token) {
-                localStorage.setItem("token", token);
+                if (rememberMe) {
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("savedId", id);
+                    localStorage.setItem("savedPassword", password);
+                } else {
+                    sessionStorage.setItem("token", token);
+                    localStorage.removeItem("savedId");
+                    localStorage.removeItem("savedPassword");
+                }
                 setIsError(false);
                 navigate('/dashboard');
             } else {
@@ -88,6 +97,8 @@ export default function Login() {
                                 {/* 1. Input ẩn phủ kín */}
                                 <input
                                     type="checkbox"
+                                    checked={rememberMe}
+                                    onChange={(e) => setRememberMe(e.target.checked)}
                                     className="peer absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
                                 />
                                 <div className="w-full h-full border border-gray-300 rounded bg-surface-bright peer-checked:bg-[#10b981] peer-checked:border-[#10b981] transition-colors"></div>

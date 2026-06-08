@@ -29,4 +29,8 @@ public class ProductCategory {
     @Builder.Default
     @Column(name = "profit_percentage", precision = 5, scale = 2)
     private BigDecimal profitPercentage = BigDecimal.ZERO;
+
+    @Builder.Default
+    @Column(name = "status", length = 20)
+    private String status = "ACTIVE";
 }

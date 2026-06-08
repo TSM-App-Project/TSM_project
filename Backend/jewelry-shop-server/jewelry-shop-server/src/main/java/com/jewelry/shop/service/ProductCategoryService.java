@@ -33,6 +33,9 @@ public class ProductCategoryService {
         category.setCategoryName(request.getCategoryName());
         category.setUnitName(request.getUnitName());
         category.setProfitPercentage(request.getProfitPercentage() == null ? java.math.BigDecimal.ZERO : request.getProfitPercentage());
+        if (request.getStatus() != null) {
+            category.setStatus(request.getStatus());
+        }
         return productCategoryRepository.save(category);
     }
 
@@ -47,6 +50,9 @@ public class ProductCategoryService {
         }
         if (request.getProfitPercentage() != null) {
             category.setProfitPercentage(request.getProfitPercentage());
+        }
+        if (request.getStatus() != null) {
+            category.setStatus(request.getStatus());
         }
         return productCategoryRepository.save(category);
     }
