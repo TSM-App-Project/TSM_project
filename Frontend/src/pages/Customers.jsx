@@ -75,8 +75,8 @@ export default function Customers() {
     email: "",
     phone: customer.phoneNumber || "",
     address: "",
-    totalOrders: customer.totalPoints || 0,
-    totalSpent: 0,
+    totalOrders: customer.totalOrders || 0,
+    totalSpent: customer.totalAmountSpent || 0,
     tier: mapTierFromDb(customer.memberTier),
     status: "active",
     memberSince: formatDate(customer.createdAt),
@@ -424,15 +424,7 @@ export default function Customers() {
                               edit_square
                             </span>
                           </button>
-                          <button
-                            onClick={() => setDeleteConfirmCustomer(c)}
-                            className="p-1.5 hover:bg-error-container/20 text-on-surface-variant hover:text-error rounded"
-                            title="Delete"
-                          >
-                            <span className="material-symbols-outlined text-[20px]">
-                              delete
-                            </span>
-                          </button>
+                          
                         </>
                       ) : (
                         <span className="text-xs text-outline italic">
@@ -704,12 +696,7 @@ export default function Customers() {
               Dữ liệu không thể hoàn tác.
             </p>
             <div className="flex justify-center gap-3">
-              <button
-                onClick={() => setDeleteConfirmCustomer(null)}
-                className="px-5 py-2.5 text-sm font-medium bg-surface-container-low rounded-lg border"
-              >
-                Cancel
-              </button>
+              
               <button
                 onClick={confirmDelete}
                 className="px-5 py-2.5 text-sm font-bold bg-error text-white rounded-lg shadow-sm"

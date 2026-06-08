@@ -19,7 +19,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
 
                     <div className="flex items-center gap-6">
                         {headerActions}
-                        <div className="relative hidden lg:block w-80">
+                        {/* <div className="relative hidden lg:block w-80">
                             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
                             <input className="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant/30 rounded-full font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search users, orders, products..." type="text" />
                         </div>
@@ -39,10 +39,8 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                                         <span className="text-xs text-primary font-medium cursor-pointer hover:underline">Đánh dấu đã đọc</span>
                                     </div>
 
-                                    {/* Khung chứa danh sách có thanh cuộn */}
                                     <div className="max-h-[300px] overflow-y-auto custom-scrollbar">
 
-                                        {/* Thông báo 1 */}
                                         <div className="px-4 py-3 border-b border-outline-variant/10 hover:bg-surface-bright transition-colors cursor-pointer flex gap-3">
                                             <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0">
                                                 <span className="material-symbols-outlined text-sm">local_shipping</span>
@@ -54,7 +52,6 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                                             </div>
                                         </div>
 
-                                        {/* Thông báo 2 */}
                                         <div className="px-4 py-3 border-b border-outline-variant/10 hover:bg-surface-bright transition-colors cursor-pointer flex gap-3">
                                             <div className="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center flex-shrink-0">
                                                 <span className="material-symbols-outlined text-sm">inventory_2</span>
@@ -66,7 +63,6 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                                             </div>
                                         </div>
 
-                                        {/* Thông báo 3 */}
                                         <div className="px-4 py-3 hover:bg-surface-bright transition-colors cursor-pointer flex gap-3">
                                             <div className="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center flex-shrink-0">
                                                 <span className="material-symbols-outlined text-sm">person_add</span>
@@ -85,7 +81,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                                     </div>
                                 </div>
                             )}
-                        </div>
+                        </div> */}
 
                         <div className="flex items-center gap-3">
                             <img alt="User Avatar" className="w-10 h-10 rounded-full border-2 border-surface-container-highest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY-WUOxrHMkvzH9Gydi7O_4mv4MZZsZGxLxLpzwvh33d7rknBIMKJmJuFnAd8rSJQE2Q6oCY_OJ5yxVv4MRX86x7-odgXFA00JFPH6z9A58Rk6vnI4Gkyk-p3BZLYQi5xQUj4CI6eqVuRY8QtoBEeIY0mBJyf40xlFECMP21WwBMNUDv0Z7V_xx2xTYeuks7qluOhaPKdGSx0S8Mr4lw24M8XcMrbA6vPQXJrMW87bAJD9vwmMIy2JRY1eDNdBq51lXRYaTyyR4bmm" />
@@ -97,7 +93,7 @@ export default function MainLayout({ children, title = "Dashboard Overview", sub
                     </div>
                 </header>
 
-                <main className="flex-1 p-gutter pt-2 flex flex-col gap-stack-md lg:overflow-hidden lg:min-h-0">
+                <main className="flex-1 p-gutter pt-2 flex flex-col gap-stack-md overflow-y-auto custom-scrollbar lg:min-h-0">
                     {children}
                 </main>
             </div>

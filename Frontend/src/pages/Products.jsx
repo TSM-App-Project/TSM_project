@@ -13,7 +13,6 @@ export default function Products() {
   const [productForm, setProductForm] = useState({
     productId: null,
     product_id: "",
-    sku: "",
     category_id: "",
     product_name: "",
     gold_rate_id: 1,
@@ -29,6 +28,7 @@ export default function Products() {
   // 2. KHỞI TẠO DỮ LIỆU & STATE CHO CATEGORIES (LOẠI SẢN PHẨM)
   // ========================================================================
   const [categoryList, setCategoryList] = useState([]);
+  const [supplierList, setSupplierList] = useState([]);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [deleteConfirmCategory, setDeleteConfirmCategory] = useState(null);
   const [categoryForm, setCategoryForm] = useState({
@@ -87,32 +87,41 @@ export default function Products() {
     weight: Number(product.weight || 0),
     gemstone_cost: 0,
     labor_cost: Number(product.laborCost || 0),
-    supplier_id: "",
+    supplier_id: product.supplier?.supplierId || "",
     stock_quantity: Number(product.stockQuantity || 0),
     status: product.status || "ACTIVE",
-    sku: "",
-  });
+    });
 
   const mapCategoryFromApi = (category) => ({
     categoryId: category.categoryId,
     category_id: formatId("CAT", category.categoryId),
     category_code: category.categoryName
-      ? category.categoryName.substring(0, 3).toUpperCase()
-      : "CAT",
+        ? (() => {
+            const name = category.categoryName.toLowerCase();
+            if (name.includes('nhẫn')) return 'RIN';
+            if (name.includes('vòng cổ') || name.includes('dây chuyền')) return 'NEC';
+            if (name.includes('khuyên')) return 'EAR';
+            if (name.includes('lắc')) return 'BRA';
+            if (name.includes('đồng hồ')) return 'WAT';
+            return 'OTH';
+          })()
+        : "CAT",
     category_name: category.categoryName || "",
     unit: category.unitName || "Piece",
-    status: "ACTIVE",
+    status: category.status || "ACTIVE",
   });
 
   const loadData = async () => {
     try {
       setPageError("");
-      const [products, categories] = await Promise.all([
+      const [products, categories, suppliers] = await Promise.all([
         api.get("/api/products"),
         api.get("/api/product-categories"),
+          api.get("/api/suppliers"),
       ]);
       setProductList((products || []).map(mapProductFromApi));
       setCategoryList((categories || []).map(mapCategoryFromApi));
+        setSupplierList(suppliers || []);
     } catch (error) {
       setPageError(error.message || "Failed to load data");
     }
@@ -128,8 +137,7 @@ export default function Products() {
   const filteredProducts = productList.filter(
     (p) =>
       p.product_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.product_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.sku.toLowerCase().includes(searchQuery.toLowerCase()),
+      p.product_name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleOpenProductAddModal = () => {
@@ -141,7 +149,6 @@ export default function Products() {
     setProductForm({
       productId: null,
       product_id: `PRD-${(maxNum + 1).toString().padStart(3, "0")}`,
-      sku: "",
       category_id: "",
       product_name: "",
       gold_rate_id: 1,
@@ -203,6 +210,7 @@ export default function Products() {
       purchasePrice: Number(productForm.gemstone_cost) || 0,
       stockQuantity: Number(productForm.stock_quantity) || 0,
       status: productForm.status || "ACTIVE",
+      supplierId: productForm.supplier_id ? Number(productForm.supplier_id) : null,
     };
 
     try {
@@ -223,7 +231,7 @@ export default function Products() {
 
     try {
       await api.put(`/api/products/${deleteConfirmProduct.productId}`, {
-        status: "HIDDEN",
+        status: "INACTIVE",
       });
       await loadData();
       setDeleteConfirmProduct(null);
@@ -269,15 +277,15 @@ export default function Products() {
 
   const handleSaveCategory = async (e) => {
     e.preventDefault();
-    const isDuplicateCode = categoryList.some(
+    const isDuplicateName = categoryList.some(
       (c) =>
-        c.category_code.toLowerCase() ===
-          categoryForm.category_code.toLowerCase() &&
+        c.category_name.toLowerCase() ===
+          categoryForm.category_name.toLowerCase() &&
         c.category_id !== categoryForm.category_id,
     );
-    if (isDuplicateCode) {
+    if (isDuplicateName) {
       setErrorMessage(
-        "This Category Code already exists. Please use a unique code.",
+        "This Category Name already exists. Please use a unique name.",
       );
       return;
     }
@@ -286,6 +294,7 @@ export default function Products() {
       categoryName: categoryForm.category_name,
       unitName: categoryForm.unit,
       profitPercentage: 0,
+      status: categoryForm.status,
     };
 
     try {
@@ -308,8 +317,9 @@ export default function Products() {
     if (!deleteConfirmCategory) return;
 
     try {
-      await api.del(
+      await api.put(
         `/api/product-categories/${deleteConfirmCategory.categoryId}`,
+        { status: "INACTIVE" }
       );
       await loadData();
       setDeleteConfirmCategory(null);
@@ -443,7 +453,6 @@ export default function Products() {
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                   <th className="pb-3 font-medium px-4 py-3">Product ID</th>
-                  <th className="pb-3 font-medium px-4 py-3">SKU</th>
                   <th className="pb-3 font-medium px-4 py-3">Product Name</th>
                   <th className="pb-3 font-medium px-4 py-3">Category ID</th>
                   <th className="pb-3 font-medium px-4 py-3">Weight</th>
@@ -464,9 +473,6 @@ export default function Products() {
                     >
                       <td className="py-3 px-4 font-medium text-on-surface">
                         {product.product_id}
-                      </td>
-                      <td className="py-3 px-4 font-mono text-xs text-on-surface-variant">
-                        {product.sku}
                       </td>
                       <td
                         className="py-3 px-4 font-medium text-on-surface max-w-[250px] truncate"
@@ -516,17 +522,7 @@ export default function Products() {
                             edit_square
                           </span>
                         </button>
-                        {product.status === "ACTIVE" && (
-                          <button
-                            onClick={() => setDeleteConfirmProduct(product)}
-                            className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors"
-                            title="Hide Product"
-                          >
-                            <span className="material-symbols-outlined text-[20px]">
-                              visibility_off
-                            </span>
-                          </button>
-                        )}
+                        
                       </td>
                     </tr>
                   ))
@@ -602,17 +598,7 @@ export default function Products() {
                             edit_square
                           </span>
                         </button>
-                        {cat.status === "ACTIVE" && (
-                          <button
-                            onClick={() => setDeleteConfirmCategory(cat)}
-                            className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors"
-                            title="Hide Category"
-                          >
-                            <span className="material-symbols-outlined text-[20px]">
-                              visibility_off
-                            </span>
-                          </button>
-                        )}
+                        
                       </td>
                     </tr>
                   ))
@@ -666,19 +652,6 @@ export default function Products() {
                     disabled
                     value={productForm.product_id}
                     className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed font-medium"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    SKU Code <span className="text-error">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="sku"
-                    required
-                    value={productForm.sku}
-                    onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
                   />
                 </div>
                 <div>
@@ -763,13 +736,19 @@ export default function Products() {
                   <label className="block text-sm font-medium mb-1">
                     Supplier ID
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="supplier_id"
                     value={productForm.supplier_id}
                     onChange={handleProductInputChange}
                     className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
+                  >
+                    <option value="">-- No Supplier --</option>
+                    {supplierList.map((sup) => (
+                      <option key={sup.supplierId} value={sup.supplierId}>
+                        {sup.supplierName}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
@@ -797,7 +776,7 @@ export default function Products() {
                       className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
                     >
                       <option value="ACTIVE">ACTIVE</option>
-                      <option value="HIDDEN">HIDDEN</option>
+                      <option value="INACTIVE">INACTIVE</option>
                     </select>
                   </div>
                 )}
@@ -841,12 +820,7 @@ export default function Products() {
               ?
             </p>
             <div className="flex justify-center gap-3">
-              <button
-                onClick={() => setDeleteConfirmProduct(null)}
-                className="px-5 py-2.5 bg-surface-container-low rounded-lg"
-              >
-                Cancel
-              </button>
+              
               <button
                 onClick={confirmDeleteProduct}
                 className="px-5 py-2.5 bg-error text-white rounded-lg"
@@ -901,11 +875,18 @@ export default function Products() {
                   <input
                     type="text"
                     name="category_code"
-                    required
-                    value={categoryForm.category_code}
-                    onChange={handleCategoryInputChange}
-                    placeholder="e.g. RNG"
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    disabled
+                    value={(() => {
+                      const name = categoryForm.category_name.toLowerCase();
+                      if (!name) return "";
+                      if (name.includes("nhẫn")) return "RIN";
+                      if (name.includes("vòng cổ") || name.includes("dây chuyền")) return "NEC";
+                      if (name.includes("khuyên")) return "EAR";
+                      if (name.includes("lắc")) return "BRA";
+                      if (name.includes("đồng hồ")) return "WAT";
+                      return "OTH";
+                    })()}
+                    className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed font-medium"
                   />
                 </div>
                 <div className="md:col-span-2">
@@ -948,7 +929,7 @@ export default function Products() {
                       className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none"
                     >
                       <option value="ACTIVE">ACTIVE</option>
-                      <option value="HIDDEN">HIDDEN</option>
+                      <option value="INACTIVE">INACTIVE</option>
                     </select>
                   </div>
                 )}
@@ -992,12 +973,7 @@ export default function Products() {
               ?
             </p>
             <div className="flex justify-center gap-3">
-              <button
-                onClick={() => setDeleteConfirmCategory(null)}
-                className="px-5 py-2.5 bg-surface-container-low rounded-lg"
-              >
-                Cancel
-              </button>
+              
               <button
                 onClick={confirmDeleteCategory}
                 className="px-5 py-2.5 bg-error text-white rounded-lg"

@@ -15,6 +15,8 @@ export default function Trading() {
 
   const [isSalesModalOpen, setIsSalesModalOpen] = useState(false);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
+  const [salesModalMode, setSalesModalMode] = useState("add");
+  const [purchaseModalMode, setPurchaseModalMode] = useState("add");
   const [deleteConfirmRecord, setDeleteConfirmRecord] = useState(null);
 
   const [salesForm, setSalesForm] = useState({
@@ -85,7 +87,7 @@ export default function Trading() {
           return {
             invoice_db_id: invoice.invoiceId,
             invoice_id: formatId("INV", invoice.invoiceId),
-            invoice_date: formatDate(invoice.createdAt),
+            invoice_date: invoice.createdAt.split("T")[0],
             customer_id: invoice.customer?.customerId || "",
             customer_name: invoice.customer?.fullName || "Khách lẻ",
             total_amount: Number(invoice.totalAmount || 0),
@@ -102,7 +104,7 @@ export default function Trading() {
           return {
             purchase_db_id: receipt.purchaseId,
             purchase_id: formatId("REC", receipt.purchaseId),
-            purchase_date: formatDate(receipt.purchaseDate),
+            purchase_date: receipt.purchaseDate ? receipt.purchaseDate.split("T")[0] : "",
             supplier_id: receipt.supplier?.supplierId || "",
             supplier_name: receipt.supplier?.supplierName || "",
             total_amount: Number(receipt.totalAmount || 0),
@@ -152,6 +154,7 @@ export default function Trading() {
       customer_id: "",
       items: [{ id: Date.now(), product_id: "", quantity: 1, unit_price: 0 }],
     });
+    setSalesModalMode("add");
     setIsSalesModalOpen(true);
   };
 
@@ -169,6 +172,44 @@ export default function Trading() {
         { id: Date.now(), product_id: "", quantity: 1, purchase_price: 0 },
       ],
     });
+    setPurchaseModalMode("add");
+    setIsPurchaseModalOpen(true);
+  };
+
+  
+  const handleEditSales = (sale) => {
+    setSalesModalMode("edit");
+    setSalesForm({
+      invoice_db_id: sale.invoice_db_id,
+      invoice_id: sale.invoice_id,
+      invoice_date: sale.invoice_date.split("-").reverse().join("-"), // assuming dd-MM-yyyy to yyyy-MM-dd
+      customer_id: sale.customer_id,
+      items: sale.details.map(d => ({
+        id: d.id,
+        product_id: d.product_db_id,
+        quantity: d.quantity,
+        unit_price: d.unit_price
+      }))
+    });
+    setSalesModalMode("add");
+    setIsSalesModalOpen(true);
+  };
+
+  const handleEditPurchase = (purchase) => {
+    setPurchaseModalMode("edit");
+    setPurchaseForm({
+      purchase_db_id: purchase.purchase_db_id,
+      purchase_id: purchase.purchase_id,
+      purchase_date: purchase.purchase_date.split("-").reverse().join("-"),
+      supplier_id: purchase.supplier_id,
+      items: purchase.details.map(d => ({
+        id: d.id,
+        product_id: d.product_db_id,
+        quantity: d.quantity,
+        purchase_price: d.purchase_price
+      }))
+    });
+    setPurchaseModalMode("add");
     setIsPurchaseModalOpen(true);
   };
 
@@ -238,11 +279,17 @@ export default function Trading() {
       })),
     };
 
+
     try {
-      await api.post("/api/invoices", payload);
+      if (salesModalMode === "edit") {
+        await api.put(`/api/invoices/${salesForm.invoice_db_id}`, payload);
+      } else {
+        await api.post("/api/invoices", payload);
+      }
       await loadData();
       setIsSalesModalOpen(false);
     } catch (error) {
+
       setPageError(error.message || "Failed to save invoice");
     }
   };
@@ -263,11 +310,17 @@ export default function Trading() {
       })),
     };
 
+
     try {
-      await api.post("/api/purchase-receipts", payload);
+      if (purchaseModalMode === "edit") {
+        await api.put(`/api/purchase-receipts/${purchaseForm.purchase_db_id}`, payload);
+      } else {
+        await api.post("/api/purchase-receipts", payload);
+      }
       await loadData();
       setIsPurchaseModalOpen(false);
     } catch (error) {
+
       setPageError(error.message || "Failed to save receipt");
     }
   };
@@ -448,9 +501,18 @@ export default function Trading() {
                     </td>
                     <td className="py-3 px-4 flex justify-end gap-2">
                       <button
-                        onClick={() => setDeleteConfirmRecord(sale)}
-                        className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors"
-                        title="Delete"
+                        onClick={() => handleEditSales(sale)}
+                        className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
+                        title="Edit Invoice"
+                      >
+                        <span className="material-symbols-outlined text-[20px]">
+                          edit
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirmRecord({ ...sale, type: "sales" })}
+                        className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
+                        title="Delete Invoice"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           delete
@@ -502,9 +564,18 @@ export default function Trading() {
                     </td>
                     <td className="py-3 px-4 flex justify-end gap-2">
                       <button
-                        onClick={() => setDeleteConfirmRecord(purchase)}
-                        className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors"
-                        title="Delete"
+                        onClick={() => handleEditPurchase(purchase)}
+                        className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
+                        title="Edit Receipt"
+                      >
+                        <span className="material-symbols-outlined text-[20px]">
+                          edit
+                        </span>
+                      </button>
+                      <button
+                        onClick={() => setDeleteConfirmRecord({ ...purchase, type: "purchases" })}
+                        className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
+                        title="Delete Receipt"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           delete
@@ -525,7 +596,7 @@ export default function Trading() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                Create Sales Invoice (BM9)
+                {salesModalMode === "add" ? "Create Sales Invoice (BM9)" : "Edit Sales Invoice (BM9)"}
               </h3>
               <button
                 onClick={() => setIsSalesModalOpen(false)}
@@ -738,7 +809,7 @@ export default function Trading() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                Create Purchase Receipt (BM10)
+                {purchaseModalMode === "add" ? "Create Purchase Receipt (BM10)" : "Edit Purchase Receipt (BM10)"}
               </h3>
               <button
                 onClick={() => setIsPurchaseModalOpen(false)}
@@ -967,12 +1038,7 @@ export default function Trading() {
                 ? This action cannot be undone.
               </p>
               <div className="flex justify-center gap-3">
-                <button
-                  onClick={() => setDeleteConfirmRecord(null)}
-                  className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
+                
                 <button
                   onClick={confirmDelete}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
@@ -984,6 +1050,40 @@ export default function Trading() {
           </div>
         </div>
       )}
+
+      {deleteConfirmRecord && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-md p-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-error-container/30 text-error flex items-center justify-center">
+                <span className="material-symbols-outlined text-4xl">warning</span>
+              </div>
+              <div>
+                <h3 className="text-title-lg font-semibold text-on-surface mb-2">Delete Record</h3>
+                <p className="text-on-surface-variant">
+                  Are you sure you want to delete {deleteConfirmRecord.type === "sales" ? deleteConfirmRecord.invoice_id : deleteConfirmRecord.purchase_id}? 
+                  This action cannot be undone and will affect inventory.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-8">
+              <button
+                onClick={() => setDeleteConfirmRecord(null)}
+                className="flex-1 py-2.5 rounded-lg border border-outline-variant/50 font-medium text-on-surface hover:bg-surface-variant/30 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="flex-1 py-2.5 rounded-lg bg-error text-on-error font-medium hover:bg-error/90 transition-colors shadow-sm"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
+
   );
 }

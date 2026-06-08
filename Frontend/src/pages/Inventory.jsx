@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { api } from "../services/apiClient";
 import { formatId, parseId } from "../services/idMapper";
+import InventoryReportModal from "../components/InventoryReportModal";
 
 export default function Inventory() {
   const [inventoryList, setInventoryList] = useState([]);
@@ -12,6 +13,7 @@ export default function Inventory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState("add");
   const [deleteConfirmRecord, setDeleteConfirmRecord] = useState(null);
+  const [showInventoryReport, setShowInventoryReport] = useState(false);
 
   // Đã chuẩn hóa toàn bộ tên biến khớp 100% với DB (inventory_reports & inventory_report_details)
   const [formData, setFormData] = useState({
@@ -272,6 +274,15 @@ export default function Inventory() {
 
   return (
     <MainLayout
+      headerActions={
+        <button
+          onClick={() => setShowInventoryReport(true)}
+          className="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-medium hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2 no-print"
+        >
+          <span className="material-symbols-outlined text-[18px]">download</span>
+          Xuất Báo Cáo
+        </button>
+      }
       title="Inventory Reports"
       subtitle="Manage monthly stock movements and closing balances"
     >
@@ -437,15 +448,7 @@ export default function Inventory() {
                           edit_square
                         </span>
                       </button>
-                      <button
-                        onClick={() => setDeleteConfirmRecord(item)}
-                        className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded transition-colors"
-                        title="Delete Entry"
-                      >
-                        <span className="material-symbols-outlined text-[20px]">
-                          delete
-                        </span>
-                      </button>
+                      
                     </td>
                   </tr>
                 ))
@@ -676,12 +679,7 @@ export default function Inventory() {
                 ?
               </p>
               <div className="flex justify-center gap-3">
-                <button
-                  onClick={() => setDeleteConfirmRecord(null)}
-                  className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-container-high rounded-lg transition-colors"
-                >
-                  Cancel
-                </button>
+                
                 <button
                   onClick={confirmDelete}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm flex items-center gap-2"
@@ -696,6 +694,7 @@ export default function Inventory() {
           </div>
         </div>
       )}
+      <InventoryReportModal isOpen={showInventoryReport} onClose={() => setShowInventoryReport(false)} />
     </MainLayout>
   );
 }
