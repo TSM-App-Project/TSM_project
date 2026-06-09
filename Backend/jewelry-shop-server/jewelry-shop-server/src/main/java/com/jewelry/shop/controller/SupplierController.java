@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/suppliers")
 @CrossOrigin("*")
-@PreAuthorize("hasAuthority('QUAN_LY')") // Phân quyền module nhà cung cấp
 public class SupplierController {
 
     private final SupplierService supplierService;
