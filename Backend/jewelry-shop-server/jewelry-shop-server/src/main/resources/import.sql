@@ -1,6 +1,7 @@
-INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('admin', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Nguyễn Văn Admin', 'QUAN_LY', 'ACTIVE', '2026-05-01 08:00:00');
+INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('admin', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Nguyễn Văn Admin', 'ADMIN', 'ACTIVE', '2026-05-01 08:00:00');
 INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('quanly1', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Trần Thị Quản Lý', 'QUAN_LY', 'ACTIVE', '2026-05-01 08:00:00');
-INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('thungan1', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Lê Văn Thu Ngân', 'NHAN_VIEN', 'ACTIVE', '2026-05-01 08:00:00');
+INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('ketoan1', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Phạm Văn Kế Toán', 'KE_TOAN', 'ACTIVE', '2026-05-01 08:00:00');
+INSERT INTO users (username, password_hash, full_name, role, status, created_at) VALUES ('nhanvien1', '$2b$10$aWFoyV4coreoHifdjTagNeGeJC/7j1JWIvMMe8JRV2hkUBlhLILV6', 'Lê Văn Nhân Viên', 'NHAN_VIEN', 'ACTIVE', '2026-05-01 08:00:00');
 INSERT INTO product_categories (category_name, unit_name, profit_percentage) VALUES ('Nhẫn Vàng Tây', 'Chiếc', 5.0);
 INSERT INTO product_categories (category_name, unit_name, profit_percentage) VALUES ('Dây Chuyền', 'Sợi', 10.0);
 INSERT INTO product_categories (category_name, unit_name, profit_percentage) VALUES ('Bông Tai', 'Đôi', 8.0);

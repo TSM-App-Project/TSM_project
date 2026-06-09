@@ -17,7 +17,7 @@ export default function Products() {
     product_name: "",
     gold_rate_id: 1,
     weight: 0,
-    gemstone_cost: 0,
+    purchase_price: 0,
     labor_cost: 0,
     supplier_id: "",
     stock_quantity: 0,
@@ -34,7 +34,7 @@ export default function Products() {
   const [categoryForm, setCategoryForm] = useState({
     categoryId: null,
     category_id: "",
-    category_code: "",
+    profit_percentage: 0,
     category_name: "",
     unit: "Piece",
     status: "ACTIVE",
@@ -85,7 +85,8 @@ export default function Products() {
     product_name: product.productName || "",
     gold_rate_id: 1,
     weight: Number(product.weight || 0),
-    gemstone_cost: 0,
+    purchase_price: Number(product.purchasePrice || 0),
+    category_profit_percentage: Number(product.category?.profitPercentage || 0),
     labor_cost: Number(product.laborCost || 0),
     supplier_id: product.supplier?.supplierId || "",
     stock_quantity: Number(product.stockQuantity || 0),
@@ -95,17 +96,7 @@ export default function Products() {
   const mapCategoryFromApi = (category) => ({
     categoryId: category.categoryId,
     category_id: formatId("CAT", category.categoryId),
-    category_code: category.categoryName
-        ? (() => {
-            const name = category.categoryName.toLowerCase();
-            if (name.includes('nhẫn')) return 'RIN';
-            if (name.includes('vòng cổ') || name.includes('dây chuyền')) return 'NEC';
-            if (name.includes('khuyên')) return 'EAR';
-            if (name.includes('lắc')) return 'BRA';
-            if (name.includes('đồng hồ')) return 'WAT';
-            return 'OTH';
-          })()
-        : "CAT",
+    profit_percentage: Number(category.profitPercentage || 0),
     category_name: category.categoryName || "",
     unit: category.unitName || "Piece",
     status: category.status || "ACTIVE",
@@ -153,7 +144,7 @@ export default function Products() {
       product_name: "",
       gold_rate_id: 1,
       weight: 0,
-      gemstone_cost: 0,
+      purchase_price: 0,
       labor_cost: 0,
       supplier_id: "",
       stock_quantity: 0,
@@ -170,7 +161,7 @@ export default function Products() {
       const rawData = { ...prev, [name]: value };
       const numberFields = [
         "weight",
-        "gemstone_cost",
+        "purchase_price",
         "labor_cost",
         "stock_quantity",
         "gold_rate_id",
@@ -207,7 +198,7 @@ export default function Products() {
       productName: productForm.product_name,
       weight: Number(productForm.weight) || 0,
       laborCost: Number(productForm.labor_cost) || 0,
-      purchasePrice: Number(productForm.gemstone_cost) || 0,
+      purchasePrice: Number(productForm.purchase_price) || 0,
       stockQuantity: Number(productForm.stock_quantity) || 0,
       status: productForm.status || "ACTIVE",
       supplierId: productForm.supplier_id ? Number(productForm.supplier_id) : null,
@@ -246,8 +237,7 @@ export default function Products() {
   const filteredCategories = categoryList.filter(
     (c) =>
       c.category_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.category_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      c.category_code.toLowerCase().includes(searchQuery.toLowerCase()),
+      c.category_name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleOpenCategoryAddModal = () => {
@@ -259,7 +249,7 @@ export default function Products() {
     setCategoryForm({
       categoryId: null,
       category_id: `CAT-${(maxNum + 1).toString().padStart(3, "0")}`,
-      category_code: "",
+      profit_percentage: 0,
       category_name: "",
       unit: "Piece",
       status: "ACTIVE",
@@ -293,7 +283,7 @@ export default function Products() {
     const payload = {
       categoryName: categoryForm.category_name,
       unitName: categoryForm.unit,
-      profitPercentage: 0,
+      profitPercentage: Number(categoryForm.profit_percentage) || 0,
       status: categoryForm.status,
     };
 
@@ -457,6 +447,8 @@ export default function Products() {
                   <th className="pb-3 font-medium px-4 py-3">Category ID</th>
                   <th className="pb-3 font-medium px-4 py-3">Weight</th>
                   <th className="pb-3 font-medium px-4 py-3">Labor Cost</th>
+                  <th className="pb-3 font-medium px-4 py-3">Purchase Price</th>
+                  <th className="pb-3 font-medium px-4 py-3">Selling Price</th>
                   <th className="pb-3 font-medium px-4 py-3">Stock</th>
                   <th className="pb-3 font-medium px-4 py-3">Status</th>
                   <th className="pb-3 font-medium px-4 py-3 text-right">
@@ -488,6 +480,16 @@ export default function Products() {
                       </td>
                       <td className="py-3 px-4 font-medium">
                         {formatCurrency(product.labor_cost)}
+                      </td>
+                      <td className="py-3 px-4 font-medium">
+                        {formatCurrency(product.purchase_price)}
+                      </td>
+                      <td className="py-3 px-4 font-bold text-primary">
+                        {formatCurrency(
+                          product.purchase_price +
+                          product.purchase_price * (product.category_profit_percentage / 100) +
+                          product.labor_cost
+                        )}
                       </td>
                       <td className="py-3 px-4">
                         <span
@@ -544,7 +546,7 @@ export default function Products() {
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                   <th className="pb-3 font-medium px-4 py-3">Category ID</th>
-                  <th className="pb-3 font-medium px-4 py-3">Category Code</th>
+                  <th className="pb-3 font-medium px-4 py-3">Profit Percentage (%)</th>
                   <th className="pb-3 font-medium px-4 py-3">Category Name</th>
                   <th className="pb-3 font-medium px-4 py-3">Default Unit</th>
                   <th className="pb-3 font-medium px-4 py-3">Status</th>
@@ -564,7 +566,7 @@ export default function Products() {
                         {cat.category_id}
                       </td>
                       <td className="py-3 px-4 font-mono text-xs text-primary font-bold bg-primary-container/20 px-2 py-1 rounded inline-block mt-2 ml-4">
-                        {cat.category_code}
+                        {cat.profit_percentage}%
                       </td>
                       <td className="py-3 px-4 font-medium text-on-surface">
                         {cat.category_name}
@@ -707,13 +709,13 @@ export default function Products() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Gemstone Cost (VND)
+                    Purchase Price (VND)
                   </label>
                   <input
                     type="number"
-                    name="gemstone_cost"
+                    name="purchase_price"
                     min="0"
-                    value={productForm.gemstone_cost}
+                    value={productForm.purchase_price}
                     onChange={handleProductInputChange}
                     className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
                   />
@@ -870,23 +872,17 @@ export default function Products() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Category Code <span className="text-error">*</span>
+                    Profit Percentage (%) <span className="text-error">*</span>
                   </label>
                   <input
-                    type="text"
-                    name="category_code"
-                    disabled
-                    value={(() => {
-                      const name = categoryForm.category_name.toLowerCase();
-                      if (!name) return "";
-                      if (name.includes("nhẫn")) return "RIN";
-                      if (name.includes("vòng cổ") || name.includes("dây chuyền")) return "NEC";
-                      if (name.includes("khuyên")) return "EAR";
-                      if (name.includes("lắc")) return "BRA";
-                      if (name.includes("đồng hồ")) return "WAT";
-                      return "OTH";
-                    })()}
-                    className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed font-medium"
+                    type="number"
+                    name="profit_percentage"
+                    min="0"
+                    step="0.01"
+                    required
+                    value={categoryForm.profit_percentage}
+                    onChange={handleCategoryInputChange}
+                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
                   />
                 </div>
                 <div className="md:col-span-2">

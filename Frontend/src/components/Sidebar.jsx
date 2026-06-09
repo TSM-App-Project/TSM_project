@@ -21,14 +21,14 @@ export default function Sidebar() {
     const currentUserRole = getUserRole();
 
     const mainMenuItems = [
-        { path: '/dashboard', icon: 'dashboard', label: 'Dashboard', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] },
-        { path: '/master', icon: 'manage_accounts', label: 'Master', roles: ['ADMIN', 'QUAN_LY'] },
+        { path: '/dashboard', icon: 'dashboard', label: 'Dashboard', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/master', icon: 'manage_accounts', label: 'Master', roles: ['ADMIN'] },
         { path: '/products', icon: 'diamond', label: 'Products', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/trading', icon: 'receipt_long', label: 'Sell / Buy', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/services', icon: 'handyman', label: 'Services', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/customers', icon: 'group', label: 'Customers', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/suppliers', icon: 'local_shipping', label: 'Suppliers', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] },
-        { path: '/inventory', icon: 'inventory_2', label: 'Inventory', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN', 'KE_TOAN'] }
+        { path: '/trading', icon: 'receipt_long', label: 'Sell / Buy', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
+        { path: '/services', icon: 'handyman', label: 'Services', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
+        { path: '/customers', icon: 'group', label: 'Customers', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/suppliers', icon: 'local_shipping', label: 'Suppliers', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/inventory', icon: 'inventory_2', label: 'Inventory', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] }
     ];
 
     const handleLogout = (e) => {
