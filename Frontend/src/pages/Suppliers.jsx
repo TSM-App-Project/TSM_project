@@ -186,8 +186,8 @@ export default function Suppliers() {
 
   return (
     <MainLayout
-      title="Suppliers"
-      subtitle="Jewelry & Gemstone Supplier Management"
+      title="Nhà Cung Cấp"
+      subtitle="Quản lý nhà cung cấp Trang sức & Đá quý"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -259,7 +259,7 @@ export default function Suppliers() {
             className="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-fixed-dim transition-colors whitespace-nowrap"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>{" "}
-            Add Supplier
+            Thêm Nhà Cung Cấp
           </button>
         </div>
 
@@ -269,25 +269,25 @@ export default function Suppliers() {
             <thead>
               <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Supplier ID
+                  ID NCC
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Name
+                  Tên NCC
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Contact Name
+                  Người Liên Hệ
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Phone Number
+                  Số Điện Thoại
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Total debt
+                  Tổng Công Nợ
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Status
+                  Trạng Thái
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">
-                  Actions
+                  Thao Tác
                 </th>
               </tr>
             </thead>

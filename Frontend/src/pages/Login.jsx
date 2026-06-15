@@ -27,10 +27,12 @@ export default function Login() {
             if (token) {
                 if (rememberMe) {
                     localStorage.setItem("token", token);
+                    sessionStorage.removeItem("token");
                     localStorage.setItem("savedId", id);
                     localStorage.setItem("savedPassword", password);
                 } else {
                     sessionStorage.setItem("token", token);
+                    localStorage.removeItem("token");
                     localStorage.removeItem("savedId");
                     localStorage.removeItem("savedPassword");
                 }
@@ -72,7 +74,7 @@ export default function Login() {
                         <div className="relative">
                             <input
                                 type={showPassword ? "text" : "password"}
-                                placeholder="Password"
+                                placeholder="Mật Khẩu"
                                 value = {password}
                                 onChange={(e) =>{
                                     setPassword(e.target.value)
@@ -113,7 +115,7 @@ export default function Login() {
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span className="font-medium text-gray-700">Remember me</span>
+                            <span className="font-medium text-gray-700">Ghi nhớ đăng nhập</span>
                         </label>
                     </div>
 

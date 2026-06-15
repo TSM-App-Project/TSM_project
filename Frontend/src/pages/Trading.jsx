@@ -371,8 +371,8 @@ export default function Trading() {
 
   return (
     <MainLayout
-      title="Trading & Transactions"
-      subtitle="Manage Sales Invoices and Purchase Receipts"
+      title="Giao Dịch & Mua Bán"
+      subtitle="Quản lý hóa đơn bán hàng và phiếu nhập kho"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -384,7 +384,7 @@ export default function Trading() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Sales Revenue
+              Tổng Doanh Thu Bán Hàng
             </span>
             <span className="font-headline-md text-headline-md font-bold text-primary">
               {formatCurrency(totalSalesRevenue)}
@@ -397,7 +397,7 @@ export default function Trading() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Purchase Costs
+              Tổng Chi Phí Nhập Hàng
             </span>
             <span className="font-headline-md text-headline-md font-bold text-error">
               {formatCurrency(totalPurchaseCost)}
@@ -419,7 +419,7 @@ export default function Trading() {
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === "sales" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
             >
-              Sales Invoices
+              Hóa Đơn Bán Hàng
             </button>
             <button
               onClick={() => {
@@ -428,7 +428,7 @@ export default function Trading() {
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === "purchases" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
             >
-              Purchase Receipts
+              Phiếu Nhập Hàng
             </button>
           </div>
 
@@ -439,7 +439,7 @@ export default function Trading() {
               </span>
               <input
                 type="text"
-                placeholder={`Search ${activeTab === "sales" ? "invoices..." : "receipts..."}`}
+                placeholder={`Tìm kiếm ${activeTab === "sales" ? "hóa đơn..." : "phiếu nhập..."}`}
                 className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 text-on-surface text-sm rounded-lg focus:ring-primary focus:border-primary outline-none transition-all"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -454,7 +454,7 @@ export default function Trading() {
               className="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-fixed-dim transition-colors whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>{" "}
-              {activeTab === "sales" ? "Add Invoice" : "Add Receipt"}
+              {activeTab === "sales" ? "Thêm Hóa Đơn" : "Thêm Phiếu Nhập"}
             </button>
           </div>
         </div>
@@ -465,19 +465,19 @@ export default function Trading() {
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Invoice ID
+                    ID Hóa Đơn
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Date
+                    Ngày Lập
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Customer
+                    Khách Hàng
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Total Amount
+                    Tổng Tiền
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -503,7 +503,7 @@ export default function Trading() {
                       <button
                         onClick={() => handleEditSales(sale)}
                         className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
-                        title="Edit Invoice"
+                        title="Sửa Hóa Đơn"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           edit
@@ -512,7 +512,7 @@ export default function Trading() {
                       <button
                         onClick={() => setDeleteConfirmRecord({ ...sale, type: "sales" })}
                         className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
-                        title="Delete Invoice"
+                        title="Xóa Hóa Đơn"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           delete
@@ -528,19 +528,19 @@ export default function Trading() {
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Receipt ID
+                    ID Phiếu Nhập
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Date
+                    Ngày Lập
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Supplier
+                    Nhà Cung Cấp
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                    Total Amount
+                    Tổng Tiền
                   </th>
                   <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -566,7 +566,7 @@ export default function Trading() {
                       <button
                         onClick={() => handleEditPurchase(purchase)}
                         className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
-                        title="Edit Receipt"
+                        title="Sửa Phiếu Nhập"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           edit
@@ -575,7 +575,7 @@ export default function Trading() {
                       <button
                         onClick={() => setDeleteConfirmRecord({ ...purchase, type: "purchases" })}
                         className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
-                        title="Delete Receipt"
+                        title="Xóa Phiếu Nhập"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           delete

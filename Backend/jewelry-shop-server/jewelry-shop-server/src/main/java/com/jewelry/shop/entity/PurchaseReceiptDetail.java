@@ -20,11 +20,11 @@ public class PurchaseReceiptDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer detailId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "purchase_id", nullable = false)
     private PurchaseReceipt purchaseReceipt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 

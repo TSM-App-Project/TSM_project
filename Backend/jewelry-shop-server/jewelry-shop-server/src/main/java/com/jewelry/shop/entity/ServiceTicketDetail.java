@@ -21,11 +21,11 @@ public class ServiceTicketDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer detailId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "ticket_id", nullable = false)
     private ServiceTicket serviceTicket;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "service_id", nullable = false)
     private Service service;
 

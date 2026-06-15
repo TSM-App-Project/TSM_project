@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { api } from "../services/apiClient";
 import { formatDate, formatId, toLocalDateTime } from "../services/idMapper";
+import { getUserRole } from "../utils/auth";
 
 export default function Services() {
-  const currentUserRole = "QUAN_LY";
+  const currentUserRole = getUserRole();
 
   const [servicesList, setServicesList] = useState([]);
   const [ticketsList, setTicketsList] = useState([]);
@@ -357,8 +358,8 @@ export default function Services() {
 
   return (
     <MainLayout
-      title="Services Management"
-      subtitle="Manage service tickets and service categories"
+      title="Quản Lý Dịch Vụ"
+      subtitle="Quản lý phiếu dịch vụ và danh mục dịch vụ"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -370,7 +371,7 @@ export default function Services() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Service Types
+              Tổng Loại Dịch Vụ
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
               {stats.totalTypes}
@@ -383,7 +384,7 @@ export default function Services() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Most Used Service
+              Dịch Vụ Dùng Nhiều Nhất
             </span>
             <span className="font-title-lg text-title-lg font-bold text-on-surface">
               {stats.mostUsed}
@@ -396,7 +397,7 @@ export default function Services() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Revenue
+              Tổng Doanh Thu
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
               {formatCurrency(stats.totalRevenue)}
@@ -415,14 +416,14 @@ export default function Services() {
               onClick={() => setActiveTab("tickets")}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === "tickets" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
             >
-              Service Tickets List
+              Danh Sách Phiếu Dịch Vụ
             </button>
             {currentUserRole === "QUAN_LY" && (
               <button
                 onClick={() => setActiveTab("types")}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeTab === "types" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
               >
-                Service Types Management
+                Quản Lý Loại Dịch Vụ
               </button>
             )}
           </div>
@@ -435,8 +436,8 @@ export default function Services() {
                 type="text"
                 placeholder={
                   activeTab === "tickets"
-                    ? "Search by ID, name, status..."
-                    : "Search by ID, name, status..."
+                    ? "Tìm kiếm theo ID, tên, trạng thái..."
+                    : "Tìm kiếm theo ID, tên, trạng thái..."
                 }
                 className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 rounded-lg outline-none focus:border-primary text-sm"
                 value={searchQuery}
@@ -459,7 +460,7 @@ export default function Services() {
                 <span className="material-symbols-outlined text-[18px]">
                   add
                 </span>{" "}
-                Create Ticket
+                Tạo Phiếu Dịch Vụ
               </button>
             ) : (
               <button
@@ -469,7 +470,7 @@ export default function Services() {
                 <span className="material-symbols-outlined text-[18px]">
                   add
                 </span>{" "}
-                Add Service
+                Thêm Loại Dịch Vụ
               </button>
             )}
           </div>
@@ -480,19 +481,19 @@ export default function Services() {
             <table className="w-full text-left border-collapse min-w-[900px]">
               <thead className="sticky top-0 bg-surface-container-lowest z-10 shadow-sm font-bold uppercase text-xs text-on-surface-variant">
                 <tr>
-                  <th className="p-4 bg-surface-container-lowest">Ticket ID</th>
-                  <th className="p-4 bg-surface-container-lowest">Customer</th>
+                  <th className="p-4 bg-surface-container-lowest">ID Phiếu</th>
+                  <th className="p-4 bg-surface-container-lowest">Khách Hàng</th>
                   <th className="p-4 text-center bg-surface-container-lowest">
-                    Date
+                    Ngày Lập
                   </th>
                   <th className="p-4 bg-surface-container-lowest">
-                    Grand Total
+                    Tổng Tiền
                   </th>
                   <th className="p-4 text-center bg-surface-container-lowest">
-                    Status
+                    Trạng Thái
                   </th>
                   <th className="p-4 text-right bg-surface-container-lowest">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -506,7 +507,7 @@ export default function Services() {
                         setIsDetailModalOpen(true);
                       }}
                       className="border-b border-outline-variant/10 hover:bg-surface-bright transition-colors cursor-pointer"
-                      title="Double click to view details"
+                      title="Nhấp đúp để xem chi tiết"
                     >
                       <td className="p-4 font-bold text-primary">
                         {formatId("SRV", t.ticket_id, 4)}
@@ -528,14 +529,14 @@ export default function Services() {
                         <button
                           onClick={(e) => handleEditTicket(e, t)}
                           className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/30 rounded-lg transition-colors"
-                          title="Edit Ticket"
+                          title="Sửa Phiếu"
                         >
                           <span className="material-symbols-outlined text-[20px]">edit</span>
                         </button>
                         <button
                           onClick={(e) => { e.stopPropagation(); setDeleteConfirmTicket(t); }}
                           className="p-1.5 text-on-surface-variant hover:text-error hover:bg-error-container/30 rounded-lg transition-colors"
-                          title="Delete Ticket"
+                          title="Xóa Phiếu"
                         >
                           <span className="material-symbols-outlined text-[20px]">delete</span>
                         </button>
@@ -549,7 +550,7 @@ export default function Services() {
                       colSpan="5"
                       className="p-8 text-center text-on-surface-variant"
                     >
-                      No service tickets found.
+                      Không tìm thấy phiếu dịch vụ nào.
                     </td>
                   </tr>
                 )}
@@ -560,19 +561,19 @@ export default function Services() {
               <thead className="sticky top-0 bg-surface-container-lowest z-10 shadow-sm font-bold uppercase text-xs text-on-surface-variant">
                 <tr>
                   <th className="p-4 bg-surface-container-lowest">
-                    Service ID
+                    ID Dịch Vụ
                   </th>
                   <th className="p-4 bg-surface-container-lowest">
-                    Service Name
+                    Tên Dịch Vụ
                   </th>
                   <th className="p-4 bg-surface-container-lowest">
-                    Base Price
+                    Đơn Giá
                   </th>
                   <th className="p-4 text-center bg-surface-container-lowest">
-                    Status
+                    Trạng Thái
                   </th>
                   <th className="p-4 text-right bg-surface-container-lowest">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -634,7 +635,7 @@ export default function Services() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-sm animate-in zoom-in-95 duration-200">
             <div className="p-5 border-b flex justify-between items-center">
               <h3 className="font-bold">
-                {typeModalMode === "add" ? "Add Service" : "Edit Service"}
+                {typeModalMode === "add" ? "Thêm Dịch Vụ" : "Sửa Dịch Vụ"}
               </h3>
               <button
                 onClick={() => setIsTypeModalOpen(false)}
@@ -646,7 +647,7 @@ export default function Services() {
             <form className="p-5 flex flex-col gap-4" onSubmit={handleSaveType}>
               <div>
                 <label className="text-sm font-medium block mb-1">
-                  Service ID
+                  Mã Dịch Vụ
                 </label>
                 <input
                   type="text"
@@ -656,7 +657,7 @@ export default function Services() {
                 />
               </div>
               <div>
-                <label className="text-sm font-medium block mb-1">Status</label>
+                <label className="text-sm font-medium block mb-1">Trạng Thái</label>
                 <select
                   className="w-full p-2.5 bg-surface-bright rounded border border-outline-variant/50 focus:border-primary outline-none"
                   value={typeFormData.status}
@@ -664,13 +665,13 @@ export default function Services() {
                     setTypeFormData({ ...typeFormData, status: e.target.value })
                   }
                 >
-                  <option value="ACTIVE">ACTIVE</option>
-                  <option value="INACTIVE">INACTIVE</option>
+                  <option value="ACTIVE">Hoạt động (ACTIVE)</option>
+                  <option value="INACTIVE">Ngừng hoạt động (INACTIVE)</option>
                 </select>
               </div>
               <div>
                 <label className="text-sm font-medium block mb-1">
-                  Service Name <span className="text-error">*</span>
+                  Tên Dịch Vụ <span className="text-error">*</span>
                 </label>
                 <input
                   type="text"
@@ -688,7 +689,7 @@ export default function Services() {
               </div>
               <div>
                 <label className="text-sm font-medium block mb-1">
-                  Base Price (VND) <span className="text-error">*</span>
+                  Giá Cơ Bản (VND) <span className="text-error">*</span>
                 </label>
                 <input
                   type="text"
@@ -705,15 +706,15 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={() => setIsTypeModalOpen(false)}
-                  className="px-4 py-2 text-sm bg-surface-container-low rounded-lg"
+                  className="px-4 py-2 text-sm bg-surface-container-low rounded-lg hover:bg-surface-container-high transition-colors text-on-surface-variant"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm bg-primary text-on-primary rounded-lg"
+                  className="px-4 py-2 text-sm bg-primary text-on-primary rounded-lg hover:bg-primary-fixed-dim transition-colors"
                 >
-                  Save
+                  Lưu
                 </button>
               </div>
             </form>
@@ -732,7 +733,7 @@ export default function Services() {
                 </span>
               </div>
               <h3 className="text-title-lg font-bold text-on-surface mb-2">
-                Delete Service Type?
+                Xóa Dịch Vụ?
               </h3>
               <p className="text-on-surface-variant text-sm mb-6">
                 Bạn có chắc chắn muốn xóa dịch vụ{" "}
@@ -835,7 +836,7 @@ export default function Services() {
                   <span className="material-symbols-outlined text-[16px]">
                     add
                   </span>{" "}
-                  Add Item
+                  Thêm Dịch Vụ
                 </button>
               </div>
 
@@ -994,7 +995,7 @@ export default function Services() {
                           colSpan="9"
                           className="p-8 text-center text-on-surface-variant italic"
                         >
-                          Chưa có dịch vụ nào được thêm. Bấm "Add Item" để bắt
+                          Chưa có dịch vụ nào được thêm. Bấm "Thêm Dịch Vụ" để bắt
                           đầu.
                         </td>
                       </tr>

@@ -129,7 +129,7 @@ export default function Master() {
 
     if (currentUserRole !== 'QUAN_LY' && currentUserRole !== 'ADMIN') {
         return (
-            <MainLayout title="Access Denied" subtitle="Unauthorized Access">
+            <MainLayout title="Từ chối truy cập" subtitle="Truy cập không được phép">
                 <div className="flex flex-col items-center justify-center h-[60vh]">
                     <span className="material-symbols-outlined text-6xl text-error mb-4">gpp_maybe</span>
                     <h2 className="text-headline-md font-bold text-on-surface">Bạn không có quyền truy cập</h2>
@@ -139,12 +139,12 @@ export default function Master() {
     }
 
     return (
-        <MainLayout title="Master Data" subtitle="Manage system accounts and monitor security logs">
+        <MainLayout title="Dữ Liệu Hệ Thống" subtitle="Quản lý tài khoản hệ thống và theo dõi nhật ký bảo mật">
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
-                        <span className="text-sm text-on-surface-variant block mb-1">Total Accounts</span>
+                        <span className="text-sm text-on-surface-variant block mb-1">Tổng Số Tài Khoản</span>
                         <span className="font-headline-md text-headline-md font-bold text-on-surface">
                             {userList.length}
                         </span>
@@ -155,7 +155,7 @@ export default function Master() {
                 </div>
                 <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
                     <div>
-                        <span className="text-sm text-on-surface-variant block mb-1">Total Log Events</span>
+                        <span className="text-sm text-on-surface-variant block mb-1">Tổng Số Sự Kiện Nhật Ký</span>
                         <span className="font-headline-md text-headline-md font-bold text-on-surface">
                             {logList.length}
                         </span>
@@ -174,13 +174,13 @@ export default function Master() {
                             onClick={() => setActiveTab('accounts')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'accounts' ? 'bg-surface-bright text-on-surface shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}`}
                         >
-                            Account Management
+                            Quản Lý Tài Khoản
                         </button>
                         <button
                             onClick={() => setActiveTab('logs')}
                             className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === 'logs' ? 'bg-surface-bright text-on-surface shadow-sm' : 'text-on-surface-variant hover:text-on-surface'}`}
                         >
-                            System Audit Logs
+                            Nhật Ký Hệ Thống
                         </button>
                     </div>
 
@@ -190,7 +190,7 @@ export default function Master() {
                             {/* Placeholder thay đổi theo Tab hiện tại */}
                             <input
                                 type="text"
-                                placeholder={activeTab === 'accounts' ? "Search users..." : "Search records..."}
+                                placeholder={activeTab === 'accounts' ? "Tìm kiếm người dùng..." : "Tìm kiếm bản ghi..."}
                                 className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 text-on-surface text-sm rounded-lg focus:ring-primary focus:border-primary outline-none transition-all"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -201,7 +201,7 @@ export default function Master() {
                                 onClick={handleOpenAddModal}
                                 className="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-fixed-dim transition-colors whitespace-nowrap"
                             >
-                                <span className="material-symbols-outlined text-[18px]">add</span> Add User
+                                <span className="material-symbols-outlined text-[18px]">add</span> Thêm Người Dùng
                             </button>
                         )}
                     </div>
@@ -212,14 +212,13 @@ export default function Master() {
                     {activeTab === 'accounts' ? (
                         <table className="w-full text-left border-collapse min-w-[800px] relative">
                             <thead>
-                            {/* Thêm sticky top-0 và màu nền để thanh tiêu đề trượt bám phía trên */}
                             <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">User ID</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Username</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Full Name</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Role</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Status</th>
-                                <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">Actions</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">ID Người Dùng</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Tên Đăng Nhập</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Họ và Tên</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Vai Trò</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Trạng Thái</th>
+                                <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">Thao Tác</th>
                             </tr>
                             </thead>
                             <tbody className="text-sm">
@@ -259,11 +258,11 @@ export default function Master() {
                         <table className="w-full text-left border-collapse min-w-[900px] relative">
                             <thead>
                             <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Time</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">User</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Action</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Affected Table</th>
-                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Description / Changes</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Thời Gian</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Người Dùng</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Thao Tác</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Bảng Bị Ảnh Hưởng</th>
+                                <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">Mô Tả / Thay Đổi</th>
                             </tr>
                             </thead>
                             <tbody className="text-sm">
@@ -292,7 +291,7 @@ export default function Master() {
                     <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                         <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
                             <h3 className="text-title-lg font-semibold text-on-surface">
-                                {modalMode === 'add' ? 'Add New User' : 'Edit User Account'}
+                                {modalMode === 'add' ? 'Thêm Người Dùng Mới' : 'Chỉnh Sửa Tài Khoản'}
                             </h3>
                             <button onClick={handleCloseModal} className="text-on-surface-variant hover:text-error transition-colors">
                                 <span className="material-symbols-outlined">close</span>
@@ -301,15 +300,15 @@ export default function Master() {
 
                         <form onSubmit={handleSave} className="p-5 flex flex-col gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-on-surface mb-1">User ID</label>
+                                <label className="block text-sm font-medium text-on-surface mb-1">ID Người Dùng</label>
                                 <input
                                     type="text" disabled
-                                    value={modalMode === 'add' ? 'Auto-generated' : `USR-${formData.userId.toString().padStart(3, '0')}`}
+                                    value={modalMode === 'add' ? 'Tự động tạo' : `USR-${formData.userId.toString().padStart(3, '0')}`}
                                     className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-on-surface mb-1">Username <span className="text-error">*</span></label>
+                                <label className="block text-sm font-medium text-on-surface mb-1">Tên Đăng Nhập <span className="text-error">*</span></label>
                                 <input
                                     type="text" name="username" required value={formData.username} onChange={handleInputChange}
                                     placeholder="e.g. jdoe123"
@@ -317,7 +316,7 @@ export default function Master() {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-on-surface mb-1">Full Name <span className="text-error">*</span></label>
+                                <label className="block text-sm font-medium text-on-surface mb-1">Họ và Tên <span className="text-error">*</span></label>
                                 <input
                                     type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
                                     placeholder="John Doe"
@@ -326,17 +325,17 @@ export default function Master() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-on-surface mb-1">
-                                    Password {modalMode === 'add' && <span className="text-error">*</span>}
+                                    Mật Khẩu {modalMode === 'add' && <span className="text-error">*</span>}
                                 </label>
                                 <input
                                     type="password" name="password" required={modalMode === 'add'} value={formData.password} onChange={handleInputChange}
-                                    placeholder={modalMode === 'edit' ? "Leave blank to keep current password" : "Enter secure password"}
+                                    placeholder={modalMode === 'edit' ? "Để trống nếu không muốn đổi mật khẩu" : "Nhập mật khẩu an toàn"}
                                     className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
                                 />
                             </div>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-on-surface mb-1">Role</label>
+                                    <label className="block text-sm font-medium text-on-surface mb-1">Vai Trò</label>
                                     <select name="role" value={formData.role} onChange={handleInputChange} className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none">
                                         <option value="ADMIN">Admin</option>
                                         <option value="QUAN_LY">Quản lý</option>
@@ -345,7 +344,7 @@ export default function Master() {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-on-surface mb-1">Status</label>
+                                    <label className="block text-sm font-medium text-on-surface mb-1">Trạng Thái</label>
                                     <select name="status" value={formData.status} onChange={handleInputChange} className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none">
                                         <option value="ACTIVE">ACTIVE</option>
                                         <option value="INACTIVE">INACTIVE</option>
@@ -353,9 +352,9 @@ export default function Master() {
                                 </div>
                             </div>
                             <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-outline-variant/20">
-                                <button type="button" onClick={handleCloseModal} className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors">Cancel</button>
+                                <button type="button" onClick={handleCloseModal} className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors">Hủy</button>
                                 <button type="submit" className="px-4 py-2 text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim rounded-lg transition-colors shadow-sm">
-                                    {modalMode === 'add' ? 'Create User' : 'Save Changes'}
+                                    {modalMode === 'add' ? 'Tạo Người Dùng' : 'Lưu Thay Đổi'}
                                 </button>
                             </div>
                         </form>
@@ -371,11 +370,11 @@ export default function Master() {
                             <div className="w-16 h-16 bg-error-container/30 text-error rounded-full flex items-center justify-center mx-auto mb-4">
                                 <span className="material-symbols-outlined text-3xl">warning</span>
                             </div>
-                            <h3 className="text-title-lg font-bold text-on-surface mb-2">Delete User?</h3>
+                            <h3 className="text-title-lg font-bold text-on-surface mb-2">Xóa Người Dùng?</h3>
                             <p className="text-on-surface-variant text-sm mb-6">
-                                Are you sure you want to delete the account
+                                Bạn có chắc chắn muốn xóa tài khoản
                                 <span className="font-bold text-on-surface"> {deleteConfirmUser.username} </span>?
-                                This action cannot be undone.
+                                Hành động này không thể hoàn tác.
                             </p>
                             <div className="flex justify-center gap-3">
                                 
@@ -383,7 +382,7 @@ export default function Master() {
                                     onClick={confirmDelete}
                                     className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
                                 >
-                                    Yes, Delete
+                                    Xóa
                                 </button>
                             </div>
                         </div>

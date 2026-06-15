@@ -2,8 +2,10 @@ package com.jewelry.shop.controller;
 
 import com.jewelry.shop.dto.ProductRequest;
 import com.jewelry.shop.entity.Product;
+import com.jewelry.shop.repository.ProductRepository;
 import com.jewelry.shop.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,21 +24,23 @@ import java.util.List;
 @CrossOrigin("*")
 public class ProductController {
 
+    private final ProductRepository productRepository;
     private final ProductService productService;
 
-    // Inject qua Constructor (Chuẩn Spring Boot hiện đại)
-    public ProductController(ProductService productService) {
+    public ProductController(ProductRepository productRepository, ProductService productService) {
+        this.productRepository = productRepository;
         this.productService = productService;
     }
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return productService.getAll();
+        return productRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Integer id) {
-        return productService.getById(id);
+        return productRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
     }
 
     @PostMapping

@@ -21,14 +21,14 @@ export default function Sidebar() {
     const currentUserRole = getUserRole();
 
     const mainMenuItems = [
-        { path: '/dashboard', icon: 'dashboard', label: 'Dashboard', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
-        { path: '/master', icon: 'manage_accounts', label: 'Master', roles: ['ADMIN'] },
-        { path: '/products', icon: 'diamond', label: 'Products', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
-        { path: '/trading', icon: 'receipt_long', label: 'Sell / Buy', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
-        { path: '/services', icon: 'handyman', label: 'Services', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
-        { path: '/customers', icon: 'group', label: 'Customers', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
-        { path: '/suppliers', icon: 'local_shipping', label: 'Suppliers', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
-        { path: '/inventory', icon: 'inventory_2', label: 'Inventory', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] }
+        { path: '/dashboard', icon: 'dashboard', label: 'Tổng Quan', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/master', icon: 'manage_accounts', label: 'Quản Trị', roles: ['ADMIN'] },
+        { path: '/products', icon: 'diamond', label: 'Sản Phẩm', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] },
+        { path: '/trading', icon: 'receipt_long', label: 'Giao Dịch', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
+        { path: '/services', icon: 'handyman', label: 'Dịch Vụ', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN', 'NHAN_VIEN'] },
+        { path: '/customers', icon: 'group', label: 'Khách Hàng', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/suppliers', icon: 'local_shipping', label: 'Nhà Cung Cấp', roles: ['ADMIN', 'QUAN_LY', 'KE_TOAN'] },
+        { path: '/inventory', icon: 'inventory_2', label: 'Kho Hàng', roles: ['ADMIN', 'QUAN_LY', 'NHAN_VIEN'] }
     ];
 
     const handleLogout = (e) => {
@@ -39,7 +39,7 @@ export default function Sidebar() {
     };
 
     const otherMenuItems = [
-        { path: '/login', icon: 'logout', label: 'Logout', onClick: handleLogout }
+        { path: '/login', icon: 'logout', label: 'Đăng Xuất', onClick: handleLogout }
     ];
 
     const renderMenuItem = (item) => {
