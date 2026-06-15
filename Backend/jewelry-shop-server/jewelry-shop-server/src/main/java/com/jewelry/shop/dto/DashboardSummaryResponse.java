@@ -12,4 +12,10 @@ public class DashboardSummaryResponse {
     private long totalOrders;
     private BigDecimal totalSales;
     private BigDecimal totalPurchases;
+
+    // Growth percentages (current month vs previous month)
+    private double salesGrowth;
+    private double ordersGrowth;
+    private double customersGrowth;
+    private double productsGrowth;
 }

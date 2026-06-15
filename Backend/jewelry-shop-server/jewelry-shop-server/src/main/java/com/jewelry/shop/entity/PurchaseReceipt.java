@@ -21,11 +21,11 @@ public class PurchaseReceipt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer purchaseId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

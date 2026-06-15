@@ -1,6 +1,7 @@
 package com.jewelry.shop.controller;
 
 import com.jewelry.shop.dto.CategorySalesDto;
+import com.jewelry.shop.dto.DailyRevenueDto;
 import com.jewelry.shop.dto.DashboardSummaryResponse;
 import com.jewelry.shop.dto.RecentOrderDto;
 import com.jewelry.shop.dto.TopProductDto;
@@ -16,9 +17,14 @@ import com.jewelry.shop.repository.ServiceRepository;
 import com.jewelry.shop.repository.SupplierRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -51,15 +57,47 @@ public class DashboardController {
 
     @GetMapping("/summary")
     public DashboardSummaryResponse getSummary() {
-        BigDecimal totalSales = invoiceRepository.findAll().stream()
+        List<Invoice> allInvoices = invoiceRepository.findAll();
+        List<PurchaseReceipt> allReceipts = purchaseReceiptRepository.findAll();
+
+        BigDecimal totalSales = allInvoices.stream()
                 .map(Invoice::getTotalAmount)
-                .filter(amount -> amount != null)
+                .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        BigDecimal totalPurchases = purchaseReceiptRepository.findAll().stream()
+        BigDecimal totalPurchases = allReceipts.stream()
                 .map(PurchaseReceipt::getTotalAmount)
-                .filter(amount -> amount != null)
+                .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        // Calculate growth: current month vs previous month
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfCurrentMonth = now.withDayOfMonth(1).withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime startOfPreviousMonth = startOfCurrentMonth.minusMonths(1);
+
+        BigDecimal currentMonthSales = allInvoices.stream()
+                .filter(i -> i.getCreatedAt() != null && !i.getCreatedAt().isBefore(startOfCurrentMonth))
+                .map(Invoice::getTotalAmount)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal previousMonthSales = allInvoices.stream()
+                .filter(i -> i.getCreatedAt() != null
+                        && !i.getCreatedAt().isBefore(startOfPreviousMonth)
+                        && i.getCreatedAt().isBefore(startOfCurrentMonth))
+                .map(Invoice::getTotalAmount)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        long currentMonthOrders = allInvoices.stream()
+                .filter(i -> i.getCreatedAt() != null && !i.getCreatedAt().isBefore(startOfCurrentMonth))
+                .count();
+
+        long previousMonthOrders = allInvoices.stream()
+                .filter(i -> i.getCreatedAt() != null
+                        && !i.getCreatedAt().isBefore(startOfPreviousMonth)
+                        && i.getCreatedAt().isBefore(startOfCurrentMonth))
+                .count();
 
         DashboardSummaryResponse response = new DashboardSummaryResponse();
         response.setTotalProducts(productRepository.count());
@@ -69,7 +107,102 @@ public class DashboardController {
         response.setTotalOrders(invoiceRepository.count());
         response.setTotalSales(totalSales);
         response.setTotalPurchases(totalPurchases);
+
+        // Growth percentages
+        response.setSalesGrowth(calculateGrowth(currentMonthSales, previousMonthSales));
+        response.setOrdersGrowth(calculateGrowthLong(currentMonthOrders, previousMonthOrders));
+        response.setCustomersGrowth(0); // Customers don't have createdAt, so set to 0
+        response.setProductsGrowth(0);  // Products don't track monthly change
+
         return response;
+    }
+
+    private double calculateGrowth(BigDecimal current, BigDecimal previous) {
+        if (previous == null || previous.compareTo(BigDecimal.ZERO) == 0) {
+            return current != null && current.compareTo(BigDecimal.ZERO) > 0 ? 100.0 : 0.0;
+        }
+        return current.subtract(previous)
+                .multiply(BigDecimal.valueOf(100))
+                .divide(previous, 1, RoundingMode.HALF_UP)
+                .doubleValue();
+    }
+
+    private double calculateGrowthLong(long current, long previous) {
+        if (previous == 0) {
+            return current > 0 ? 100.0 : 0.0;
+        }
+        return Math.round((double) (current - previous) / previous * 1000.0) / 10.0;
+    }
+
+    /**
+     * Returns daily revenue data for the chart.
+     * @param days Number of past days to include (default 30)
+     */
+    @GetMapping("/daily-revenue")
+    public List<DailyRevenueDto> getDailyRevenue(@RequestParam(defaultValue = "0") int days) {
+        List<Invoice> allInvoices = invoiceRepository.findAll();
+        List<PurchaseReceipt> allReceipts = purchaseReceiptRepository.findAll();
+
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate;
+
+        if (days <= 0) {
+            // All time: find the earliest date from invoices and receipts
+            LocalDate earliestInvoice = allInvoices.stream()
+                    .filter(i -> i.getCreatedAt() != null)
+                    .map(i -> i.getCreatedAt().toLocalDate())
+                    .min(LocalDate::compareTo)
+                    .orElse(endDate);
+            LocalDate earliestReceipt = allReceipts.stream()
+                    .filter(r -> r.getPurchaseDate() != null)
+                    .map(r -> r.getPurchaseDate().toLocalDate())
+                    .min(LocalDate::compareTo)
+                    .orElse(endDate);
+            startDate = earliestInvoice.isBefore(earliestReceipt) ? earliestInvoice : earliestReceipt;
+        } else {
+            startDate = endDate.minusDays(days - 1);
+        }
+
+        // Group invoices by date
+        Map<LocalDate, BigDecimal> revenueByDate = allInvoices.stream()
+                .filter(i -> i.getCreatedAt() != null)
+                .filter(i -> {
+                    LocalDate d = i.getCreatedAt().toLocalDate();
+                    return !d.isBefore(startDate) && !d.isAfter(endDate);
+                })
+                .collect(Collectors.groupingBy(
+                        i -> i.getCreatedAt().toLocalDate(),
+                        Collectors.reducing(BigDecimal.ZERO,
+                                i -> i.getTotalAmount() != null ? i.getTotalAmount() : BigDecimal.ZERO,
+                                BigDecimal::add)
+                ));
+
+        // Group purchases by date
+        Map<LocalDate, BigDecimal> purchasesByDate = allReceipts.stream()
+                .filter(r -> r.getPurchaseDate() != null)
+                .filter(r -> {
+                    LocalDate d = r.getPurchaseDate().toLocalDate();
+                    return !d.isBefore(startDate) && !d.isAfter(endDate);
+                })
+                .collect(Collectors.groupingBy(
+                        r -> r.getPurchaseDate().toLocalDate(),
+                        Collectors.reducing(BigDecimal.ZERO,
+                                r -> r.getTotalAmount() != null ? r.getTotalAmount() : BigDecimal.ZERO,
+                                BigDecimal::add)
+                ));
+
+        // Build result list for all days in range (fill gaps with 0)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM");
+        List<DailyRevenueDto> result = new ArrayList<>();
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
+            result.add(new DailyRevenueDto(
+                    date.format(formatter),
+                    revenueByDate.getOrDefault(date, BigDecimal.ZERO),
+                    purchasesByDate.getOrDefault(date, BigDecimal.ZERO)
+            ));
+        }
+
+        return result;
     }
 
     @GetMapping("/recent-invoices")

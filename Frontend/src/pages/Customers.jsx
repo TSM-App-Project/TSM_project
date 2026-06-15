@@ -2,10 +2,18 @@ import React, { useState, useEffect, useMemo } from "react";
 import MainLayout from "../layouts/MainLayout";
 import { api } from "../services/apiClient";
 import { formatDate } from "../services/idMapper";
-import { TIER_CONFIG } from "../mocks/customers.mock";
+
+import { getUserRole } from "../utils/auth";
+
+export const TIER_CONFIG = {
+    standard: { label: 'Standard', color: 'bg-blue-100 text-blue-700', icon: 'person' },
+    silver:   { label: 'Silver',   color: 'bg-slate-200 text-slate-700', icon: 'workspace_premium' },
+    gold:     { label: 'Gold',     color: 'bg-yellow-100 text-yellow-700', icon: 'star' },
+    platinum: { label: 'Platinum', color: 'bg-secondary-fixed/50 text-secondary', icon: 'diamond' },
+};
 
 export default function Customers() {
-  const currentUserRole = "QUAN_LY";
+  const currentUserRole = getUserRole();
 
   const [customersList, setCustomersList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -139,10 +147,10 @@ export default function Customers() {
     const maxIdNum =
       customersList.length > 0
         ? Math.max(
-            ...customersList.map(
-              (c) => parseInt(c.id.replace("cus_", "")) || 0,
-            ),
-          )
+          ...customersList.map(
+            (c) => parseInt(c.id.replace("cus_", "")) || 0,
+          ),
+        )
         : 0;
     const nextId = `cus_${(maxIdNum + 1).toString().padStart(3, "0")}`;
 
@@ -424,7 +432,7 @@ export default function Customers() {
                               edit_square
                             </span>
                           </button>
-                          
+
                         </>
                       ) : (
                         <span className="text-xs text-outline italic">
@@ -696,7 +704,7 @@ export default function Customers() {
               Dữ liệu không thể hoàn tác.
             </p>
             <div className="flex justify-center gap-3">
-              
+
               <button
                 onClick={confirmDelete}
                 className="px-5 py-2.5 text-sm font-bold bg-error text-white rounded-lg shadow-sm"

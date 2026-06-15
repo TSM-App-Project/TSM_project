@@ -48,3 +48,30 @@ INSERT INTO inventory_report_details (report_id, product_id, opening_stock, in_q
 INSERT INTO revenue_reports (report_month, report_year, total_revenue, created_at) VALUES (5, 2026, 57745000.0, '2026-06-01 00:00:00');
 INSERT INTO revenue_report_details (report_id, category_id, revenue_amount, percentage) VALUES (1, 1, 18445000.0, 31.94);
 INSERT INTO revenue_report_details (report_id, category_id, revenue_amount, percentage) VALUES (1, 2, 39300000.0, 68.06);
+
+-- Thêm Customer từ mock data
+INSERT INTO customers (phone_number, full_name, dob, total_points, created_at, version) VALUES ('0977567444', 'Phạm Thu Hà', '1988-11-30', 5190, '2026-05-01 10:00:00', 0);
+INSERT INTO customers (phone_number, full_name, dob, total_points, created_at, version) VALUES ('0345678555', 'Hoàng Văn Nam', '1995-08-01', 380, '2026-05-01 10:00:00', 0);
+INSERT INTO customers (phone_number, full_name, dob, total_points, created_at, version) VALUES ('0862789666', 'Vũ Thị Lan', '1993-04-11', 810, '2026-05-01 10:00:00', 0);
+INSERT INTO customers (phone_number, full_name, dob, total_points, created_at, version) VALUES ('0793890777', 'Đặng Minh Tú', '1991-07-19', 2950, '2026-05-01 10:00:00', 0);
+INSERT INTO customers (phone_number, full_name, dob, total_points, created_at, version) VALUES ('0919901888', 'Bùi Thị Ngọc', '1998-12-25', 215, '2026-05-01 10:00:00', 0);
+
+-- Thêm Categories từ mock data
+INSERT INTO product_categories (category_name, unit_name, profit_percentage) VALUES ('Đồng Hồ', 'Chiếc', 20.0);
+INSERT INTO product_categories (category_name, unit_name, profit_percentage) VALUES ('Bộ Trang Sức', 'Bộ', 12.0);
+
+-- Thêm Products từ mock data
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (2, 'Dây Chuyền Vàng Chữ Tâm', 2.0, 300000, 3600000, 0, 'INACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (3, 'Bông Tai Kim Cương Halo', 1.5, 500000, 18900000, 6, 'ACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (3, 'Bông Tai Ngọc Trai Nước Ngọt', 1.0, 150000, 1200000, 38, 'ACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (4, 'Lắc Tay Vàng Nhật Ký', 3.0, 400000, 6700000, 19, 'ACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (4, 'Vòng Bạc Thủ Công Đà Lạt', 2.5, 200000, 720000, 52, 'ACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (6, 'Đồng Hồ Trang Sức Nữ', 5.0, 1000000, 24500000, 0, 'INACTIVE', 0);
+INSERT INTO products (category_id, product_name, weight, labor_cost, purchase_price, stock_quantity, status, version) VALUES (7, 'Bộ Trang Sức Cô Dâu Kim Cương', 10.0, 2000000, 68000000, 4, 'ACTIVE', 0);
+
+-- Thêm Suppliers từ mock data
+INSERT INTO suppliers (category_id, supplier_name, phone, tax_code, address, status, version) VALUES (1, 'Kim Hoàn Bảo Tín', '02812345678', '0300123456', 'TP HCM', 'ACTIVE', 0);
+INSERT INTO suppliers (category_id, supplier_name, phone, tax_code, address, status, version) VALUES (2, 'Ngọc Trai Phương Nam', '03628765432', '0300654321', 'Đà Nẵng', 'ACTIVE', 0);
+INSERT INTO suppliers (category_id, supplier_name, phone, tax_code, address, status, version) VALUES (1, 'Đá Quý Sài Gòn', '09081112233', '0300987654', 'TP HCM', 'ACTIVE', 0);
+INSERT INTO suppliers (category_id, supplier_name, phone, tax_code, address, status, version) VALUES (2, 'Bạc Mỹ Nghệ Huế', '02347654321', '0300456789', 'Thừa Thiên Huế', 'ACTIVE', 0);
+INSERT INTO suppliers (category_id, supplier_name, phone, tax_code, address, status, version) VALUES (1, 'Đồng Hồ Cao Cấp Việt', '02489990011', '0300765432', 'Hà Nội', 'INACTIVE', 0);

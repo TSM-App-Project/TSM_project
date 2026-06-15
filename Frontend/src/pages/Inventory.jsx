@@ -283,8 +283,8 @@ export default function Inventory() {
           Xuất Báo Cáo
         </button>
       }
-      title="Inventory Reports"
-      subtitle="Manage monthly stock movements and closing balances"
+      title="Báo Cáo Tồn Kho"
+      subtitle="Quản lý biến động kho hàng tháng và số dư cuối kỳ"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -296,7 +296,7 @@ export default function Inventory() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Closing Stock
+              Tổng Tồn Cuối Kỳ
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
               {totalClosingStock}
@@ -309,7 +309,7 @@ export default function Inventory() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Purchased (In)
+              Tổng Nhập Kho
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface text-primary">
               +{totalInQuantity}
@@ -322,7 +322,7 @@ export default function Inventory() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Sold (Out)
+              Tổng Xuất Kho
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface text-error">
               -{totalOutQuantity}
@@ -344,7 +344,7 @@ export default function Inventory() {
             </span>
             <input
               type="text"
-              placeholder="Search by ID, Product Name..."
+              placeholder="Tìm kiếm theo ID, Tên Sản Phẩm..."
               className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 text-on-surface text-sm rounded-lg focus:ring-primary focus:border-primary outline-none transition-all"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -356,7 +356,7 @@ export default function Inventory() {
             className="flex items-center justify-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-fixed-dim transition-colors whitespace-nowrap w-full md:w-auto"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>{" "}
-            Add Report Entry
+            Thêm Phiếu Báo Cáo
           </button>
         </div>
 
@@ -365,28 +365,28 @@ export default function Inventory() {
             <thead>
               <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Period (Rep ID)
+                  Kỳ (ID Báo Cáo)
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Detail ID
+                  ID Chi Tiết
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest">
-                  Product ID
+                  ID Sản Phẩm
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest text-right">
-                  Opening Stock
+                  Tồn Đầu Kỳ
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest text-right">
-                  In (Purchase)
+                  Nhập Kho
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest text-right">
-                  Out (Sales)
+                  Xuất Kho
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 bg-surface-container-lowest text-right">
-                  Closing Stock
+                  Tồn Cuối Kỳ
                 </th>
                 <th className="pb-3 font-medium px-4 py-3 text-right bg-surface-container-lowest">
-                  Actions
+                  Thao Tác
                 </th>
               </tr>
             </thead>
@@ -458,7 +458,7 @@ export default function Inventory() {
                     colSpan="8"
                     className="py-8 text-center text-on-surface-variant"
                   >
-                    No inventory records found matching your search.
+                    Không tìm thấy hồ sơ tồn kho nào.
                   </td>
                 </tr>
               )}
@@ -473,8 +473,8 @@ export default function Inventory() {
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
                 {modalMode === "add"
-                  ? "Add Inventory Record (BM12)"
-                  : "Update Inventory Record"}
+                  ? "Thêm Hồ Sơ Tồn Kho (BM12)"
+                  : "Cập nhật Hồ Sơ"}
               </h3>
               <button
                 onClick={handleCloseModal}
@@ -645,7 +645,7 @@ export default function Inventory() {
                   type="submit"
                   className="px-4 py-2 text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim rounded-lg transition-colors shadow-sm"
                 >
-                  {modalMode === "add" ? "Add Record" : "Save Changes"}
+                  {modalMode === "add" ? "Thêm Bản Ghi" : "Lưu Thay Đổi"}
                 </button>
               </div>
             </form>

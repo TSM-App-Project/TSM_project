@@ -327,8 +327,8 @@ export default function Products() {
 
   return (
     <MainLayout
-      title="Product & Categories"
-      subtitle="Manage your jewelry catalog, classifications, and properties"
+      title="Sản Phẩm & Danh Mục"
+      subtitle="Quản lý danh mục trang sức, phân loại và thuộc tính"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -341,7 +341,7 @@ export default function Products() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Products
+              Tổng Sản Phẩm
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
               {productList.length}
@@ -354,7 +354,7 @@ export default function Products() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Total Categories
+              Tổng Danh Mục
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface">
               {categoryList.filter((c) => c.status === "ACTIVE").length}
@@ -367,7 +367,7 @@ export default function Products() {
         <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex items-center justify-between">
           <div>
             <span className="text-sm text-on-surface-variant block mb-1">
-              Low Stock Products
+              Sắp Hết Hàng
             </span>
             <span className="font-headline-md text-headline-md font-bold text-on-surface text-error">
               {productList.filter((p) => p.stock_quantity <= 5).length}
@@ -391,7 +391,7 @@ export default function Products() {
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === "products" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
             >
-              Products List
+              Danh Sách Sản Phẩm
             </button>
             <button
               onClick={() => {
@@ -400,7 +400,7 @@ export default function Products() {
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${activeTab === "categories" ? "bg-surface-bright text-on-surface shadow-sm" : "text-on-surface-variant hover:text-on-surface"}`}
             >
-              Product Categories
+              Danh Mục Sản Phẩm
             </button>
           </div>
 
@@ -413,8 +413,8 @@ export default function Products() {
                 type="text"
                 placeholder={
                   activeTab === "products"
-                    ? "Search Products..."
-                    : "Search Categories..."
+                    ? "Tìm kiếm Sản phẩm..."
+                    : "Tìm kiếm Danh mục..."
                 }
                 className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 text-on-surface text-sm rounded-lg focus:ring-primary focus:border-primary outline-none transition-all"
                 value={searchQuery}
@@ -430,7 +430,7 @@ export default function Products() {
               className="flex items-center gap-2 bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-fixed-dim transition-colors whitespace-nowrap"
             >
               <span className="material-symbols-outlined text-[18px]">add</span>
-              {activeTab === "products" ? "Add Product" : "Add Category"}
+              {activeTab === "products" ? "Thêm Sản Phẩm" : "Thêm Danh Mục"}
             </button>
           </div>
         </div>
@@ -442,17 +442,17 @@ export default function Products() {
             <table className="w-full text-left border-collapse min-w-[1200px] relative">
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
-                  <th className="pb-3 font-medium px-4 py-3">Product ID</th>
-                  <th className="pb-3 font-medium px-4 py-3">Product Name</th>
-                  <th className="pb-3 font-medium px-4 py-3">Category ID</th>
-                  <th className="pb-3 font-medium px-4 py-3">Weight</th>
-                  <th className="pb-3 font-medium px-4 py-3">Labor Cost</th>
-                  <th className="pb-3 font-medium px-4 py-3">Purchase Price</th>
-                  <th className="pb-3 font-medium px-4 py-3">Selling Price</th>
-                  <th className="pb-3 font-medium px-4 py-3">Stock</th>
-                  <th className="pb-3 font-medium px-4 py-3">Status</th>
+                  <th className="pb-3 font-medium px-4 py-3">ID Sản Phẩm</th>
+                  <th className="pb-3 font-medium px-4 py-3">Tên Sản Phẩm</th>
+                  <th className="pb-3 font-medium px-4 py-3">ID Danh Mục</th>
+                  <th className="pb-3 font-medium px-4 py-3">Trọng Lượng</th>
+                  <th className="pb-3 font-medium px-4 py-3">Tiền Công</th>
+                  <th className="pb-3 font-medium px-4 py-3">Giá Mua</th>
+                  <th className="pb-3 font-medium px-4 py-3">Giá Bán</th>
+                  <th className="pb-3 font-medium px-4 py-3">Tồn Kho</th>
+                  <th className="pb-3 font-medium px-4 py-3">Trạng Thái</th>
                   <th className="pb-3 font-medium px-4 py-3 text-right">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -534,7 +534,7 @@ export default function Products() {
                       colSpan="9"
                       className="py-8 text-center text-on-surface-variant"
                     >
-                      No products found.
+                      Không tìm thấy sản phẩm nào.
                     </td>
                   </tr>
                 )}
@@ -545,13 +545,13 @@ export default function Products() {
             <table className="w-full text-left border-collapse min-w-[800px] relative">
               <thead>
                 <tr className="text-xs text-on-surface-variant border-b border-outline-variant/20 uppercase tracking-wider bg-surface-container-lowest sticky top-0 z-10 shadow-sm">
-                  <th className="pb-3 font-medium px-4 py-3">Category ID</th>
-                  <th className="pb-3 font-medium px-4 py-3">Profit Percentage (%)</th>
-                  <th className="pb-3 font-medium px-4 py-3">Category Name</th>
-                  <th className="pb-3 font-medium px-4 py-3">Default Unit</th>
-                  <th className="pb-3 font-medium px-4 py-3">Status</th>
+                  <th className="pb-3 font-medium px-4 py-3">ID Danh Mục</th>
+                  <th className="pb-3 font-medium px-4 py-3">Phần Trăm Lợi Nhuận (%)</th>
+                  <th className="pb-3 font-medium px-4 py-3">Tên Danh Mục</th>
+                  <th className="pb-3 font-medium px-4 py-3">Đơn Vị Mặc Định</th>
+                  <th className="pb-3 font-medium px-4 py-3">Trạng Thái</th>
                   <th className="pb-3 font-medium px-4 py-3 text-right">
-                    Actions
+                    Thao Tác
                   </th>
                 </tr>
               </thead>
@@ -610,7 +610,7 @@ export default function Products() {
                       colSpan="6"
                       className="py-8 text-center text-on-surface-variant"
                     >
-                      No categories found.
+                      Không tìm thấy danh mục nào.
                     </td>
                   </tr>
                 )}
@@ -626,7 +626,7 @@ export default function Products() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-3xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                {modalMode === "add" ? "Add New Product" : "Update Product"}
+                {modalMode === "add" ? "Thêm Sản Phẩm Mới" : "Cập Nhật Sản Phẩm"}
               </h3>
               <button
                 onClick={() => setIsProductModalOpen(false)}
@@ -647,54 +647,54 @@ export default function Products() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Product ID
+                    Mã Sản Phẩm
                   </label>
                   <input
                     type="text"
+                    name="product_id"
                     disabled
                     value={productForm.product_id}
-                    className="w-full p-2.5 bg-surface-variant/30 text-on-surface-variant border border-outline-variant/30 rounded-lg cursor-not-allowed font-medium"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface-variant font-mono text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Category <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Mã Danh Mục <span className="text-error">*</span>
                   </label>
                   <select
                     name="category_id"
-                    required
                     value={productForm.category_id}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    required
                   >
-                    <option value="" disabled>
-                      Select Category
-                    </option>
-                    {categoryList
-                      .filter((c) => c.status === "ACTIVE")
-                      .map((cat) => (
-                        <option key={cat.category_id} value={cat.category_id}>
-                          {cat.category_name} ({cat.category_code})
-                        </option>
-                      ))}
+                    <option value="">Chọn danh mục</option>
+                    {categoryList.map((cat) => (
+                      <option key={cat.category_id} value={cat.category_id}>
+                        {cat.category_id} - {cat.category_name}
+                      </option>
+                    ))}
                   </select>
                 </div>
-                <div className="md:col-span-3">
-                  <label className="block text-sm font-medium mb-1">
-                    Product Name <span className="text-error">*</span>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Tên Sản Phẩm <span className="text-error">*</span>
                   </label>
                   <input
                     type="text"
                     name="product_name"
-                    required
                     value={productForm.product_name}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    required
                   />
                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Weight <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Trọng Lượng
                   </label>
                   <input
                     type="number"
@@ -704,47 +704,62 @@ export default function Products() {
                     required
                     value={productForm.weight}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Purchase Price (VND)
-                  </label>
-                  <input
-                    type="number"
-                    name="purchase_price"
-                    min="0"
-                    value={productForm.purchase_price}
-                    onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Labor Cost (VND) <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Tiền Công
                   </label>
                   <input
                     type="number"
                     name="labor_cost"
-                    min="0"
-                    required
                     value={productForm.labor_cost}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    min="0"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Supplier ID
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Giá Mua
+                  </label>
+                  <input
+                    type="number"
+                    name="purchase_price"
+                    value={productForm.purchase_price}
+                    onChange={handleProductInputChange}
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    min="0"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Tồn Kho
+                  </label>
+                  <input
+                    type="number"
+                    name="stock_quantity"
+                    value={productForm.stock_quantity}
+                    onChange={handleProductInputChange}
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    min="0"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Nhà Cung Cấp
                   </label>
                   <select
                     name="supplier_id"
                     value={productForm.supplier_id}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
                   >
-                    <option value="">-- No Supplier --</option>
+                    <option value="">Chọn Nhà Cung Cấp</option>
                     {supplierList.map((sup) => (
                       <option key={sup.supplierId} value={sup.supplierId}>
                         {sup.supplierName}
@@ -753,49 +768,33 @@ export default function Products() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Stock Quantity <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Trạng Thái
                   </label>
-                  <input
-                    type="number"
-                    name="stock_quantity"
-                    min="0"
-                    required
-                    value={productForm.stock_quantity}
+                  <select
+                    name="status"
+                    value={productForm.status}
                     onChange={handleProductInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                  >
+                    <option value="ACTIVE">Hoạt động (ACTIVE)</option>
+                    <option value="INACTIVE">Ngừng hoạt động (INACTIVE)</option>
+                  </select>
                 </div>
-                {modalMode === "edit" && (
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Status
-                    </label>
-                    <select
-                      name="status"
-                      value={productForm.status}
-                      onChange={handleProductInputChange}
-                      className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                    >
-                      <option value="ACTIVE">ACTIVE</option>
-                      <option value="INACTIVE">INACTIVE</option>
-                    </select>
-                  </div>
-                )}
               </div>
               <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-outline-variant/20">
                 <button
                   type="button"
                   onClick={() => setIsProductModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg"
+                  className="px-5 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-high transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim rounded-lg"
+                  className="px-5 py-2 rounded-lg text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors shadow-sm"
                 >
-                  {modalMode === "add" ? "Add Product" : "Save Changes"}
+                  {modalMode === "add" ? "Thêm Sản Phẩm" : "Lưu Thay Đổi"}
                 </button>
               </div>
             </form>
@@ -840,7 +839,7 @@ export default function Products() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-lg overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                {modalMode === "add" ? "Add Category" : "Update Category"}
+                {modalMode === "add" ? "Thêm Danh Mục" : "Cập Nhật Danh Mục"}
               </h3>
               <button
                 onClick={() => setIsCategoryModalOpen(false)}
@@ -861,88 +860,84 @@ export default function Products() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    Category ID
+                    Mã Danh Mục
                   </label>
                   <input
                     type="text"
+                    name="category_id"
                     disabled
                     value={categoryForm.category_id}
-                    className="w-full p-2.5 bg-surface-variant/30 border border-outline-variant/30 rounded-lg cursor-not-allowed"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-container-low text-on-surface-variant font-mono text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Profit Percentage (%) <span className="text-error">*</span>
-                  </label>
-                  <input
-                    type="number"
-                    name="profit_percentage"
-                    min="0"
-                    step="0.01"
-                    required
-                    value={categoryForm.profit_percentage}
-                    onChange={handleCategoryInputChange}
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-medium mb-1">
-                    Category Name <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Tên Danh Mục <span className="text-error">*</span>
                   </label>
                   <input
                     type="text"
                     name="category_name"
-                    required
                     value={categoryForm.category_name}
                     onChange={handleCategoryInputChange}
-                    placeholder="e.g. Diamond Rings"
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Default Unit <span className="text-error">*</span>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Phần Trăm Lợi Nhuận (%)
+                  </label>
+                  <input
+                    type="number"
+                    name="profit_percentage"
+                    value={categoryForm.profit_percentage}
+                    onChange={handleCategoryInputChange}
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    min="0"
+                    step="0.1"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Đơn Vị Mặc Định
                   </label>
                   <input
                     type="text"
                     name="unit"
-                    required
                     value={categoryForm.unit}
                     onChange={handleCategoryInputChange}
-                    placeholder="Piece, Pair..."
-                    className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                    placeholder="vd: Chiếc, Bộ, Đôi"
                   />
                 </div>
-                {modalMode === "edit" && (
-                  <div>
-                    <label className="block text-sm font-medium mb-1">
-                      Status
-                    </label>
-                    <select
-                      name="status"
-                      value={categoryForm.status}
-                      onChange={handleCategoryInputChange}
-                      className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                    >
-                      <option value="ACTIVE">ACTIVE</option>
-                      <option value="INACTIVE">INACTIVE</option>
-                    </select>
-                  </div>
-                )}
+                <div>
+                  <label className="block text-sm font-medium mb-1 text-on-surface">
+                    Trạng Thái
+                  </label>
+                  <select
+                    name="status"
+                    value={categoryForm.status}
+                    onChange={handleCategoryInputChange}
+                    className="w-full px-4 py-2 rounded-lg border border-outline-variant/30 bg-surface-bright text-on-surface text-sm focus:ring-primary focus:border-primary outline-none"
+                  >
+                    <option value="ACTIVE">Hoạt động (ACTIVE)</option>
+                    <option value="INACTIVE">Ngừng hoạt động (INACTIVE)</option>
+                  </select>
+                </div>
               </div>
               <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-outline-variant/20">
                 <button
                   type="button"
                   onClick={() => setIsCategoryModalOpen(false)}
-                  className="px-4 py-2 text-sm font-medium bg-surface-container-low rounded-lg"
+                  className="px-5 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:bg-surface-container-high transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm font-medium bg-primary text-on-primary rounded-lg"
+                  className="px-5 py-2 rounded-lg text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim transition-colors shadow-sm"
                 >
-                  {modalMode === "add" ? "Add Category" : "Save Category"}
+                  {modalMode === "add" ? "Thêm Danh Mục" : "Lưu Danh Mục"}
                 </button>
               </div>
             </form>
