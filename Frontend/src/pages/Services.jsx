@@ -115,7 +115,7 @@ export default function Services() {
       );
       setCustomersList((customers || []).map(mapCustomerFromApi));
     } catch (error) {
-      setPageError(error.message || "Failed to load services data");
+      setPageError(error.message || "Lỗi khi tải dữ liệu dịch vụ");
     }
   };
 
@@ -180,7 +180,7 @@ export default function Services() {
       await loadData();
       setIsTypeModalOpen(false);
     } catch (error) {
-      setPageError(error.message || "Failed to save service");
+      setPageError(error.message || "Lỗi khi lưu dịch vụ");
     }
   };
 
@@ -192,7 +192,7 @@ export default function Services() {
       await loadData();
       setDeleteConfirmType(null);
     } catch (error) {
-      setPageError(error.message || "Failed to delete service");
+      setPageError(error.message || "Lỗi khi xóa dịch vụ");
     }
   };
 
@@ -204,7 +204,7 @@ export default function Services() {
       await loadData();
       setDeleteConfirmTicket(null);
     } catch (error) {
-      setPageError(error.message || "Failed to delete ticket");
+      setPageError(error.message || "Lỗi khi xóa phiếu dịch vụ");
     }
   };
 
@@ -290,11 +290,11 @@ export default function Services() {
   const handleCreateTicket = async () => {
     try {
       if (!newTicket.customer_id) {
-        setPageError("Please select a customer.");
+        setPageError("Vui lòng chọn khách hàng.");
         return;
       }
       if (newTicket.details.length === 0) {
-        setPageError("Please add at least one service item.");
+        setPageError("Vui lòng thêm ít nhất một dịch vụ.");
         return;
       }
 
@@ -323,7 +323,7 @@ export default function Services() {
       setIsTicketModalOpen(false);
 
     } catch (error) {
-      setPageError(error.message || "Failed to create ticket");
+      setPageError(error.message || "Lỗi khi tạo phiếu dịch vụ");
     }
   };
 
@@ -603,7 +603,7 @@ export default function Services() {
                         <button
                           onClick={() => handleOpenEditType(s)}
                           className="p-1.5 hover:bg-primary-container/20 text-on-surface-variant hover:text-primary rounded mr-2"
-                          title="Edit"
+                          title="Sửa"
                         >
                           <span className="material-symbols-outlined text-[20px]">
                             edit_square
@@ -619,7 +619,7 @@ export default function Services() {
                       colSpan="5"
                       className="p-8 text-center text-on-surface-variant"
                     >
-                      No service types found.
+                      Không tìm thấy loại dịch vụ nào.
                     </td>
                   </tr>
                 )}
@@ -748,7 +748,7 @@ export default function Services() {
                   onClick={confirmDeleteType}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
                 >
-                  Yes, Delete
+                  Đồng Ý Xóa
                 </button>
               </div>
             </div>
@@ -762,7 +762,7 @@ export default function Services() {
           <div className="bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-6xl animate-in zoom-in-95 flex flex-col max-h-[95vh]">
             <div className="p-5 border-b flex justify-between items-center bg-primary/5">
               <h3 className="font-bold text-primary flex items-center gap-2">
-                <span className="material-symbols-outlined">add_task</span> {ticketModalMode === "add" ? "NEW SERVICE TICKET" : "EDIT SERVICE TICKET"}
+                <span className="material-symbols-outlined">add_task</span> {ticketModalMode === "add" ? "TẠO PHIẾU DỊCH VỤ MỚI" : "SỬA PHIẾU DỊCH VỤ"}
               </h3>
               <button
                 onClick={() => setIsTicketModalOpen(false)}
@@ -1146,23 +1146,23 @@ export default function Services() {
               <div className="w-16 h-16 bg-error-container/30 text-error rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="material-symbols-outlined text-3xl">warning</span>
               </div>
-              <h3 className="text-title-lg font-bold text-on-surface mb-2">Delete Service Ticket?</h3>
+              <h3 className="text-title-lg font-bold text-on-surface mb-2">Xóa Phiếu Dịch Vụ?</h3>
               <p className="text-on-surface-variant text-sm mb-6">
-                Are you sure you want to delete ticket <span className="font-bold text-on-surface">SRV-{deleteConfirmTicket.ticket_id}</span>? 
-                This action cannot be undone.
+                Bạn có chắc chắn muốn xóa phiếu <span className="font-bold text-on-surface">SRV-{deleteConfirmTicket.ticket_id}</span>? 
+                Hành động này không thể hoàn tác.
               </p>
               <div className="flex justify-center gap-3">
                 <button
                   onClick={() => setDeleteConfirmTicket(null)}
                   className="px-5 py-2.5 text-sm font-medium bg-surface-container-low text-on-surface hover:bg-surface-variant/30 rounded-lg transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   onClick={confirmDeleteTicket}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
                 >
-                  Yes, Delete
+                  Đồng Ý Xóa
                 </button>
               </div>
             </div>

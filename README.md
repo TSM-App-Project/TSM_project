@@ -59,7 +59,7 @@ Dự án được khởi tạo sẵn một số tài khoản với các vai trò
 - **Kế toán:** `ketoan1`
 - **Nhân viên:** `nhanvien1`
 
-*(Mật khẩu cho các tài khoản trên đã được mã hóa sẵn trong tệp `import.sql`. Vui lòng tham khảo code xác thực hoặc hỏi admin để biết mật khẩu gốc - thông thường các mock data dùng pass `123456` hoặc tương tự).*
+*(Mật khẩu cho các tài khoản trên đã được mã hóa sẵn trong tệp `import.sql`. Mật khẩu gốc cho các tài khoản mặc định này là `password` hoặc `123456`).*
 
 ## 6. Xử lý sự cố thường gặp (Troubleshooting)
 - **Lỗi không tìm thấy `java` khi chạy `run_backend.ps1`**: Hãy đảm bảo bạn đã cài đặt Java 17 và thiết lập biến môi trường `JAVA_HOME` trỏ tới thư mục cài đặt JDK.

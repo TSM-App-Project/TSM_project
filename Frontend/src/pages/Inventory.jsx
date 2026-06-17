@@ -442,7 +442,7 @@ export default function Inventory() {
                       <button
                         onClick={() => handleOpenEditModal(item)}
                         className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/20 rounded transition-colors"
-                        title="Edit"
+                        title="Sửa"
                       >
                         <span className="material-symbols-outlined text-[20px]">
                           edit_square
@@ -497,7 +497,7 @@ export default function Inventory() {
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Detail ID
+                    Mã Chi Tiết
                   </label>
                   <input
                     type="text"
@@ -508,7 +508,7 @@ export default function Inventory() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Report Month <span className="text-error">*</span>
+                    Tháng Báo Cáo <span className="text-error">*</span>
                   </label>
                   <input
                     type="number"
@@ -524,7 +524,7 @@ export default function Inventory() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Report Year <span className="text-error">*</span>
+                    Năm Báo Cáo <span className="text-error">*</span>
                   </label>
                   <input
                     type="number"
@@ -541,7 +541,7 @@ export default function Inventory() {
 
                 <div className="md:col-span-1">
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Product <span className="text-error">*</span>
+                    Sản Phẩm <span className="text-error">*</span>
                   </label>
                   <select
                     name="product_db_id"
@@ -550,7 +550,7 @@ export default function Inventory() {
                     onChange={handleInputChange}
                     className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
                   >
-                    <option value="">-- Select Product --</option>
+                    <option value="">-- Chọn Sản Phẩm --</option>
                     {productsList.map((product) => (
                       <option
                         key={product.product_id}
@@ -564,7 +564,7 @@ export default function Inventory() {
                 </div>
                 <div className="md:col-span-3">
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Product Name
+                    Tên Sản Phẩm
                   </label>
                   <input
                     type="text"
@@ -576,7 +576,7 @@ export default function Inventory() {
 
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Opening Stock <span className="text-error">*</span>
+                    Tồn Đầu Kỳ <span className="text-error">*</span>
                   </label>
                   <input
                     type="number"
@@ -591,7 +591,7 @@ export default function Inventory() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Purchased (In) <span className="text-error">*</span>
+                    Nhập Kho <span className="text-error">*</span>
                   </label>
                   <input
                     type="number"
@@ -606,7 +606,7 @@ export default function Inventory() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Sold (Out) <span className="text-error">*</span>
+                    Xuất Kho <span className="text-error">*</span>
                   </label>
                   <input
                     type="number"
@@ -622,7 +622,7 @@ export default function Inventory() {
 
                 <div>
                   <label className="block text-sm font-medium text-on-surface mb-1">
-                    Closing Stock
+                    Tồn Cuối Kỳ
                   </label>
                   <input
                     type="number"
@@ -639,7 +639,7 @@ export default function Inventory() {
                   onClick={handleCloseModal}
                   className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
@@ -663,15 +663,14 @@ export default function Inventory() {
                 </span>
               </div>
               <h3 className="text-title-lg font-bold text-on-surface mb-2">
-                Delete Inventory Record?
+                Xóa Hồ Sơ Tồn Kho?
               </h3>
               <p className="text-on-surface-variant text-sm mb-6">
-                Are you sure you want to permanently delete the inventory record
-                for{" "}
+                Bạn có chắc chắn muốn xóa vĩnh viễn hồ sơ tồn kho của{" "}
                 <span className="font-bold text-on-surface">
                   {deleteConfirmRecord.product_name}
                 </span>{" "}
-                in{" "}
+                trong tháng{" "}
                 <span className="font-bold text-on-surface">
                   {deleteConfirmRecord.report_month}/
                   {deleteConfirmRecord.report_year}
@@ -687,7 +686,7 @@ export default function Inventory() {
                   <span className="material-symbols-outlined text-sm">
                     delete
                   </span>{" "}
-                  Yes, Delete
+                  Đồng Ý Xóa
                 </button>
               </div>
             </div>

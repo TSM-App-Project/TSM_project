@@ -222,8 +222,8 @@ export default function Customers() {
 
   return (
     <MainLayout
-      title="Customers"
-      subtitle="Manage client profiles and view purchasing history"
+      title="Khách Hàng"
+      subtitle="Quản lý hồ sơ khách hàng và lịch sử mua hàng"
     >
       {pageError && (
         <div className="mb-4 rounded-lg border border-error/30 bg-error-container/30 px-4 py-3 text-sm text-error">
@@ -237,7 +237,7 @@ export default function Customers() {
           <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex items-center justify-between flex-1">
             <div>
               <span className="text-sm text-on-surface-variant block mb-1">
-                Total Customers
+                Tổng Khách Hàng
               </span>
               <span className="font-headline-md text-headline-md font-bold text-on-surface">
                 {stats.totalCustomers}
@@ -250,7 +250,7 @@ export default function Customers() {
           <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex items-center justify-between flex-1">
             <div>
               <span className="text-sm text-on-surface-variant block mb-1">
-                Total Customer Spending
+                Tổng Chi Tiêu
               </span>
               <span className="font-headline-md text-headline-md font-bold text-primary">
                 {formatCurrency(stats.totalRevenue)}
@@ -270,7 +270,7 @@ export default function Customers() {
             <span className="material-symbols-outlined text-warning text-[20px]">
               workspace_premium
             </span>{" "}
-            Top 3 VIP Customers
+            Top 3 Khách Hàng VIP
           </h3>
           <div className="flex flex-col gap-3">
             {stats.top3.map((vip, index) => (
@@ -312,7 +312,7 @@ export default function Customers() {
                     {formatCurrency(vip.totalSpent)}
                   </span>
                   <span className="text-[10px] font-bold text-on-surface-variant uppercase">
-                    {vip.totalOrders} Orders
+                    {vip.totalOrders} Đơn hàng
                   </span>
                 </div>
               </div>
@@ -325,7 +325,7 @@ export default function Customers() {
       <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-card-padding shadow-sm flex flex-col">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
           <h3 className="font-title-lg font-bold text-on-surface">
-            Customers Directory
+            Danh Sách Khách Hàng
           </h3>
 
           <div className="flex items-center gap-3 w-full md:w-auto">
@@ -335,7 +335,7 @@ export default function Customers() {
               </span>
               <input
                 type="text"
-                placeholder="Search name, phone, email..."
+                placeholder="Tìm kiếm tên, số điện thoại, email..."
                 className="w-full pl-10 pr-4 py-2 bg-surface-bright border border-outline-variant/30 rounded-lg outline-none focus:border-primary text-sm"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -348,7 +348,7 @@ export default function Customers() {
               <span className="material-symbols-outlined text-[18px]">
                 person_add
               </span>{" "}
-              Add Customer
+              Thêm Khách Hàng
             </button>
           </div>
         </div>
@@ -359,19 +359,19 @@ export default function Customers() {
               <tr>
                 <th className="p-4 bg-surface-container-lowest">ID</th>
                 <th className="p-4 bg-surface-container-lowest">
-                  Customer Name
+                  Tên Khách Hàng
                 </th>
                 <th className="p-4 bg-surface-container-lowest">
-                  Phone Number
+                  Số Điện Thoại
                 </th>{" "}
                 {/* Cột số điện thoại nằm độc lập ở bảng ngoài */}
-                <th className="p-4 bg-surface-container-lowest">Tier</th>
-                <th className="p-4 bg-surface-container-lowest">Total Spent</th>
+                <th className="p-4 bg-surface-container-lowest">Hạng Mức</th>
+                <th className="p-4 bg-surface-container-lowest">Tổng Chi Tiêu</th>
                 <th className="p-4 text-center bg-surface-container-lowest">
-                  Status
+                  Trạng Thái
                 </th>
                 <th className="p-4 text-right bg-surface-container-lowest">
-                  Actions
+                  Thao Tác
                 </th>
               </tr>
             </thead>
@@ -407,7 +407,7 @@ export default function Customers() {
                         {formatCurrency(c.totalSpent)}
                       </p>
                       <p className="text-[10px] text-on-surface-variant uppercase">
-                        {c.totalOrders} Orders
+                        {c.totalOrders} Đơn hàng
                       </p>
                     </td>
                     <td className="p-4 text-center">
@@ -436,7 +436,7 @@ export default function Customers() {
                         </>
                       ) : (
                         <span className="text-xs text-outline italic">
-                          Read only
+                          Chỉ xem
                         </span>
                       )}
                     </td>
@@ -448,7 +448,7 @@ export default function Customers() {
                     colSpan="7"
                     className="p-8 text-center text-on-surface-variant"
                   >
-                    No customers found.
+                    Không tìm thấy khách hàng.
                   </td>
                 </tr>
               )}
@@ -469,8 +469,8 @@ export default function Customers() {
                   {modalMode === "add" ? "person_add" : "manage_accounts"}
                 </span>
                 {modalMode === "add"
-                  ? "Add New Customer"
-                  : "Edit Customer Profile"}
+                  ? "Thêm Khách Hàng Mới"
+                  : "Sửa Hồ Sơ Khách Hàng"}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -486,7 +486,7 @@ export default function Customers() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Customer ID
+                    Mã Khách Hàng
                   </label>
                   <input
                     type="text"
@@ -497,7 +497,7 @@ export default function Customers() {
                 </div>
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Status
+                    Trạng Thái
                   </label>
                   <select
                     value={formData.status}
@@ -506,8 +506,8 @@ export default function Customers() {
                     }
                     className="w-full p-2.5 bg-surface-bright rounded-lg border outline-none focus:border-primary font-medium"
                   >
-                    <option value="active">Active (Mua trong 6 tháng)</option>
-                    <option value="inactive">Inactive</option>
+                    <option value="active">Hoạt Động (Mua trong 6 tháng)</option>
+                    <option value="inactive">Không Hoạt Động</option>
                   </select>
                 </div>
               </div>
@@ -515,7 +515,7 @@ export default function Customers() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Full Name <span className="text-error">*</span>
+                    Họ và Tên <span className="text-error">*</span>
                   </label>
                   <input
                     type="text"
@@ -530,7 +530,7 @@ export default function Customers() {
                 </div>
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Phone Number <span className="text-error">*</span>
+                    Số Điện Thoại <span className="text-error">*</span>
                   </label>
                   <input
                     type="text"
@@ -552,7 +552,7 @@ export default function Customers() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Email Address
+                    Địa Chỉ Email
                   </label>
                   <input
                     type="email"
@@ -565,7 +565,7 @@ export default function Customers() {
                 </div>
                 <div>
                   <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                    Member Since
+                    Ngày Tham Gia
                   </label>
                   <input
                     type="date"
@@ -581,7 +581,7 @@ export default function Customers() {
 
               <div>
                 <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                  Address
+                  Địa Chỉ
                 </label>
                 <textarea
                   rows="2"
@@ -598,12 +598,12 @@ export default function Customers() {
                   <span className="material-symbols-outlined text-[16px]">
                     analytics
                   </span>{" "}
-                  Purchasing Data
+                  Dữ Liệu Mua Hàng
                 </h4>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
                     <label className="text-xs text-on-surface-variant block mb-1">
-                      Total Orders
+                      Tổng Đơn Hàng
                     </label>
                     <input
                       type="number"
@@ -620,7 +620,7 @@ export default function Customers() {
                   </div>
                   <div className="col-span-2">
                     <label className="text-xs text-on-surface-variant block mb-1">
-                      Total Spent (Auto-calculates Tier)
+                      Tổng Chi Tiêu (Tự động tính Hạng)
                     </label>
                     <input
                       type="text"
@@ -639,7 +639,7 @@ export default function Customers() {
                   </div>
                   <div className="col-span-3 flex items-center gap-2 mt-1">
                     <span className="text-xs text-on-surface-variant">
-                      Current Tier:
+                      Hạng Hiện Tại:
                     </span>
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${TIER_CONFIG[formData.tier].color} border border-current/10`}
@@ -655,7 +655,7 @@ export default function Customers() {
 
               <div>
                 <label className="text-xs font-bold uppercase text-on-surface-variant block mb-1">
-                  Customer Notes
+                  Ghi Chú Khách Hàng
                 </label>
                 <textarea
                   rows="2"
@@ -674,13 +674,13 @@ export default function Customers() {
                   onClick={() => setIsModalOpen(false)}
                   className="px-6 py-2.5 text-sm font-medium bg-surface-container-low rounded-lg hover:bg-surface-variant/50 border"
                 >
-                  Cancel
+                  Hủy
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 text-sm font-bold bg-primary text-white rounded-lg hover:bg-primary-fixed-dim shadow-md"
                 >
-                  Save Customer
+                  Lưu Khách Hàng
                 </button>
               </div>
             </form>
@@ -697,7 +697,7 @@ export default function Customers() {
                 warning
               </span>
             </div>
-            <h3 className="text-title-lg font-bold mb-2">Delete Customer?</h3>
+            <h3 className="text-title-lg font-bold mb-2">Xóa Khách Hàng?</h3>
             <p className="text-on-surface-variant text-sm mb-6">
               Xóa hồ sơ khách hàng{" "}
               <span className="font-bold">{deleteConfirmCustomer.name}</span>?
@@ -709,7 +709,7 @@ export default function Customers() {
                 onClick={confirmDelete}
                 className="px-5 py-2.5 text-sm font-bold bg-error text-white rounded-lg shadow-sm"
               >
-                Yes, Delete
+                Đồng Ý Xóa
               </button>
             </div>
           </div>
@@ -778,7 +778,7 @@ export default function Customers() {
               <div className="col-span-3 grid grid-cols-4 gap-4">
                 <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant/30 text-center shadow-sm">
                   <p className="text-[10px] font-bold text-on-surface-variant uppercase mb-1">
-                    Customer ID
+                    Mã Khách Hàng
                   </p>
                   <p className="text-title-md font-mono text-on-surface uppercase">
                     {selectedCustomer.id}
@@ -786,7 +786,7 @@ export default function Customers() {
                 </div>
                 <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant/30 text-center shadow-sm">
                   <p className="text-[10px] font-bold text-on-surface-variant uppercase mb-1">
-                    Member Since
+                    Ngày Tham Gia
                   </p>
                   <p className="text-title-md text-on-surface font-semibold">
                     {selectedCustomer.memberSince}
@@ -794,7 +794,7 @@ export default function Customers() {
                 </div>
                 <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant/30 text-center shadow-sm">
                   <p className="text-[10px] font-bold text-on-surface-variant uppercase mb-1">
-                    Last Purchase
+                    Lần Mua Cuối
                   </p>
                   <p className="text-title-md text-on-surface font-semibold">
                     {selectedCustomer.lastPurchase || "N/A"}
@@ -802,7 +802,7 @@ export default function Customers() {
                 </div>
                 <div className="bg-surface-bright p-4 rounded-xl border border-outline-variant/30 text-center shadow-sm">
                   <p className="text-[10px] font-bold text-on-surface-variant uppercase mb-1">
-                    Total Orders
+                    Tổng Đơn Hàng
                   </p>
                   <p className="text-title-md text-primary font-black">
                     {selectedCustomer.totalOrders}
@@ -815,7 +815,7 @@ export default function Customers() {
                   <span className="material-symbols-outlined text-[16px]">
                     sticky_note_2
                   </span>{" "}
-                  Customer Notes
+                  Ghi Chú Khách Hàng
                 </p>
                 <p className="text-sm text-on-surface font-medium leading-relaxed italic">
                   {selectedCustomer.notes ||
@@ -825,7 +825,7 @@ export default function Customers() {
 
               <div className="col-span-1 bg-primary/5 p-5 rounded-xl border border-primary/20 flex flex-col justify-center text-center">
                 <p className="text-xs font-bold text-primary uppercase mb-1">
-                  Total Lifetime Value
+                  Tổng Giá Trị Giao Dịch
                 </p>
                 <p
                   className="text-display-sm font-black text-primary truncate"

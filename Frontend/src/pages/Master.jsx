@@ -244,7 +244,7 @@ export default function Master() {
                                     <td className="py-3 px-4 flex justify-end gap-2">
                                         <button
                                             onClick={() => handleOpenEditModal(user)}
-                                            className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/20 rounded transition-colors" title="Edit"
+                                            className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/20 rounded transition-colors" title="Sửa"
                                         >
                                             <span className="material-symbols-outlined text-[20px]">edit_square</span>
                                         </button>
@@ -346,8 +346,8 @@ export default function Master() {
                                 <div>
                                     <label className="block text-sm font-medium text-on-surface mb-1">Trạng Thái</label>
                                     <select name="status" value={formData.status} onChange={handleInputChange} className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none">
-                                        <option value="ACTIVE">ACTIVE</option>
-                                        <option value="INACTIVE">INACTIVE</option>
+                                        <option value="ACTIVE">Hoạt động (ACTIVE)</option>
+                                        <option value="INACTIVE">Ngừng hoạt động (INACTIVE)</option>
                                     </select>
                                 </div>
                             </div>

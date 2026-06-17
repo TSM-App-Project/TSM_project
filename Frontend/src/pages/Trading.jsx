@@ -596,7 +596,7 @@ export default function Trading() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                {salesModalMode === "add" ? "Create Sales Invoice (BM9)" : "Edit Sales Invoice (BM9)"}
+                {salesModalMode === "add" ? "Tạo Hóa Đơn Bán Hàng (BM9)" : "Sửa Hóa Đơn Bán Hàng (BM9)"}
               </h3>
               <button
                 onClick={() => setIsSalesModalOpen(false)}
@@ -614,7 +614,7 @@ export default function Trading() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Invoice ID
+                      Mã Hóa Đơn
                     </label>
                     <input
                       type="text"
@@ -625,7 +625,7 @@ export default function Trading() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Date <span className="text-error">*</span>
+                      Ngày <span className="text-error">*</span>
                     </label>
                     <input
                       type="date"
@@ -642,7 +642,7 @@ export default function Trading() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Customer <span className="text-error">*</span>
+                      Khách Hàng <span className="text-error">*</span>
                     </label>
                     <select
                       required
@@ -655,7 +655,7 @@ export default function Trading() {
                       }
                       className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
                     >
-                      <option value="">-- Select Customer --</option>
+                      <option value="">-- Chọn Khách Hàng --</option>
                       {customersList.map((customer) => (
                         <option
                           key={customer.customer_id}
@@ -670,7 +670,7 @@ export default function Trading() {
                 <div className="border border-outline-variant/30 rounded-lg overflow-hidden">
                   <div className="bg-surface-container-low px-4 py-3 border-b border-outline-variant/30 flex justify-between items-center">
                     <h4 className="font-medium text-on-surface">
-                      Invoice Details
+                      Chi Tiết Hóa Đơn
                     </h4>
                     <button
                       type="button"
@@ -680,7 +680,7 @@ export default function Trading() {
                       <span className="material-symbols-outlined text-[18px]">
                         add
                       </span>{" "}
-                      Add Row
+                      Thêm Dòng
                     </button>
                   </div>
                   <div className="p-4 bg-surface-bright flex flex-col gap-3">
@@ -691,7 +691,7 @@ export default function Trading() {
                       >
                         <div className="w-full md:w-[40%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Product <span className="text-error">*</span>
+                            Sản Phẩm <span className="text-error">*</span>
                           </label>
                           <select
                             required
@@ -705,7 +705,7 @@ export default function Trading() {
                             }
                             className="w-full p-2 border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none text-sm"
                           >
-                            <option value="">-- Select Product --</option>
+                            <option value="">-- Chọn Sản Phẩm --</option>
                             {productsList.map((product) => (
                               <option
                                 key={product.product_id}
@@ -719,7 +719,7 @@ export default function Trading() {
                         </div>
                         <div className="w-full md:w-[20%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Quantity <span className="text-error">*</span>
+                            Số Lượng <span className="text-error">*</span>
                           </label>
                           <input
                             required
@@ -738,7 +738,7 @@ export default function Trading() {
                         </div>
                         <div className="w-full md:w-[30%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Unit Price <span className="text-error">*</span>
+                            Đơn Giá <span className="text-error">*</span>
                           </label>
                           <input
                             required
@@ -760,7 +760,7 @@ export default function Trading() {
                             type="button"
                             onClick={() => handleRemoveSalesItem(item.id)}
                             className="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded-lg transition-colors"
-                            title="Remove Row"
+                            title="Xóa Dòng"
                           >
                             <span className="material-symbols-outlined">
                               delete
@@ -772,7 +772,7 @@ export default function Trading() {
                   </div>
                   <div className="bg-surface-container-low px-4 py-3 border-t border-outline-variant/30 flex justify-between items-center">
                     <span className="font-medium text-on-surface-variant">
-                      Total Amount:
+                      Tổng Tiền:
                     </span>
                     <span className="font-bold text-title-lg text-primary">
                       {formatCurrency(
@@ -789,14 +789,14 @@ export default function Trading() {
                 onClick={() => setIsSalesModalOpen(false)}
                 className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors"
               >
-                Cancel
+                Hủy
               </button>
               <button
                 type="submit"
                 form="salesForm"
                 className="px-4 py-2 text-sm font-medium bg-primary text-on-primary hover:bg-primary-fixed-dim rounded-lg transition-colors shadow-sm"
               >
-                Save Invoice
+                Lưu Hóa Đơn
               </button>
             </div>
           </div>
@@ -809,7 +809,7 @@ export default function Trading() {
           <div className="bg-surface-container-lowest rounded-xl shadow-lg w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center p-5 border-b border-outline-variant/20">
               <h3 className="text-title-lg font-semibold text-on-surface">
-                {purchaseModalMode === "add" ? "Create Purchase Receipt (BM10)" : "Edit Purchase Receipt (BM10)"}
+                {purchaseModalMode === "add" ? "Tạo Phiếu Nhập Kho (BM10)" : "Sửa Phiếu Nhập Kho (BM10)"}
               </h3>
               <button
                 onClick={() => setIsPurchaseModalOpen(false)}
@@ -827,7 +827,7 @@ export default function Trading() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Receipt ID
+                      Mã Phiếu Nhập
                     </label>
                     <input
                       type="text"
@@ -838,7 +838,7 @@ export default function Trading() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Date <span className="text-error">*</span>
+                      Ngày <span className="text-error">*</span>
                     </label>
                     <input
                       type="date"
@@ -855,7 +855,7 @@ export default function Trading() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-on-surface mb-1">
-                      Supplier <span className="text-error">*</span>
+                      Nhà Cung Cấp <span className="text-error">*</span>
                     </label>
                     <select
                       required
@@ -868,7 +868,7 @@ export default function Trading() {
                       }
                       className="w-full p-2.5 bg-surface-bright border border-outline-variant/50 text-on-surface rounded-lg focus:ring-2 focus:ring-primary outline-none transition-all"
                     >
-                      <option value="">-- Select Supplier --</option>
+                      <option value="">-- Chọn Nhà Cung Cấp --</option>
                       {suppliersList.map((supplier) => (
                         <option
                           key={supplier.supplier_id}
@@ -883,7 +883,7 @@ export default function Trading() {
                 <div className="border border-outline-variant/30 rounded-lg overflow-hidden">
                   <div className="bg-surface-container-low px-4 py-3 border-b border-outline-variant/30 flex justify-between items-center">
                     <h4 className="font-medium text-on-surface">
-                      Receipt Details
+                      Chi Tiết Phiếu Nhập
                     </h4>
                     <button
                       type="button"
@@ -893,7 +893,7 @@ export default function Trading() {
                       <span className="material-symbols-outlined text-[18px]">
                         add
                       </span>{" "}
-                      Add Row
+                      Thêm Dòng
                     </button>
                   </div>
                   <div className="p-4 bg-surface-bright flex flex-col gap-3">
@@ -904,7 +904,7 @@ export default function Trading() {
                       >
                         <div className="w-full md:w-[40%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Product <span className="text-error">*</span>
+                            Sản Phẩm <span className="text-error">*</span>
                           </label>
                           <select
                             required
@@ -918,7 +918,7 @@ export default function Trading() {
                             }
                             className="w-full p-2 border border-outline-variant/50 rounded-lg focus:ring-2 focus:ring-primary outline-none text-sm"
                           >
-                            <option value="">-- Select Product --</option>
+                            <option value="">-- Chọn Sản Phẩm --</option>
                             {productsList.map((product) => (
                               <option
                                 key={product.product_id}
@@ -932,7 +932,7 @@ export default function Trading() {
                         </div>
                         <div className="w-full md:w-[20%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Quantity <span className="text-error">*</span>
+                            Số Lượng <span className="text-error">*</span>
                           </label>
                           <input
                             required
@@ -951,7 +951,7 @@ export default function Trading() {
                         </div>
                         <div className="w-full md:w-[30%]">
                           <label className="block text-xs text-on-surface-variant mb-1">
-                            Purchase Price <span className="text-error">*</span>
+                            Giá Nhập <span className="text-error">*</span>
                           </label>
                           <input
                             required
@@ -973,7 +973,7 @@ export default function Trading() {
                             type="button"
                             onClick={() => handleRemovePurchaseItem(item.id)}
                             className="p-2 text-on-surface-variant hover:text-error hover:bg-error-container/20 rounded-lg transition-colors"
-                            title="Remove Row"
+                            title="Xóa Dòng"
                           >
                             <span className="material-symbols-outlined">
                               delete
@@ -985,7 +985,7 @@ export default function Trading() {
                   </div>
                   <div className="bg-surface-container-low px-4 py-3 border-t border-outline-variant/30 flex justify-between items-center">
                     <span className="font-medium text-on-surface-variant">
-                      Total Cost:
+                      Tổng Chi Phí:
                     </span>
                     <span className="font-bold text-title-lg text-error">
                       {formatCurrency(
@@ -1002,14 +1002,14 @@ export default function Trading() {
                 onClick={() => setIsPurchaseModalOpen(false)}
                 className="px-4 py-2 text-sm font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors"
               >
-                Cancel
+                Hủy
               </button>
               <button
                 type="submit"
                 form="purchaseForm"
                 className="px-4 py-2 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
               >
-                Save Receipt
+                Lưu Phiếu Nhập
               </button>
             </div>
           </div>
@@ -1027,15 +1027,15 @@ export default function Trading() {
                 </span>
               </div>
               <h3 className="text-title-lg font-bold text-on-surface mb-2">
-                Delete Record?
+                Xóa Bản Ghi?
               </h3>
               <p className="text-on-surface-variant text-sm mb-6">
-                Are you sure you want to delete{" "}
+                Bạn có chắc chắn muốn xóa{" "}
                 <span className="font-bold text-on-surface">
                   {deleteConfirmRecord.invoice_id ||
                     deleteConfirmRecord.purchase_id}
                 </span>
-                ? This action cannot be undone.
+                ? Hành động này không thể hoàn tác.
               </p>
               <div className="flex justify-center gap-3">
                 
@@ -1043,7 +1043,7 @@ export default function Trading() {
                   onClick={confirmDelete}
                   className="px-5 py-2.5 text-sm font-medium bg-error text-white hover:bg-[#b91c1c] rounded-lg transition-colors shadow-sm"
                 >
-                  Yes, Delete
+                  Đồng Ý Xóa
                 </button>
               </div>
             </div>
@@ -1059,10 +1059,10 @@ export default function Trading() {
                 <span className="material-symbols-outlined text-4xl">warning</span>
               </div>
               <div>
-                <h3 className="text-title-lg font-semibold text-on-surface mb-2">Delete Record</h3>
+                <h3 className="text-title-lg font-semibold text-on-surface mb-2">Xóa Bản Ghi</h3>
                 <p className="text-on-surface-variant">
-                  Are you sure you want to delete {deleteConfirmRecord.type === "sales" ? deleteConfirmRecord.invoice_id : deleteConfirmRecord.purchase_id}? 
-                  This action cannot be undone and will affect inventory.
+                  Bạn có chắc chắn muốn xóa {deleteConfirmRecord.type === "sales" ? deleteConfirmRecord.invoice_id : deleteConfirmRecord.purchase_id}? 
+                  Hành động này không thể hoàn tác và sẽ ảnh hưởng đến kho hàng.
                 </p>
               </div>
             </div>
@@ -1071,13 +1071,13 @@ export default function Trading() {
                 onClick={() => setDeleteConfirmRecord(null)}
                 className="flex-1 py-2.5 rounded-lg border border-outline-variant/50 font-medium text-on-surface hover:bg-surface-variant/30 transition-colors"
               >
-                Cancel
+                Hủy
               </button>
               <button
                 onClick={confirmDelete}
                 className="flex-1 py-2.5 rounded-lg bg-error text-on-error font-medium hover:bg-error/90 transition-colors shadow-sm"
               >
-                Delete
+                Xóa
               </button>
             </div>
           </div>
