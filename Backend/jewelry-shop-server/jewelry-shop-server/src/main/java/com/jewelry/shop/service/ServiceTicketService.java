@@ -58,7 +58,7 @@ public class ServiceTicketService {
                 com.jewelry.shop.entity.Service service = serviceRepository.findById(item.getServiceId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
 
-                BigDecimal servicePrice = service.getBasePrice();
+                BigDecimal servicePrice = item.getServicePrice() != null ? item.getServicePrice() : service.getBasePrice();
                 BigDecimal extraCost = item.getExtraCost() != null ? item.getExtraCost() : BigDecimal.ZERO;
                 int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
 
@@ -82,7 +82,7 @@ public class ServiceTicketService {
                 detail.setPrepaidAmount(prepaid);
                 detail.setRemainingAmount(remaining);
                 detail.setDeliveryDate(item.getDeliveryDate());
-                detail.setStatus("CHƯA GIAO");
+                detail.setStatus(item.getStatus() != null && !item.getStatus().trim().isEmpty() ? item.getStatus() : "CHƯA GIAO");
 
                 grandTotal = grandTotal.add(subtotal);
                 details.add(detail);
@@ -122,7 +122,7 @@ public class ServiceTicketService {
                 com.jewelry.shop.entity.Service service = serviceRepository.findById(item.getServiceId())
                         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Service not found"));
 
-                BigDecimal servicePrice = service.getBasePrice();
+                BigDecimal servicePrice = item.getServicePrice() != null ? item.getServicePrice() : service.getBasePrice();
                 BigDecimal extraCost = item.getExtraCost() != null ? item.getExtraCost() : BigDecimal.ZERO;
                 int quantity = item.getQuantity() != null ? item.getQuantity() : 0;
 
@@ -146,7 +146,7 @@ public class ServiceTicketService {
                 detail.setPrepaidAmount(prepaid);
                 detail.setRemainingAmount(remaining);
                 detail.setDeliveryDate(item.getDeliveryDate());
-                detail.setStatus("CHƯA GIAO");
+                detail.setStatus(item.getStatus() != null && !item.getStatus().trim().isEmpty() ? item.getStatus() : "CHƯA GIAO");
 
                 grandTotal = grandTotal.add(subtotal);
                 newDetails.add(detail);
