@@ -60,7 +60,7 @@ export default function Suppliers() {
       const suppliers = await api.get("/api/suppliers");
       setSupplierList((suppliers || []).map(mapSupplierFromApi));
     } catch (error) {
-      setPageError(error.message || "Failed to load suppliers");
+      setPageError(error.message || "Lỗi khi tải dữ liệu nhà cung cấp");
     }
   };
 
@@ -141,7 +141,7 @@ export default function Suppliers() {
       await loadSuppliers();
       setIsModalOpen(false);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to save supplier");
+      setErrorMessage(error.message || "Lỗi khi lưu nhà cung cấp");
     }
   };
 
@@ -156,7 +156,7 @@ export default function Suppliers() {
       await loadSuppliers();
       setSuspendConfirmSupplier(null);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to update supplier");
+      setErrorMessage(error.message || "Lỗi khi cập nhật nhà cung cấp");
     }
   };
 

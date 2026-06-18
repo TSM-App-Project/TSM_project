@@ -114,7 +114,7 @@ export default function Products() {
       setCategoryList((categories || []).map(mapCategoryFromApi));
         setSupplierList(suppliers || []);
     } catch (error) {
-      setPageError(error.message || "Failed to load data");
+      setPageError(error.message || "Lỗi khi tải dữ liệu");
     }
   };
 
@@ -183,13 +183,13 @@ export default function Products() {
         p.product_id !== productForm.product_id,
     );
     if (isDuplicateName) {
-      setErrorMessage("This product name already exists in the system (QĐ4).");
+      setErrorMessage("Tên sản phẩm này đã tồn tại trong hệ thống (QĐ4).");
       return;
     }
 
     const categoryId = parseId(productForm.category_id, "CAT");
     if (!categoryId) {
-      setErrorMessage("Please select a valid category.");
+      setErrorMessage("Vui lòng chọn một danh mục hợp lệ.");
       return;
     }
 
@@ -213,7 +213,7 @@ export default function Products() {
       await loadData();
       setIsProductModalOpen(false);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to save product");
+      setErrorMessage(error.message || "Lỗi khi lưu sản phẩm");
     }
   };
 
@@ -227,7 +227,7 @@ export default function Products() {
       await loadData();
       setDeleteConfirmProduct(null);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to hide product");
+      setErrorMessage(error.message || "Lỗi khi ẩn sản phẩm");
     }
   };
 
@@ -275,7 +275,7 @@ export default function Products() {
     );
     if (isDuplicateName) {
       setErrorMessage(
-        "This Category Name already exists. Please use a unique name.",
+        "Tên danh mục này đã tồn tại. Vui lòng sử dụng tên khác.",
       );
       return;
     }
@@ -299,7 +299,7 @@ export default function Products() {
       await loadData();
       setIsCategoryModalOpen(false);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to save category");
+      setErrorMessage(error.message || "Lỗi khi lưu danh mục");
     }
   };
 
@@ -314,7 +314,7 @@ export default function Products() {
       await loadData();
       setDeleteConfirmCategory(null);
     } catch (error) {
-      setErrorMessage(error.message || "Failed to delete category");
+      setErrorMessage(error.message || "Lỗi khi xóa danh mục");
     }
   };
 
@@ -518,7 +518,7 @@ export default function Products() {
                             setIsProductModalOpen(true);
                           }}
                           className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/20 rounded transition-colors"
-                          title="Edit"
+                          title="Sửa"
                         >
                           <span className="material-symbols-outlined text-[20px]">
                             edit_square
@@ -594,7 +594,7 @@ export default function Products() {
                             setIsCategoryModalOpen(true);
                           }}
                           className="p-1.5 text-on-surface-variant hover:text-primary hover:bg-primary-container/20 rounded transition-colors"
-                          title="Edit Category"
+                          title="Sửa Danh Mục"
                         >
                           <span className="material-symbols-outlined text-[20px]">
                             edit_square
@@ -811,10 +811,10 @@ export default function Products() {
               </span>
             </div>
             <h3 className="text-title-lg font-bold mb-2">
-              Confirm Hide Product?
+              Xác nhận ẩn Sản Phẩm?
             </h3>
             <p className="text-sm text-on-surface-variant mb-6">
-              Are you sure you want to hide{" "}
+              Bạn có chắc chắn muốn ẩn{" "}
               <span className="font-bold text-on-surface">
                 {deleteConfirmProduct.product_name}
               </span>
@@ -826,7 +826,7 @@ export default function Products() {
                 onClick={confirmDeleteProduct}
                 className="px-5 py-2.5 bg-error text-white rounded-lg"
               >
-                Yes, Hide
+                Đồng Ý Ẩn
               </button>
             </div>
           </div>
@@ -954,10 +954,10 @@ export default function Products() {
               </span>
             </div>
             <h3 className="text-title-lg font-bold mb-2">
-              Confirm Hide Category?
+              Xác nhận ẩn Danh Mục?
             </h3>
             <p className="text-sm text-on-surface-variant mb-6">
-              Are you sure you want to hide{" "}
+              Bạn có chắc chắn muốn ẩn{" "}
               <span className="font-bold text-on-surface">
                 {deleteConfirmCategory.category_name}
               </span>
@@ -969,7 +969,7 @@ export default function Products() {
                 onClick={confirmDeleteCategory}
                 className="px-5 py-2.5 bg-error text-white rounded-lg"
               >
-                Yes, Hide
+                Đồng Ý Ẩn
               </button>
             </div>
           </div>
